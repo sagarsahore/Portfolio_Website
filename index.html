@@ -32,9 +32,8 @@
 					<!--Contacts-->
 					<nav class="vlt-navbar-contacts d-none d-md-block">
 						<ul>
-							<li><a href="tel:+79281012345">+7 (928)-101-23-45</a></li>
-							<li class="sep">/</li>
-							<li><a href="mailto:mikael.moore@gmail.com">mikael.moore@gmail.com</a></li>
+	
+							<li><a href="mailto:sagarsahoredev@gmail.com">sagarsahoredev@gmail.com</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -53,7 +52,7 @@
 	<div class="vlt-offcanvas-menu">
 		<div class="vlt-offcanvas-menu__header">
 			<!--Locales-->
-			<nav class="vlt-offcanvas-menu__locales"><a class="active" href="#">Eng</a><a href="#">Fra</a><a href="#">Ger</a></nav>
+			
 			<!--Menu Burger--><a class="vlt-menu-burger vlt-menu-burger--opened js-offcanvas-menu-close" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="round">
 					<line x1="18" y1="6" x2="6" y2="18" />
 					<line x1="6" y1="6" x2="18" y2="18" /></svg></a>
@@ -68,7 +67,7 @@
 				<li data-menuanchor="Portfolio"><a href="#Portfolio">Portfolio</a></li>
 				<li data-menuanchor="Awards"><a href="#Awards">Awards</a></li>
 				<li data-menuanchor="Testimonials"><a href="#Testimonials">Testimonials</a></li>
-				<li data-menuanchor="Blog"><a href="#Blog">Blog</a></li>
+		
 				<li data-menuanchor="Contact"><a href="#Contact">Contact</a></li>
 			</ul>
 		</nav>
@@ -77,7 +76,7 @@
 			<div class="vlt-offcanvas-menu__socials"><a href="#" target="_blank">Fb.</a><a href="#" target="_blank">Bē.</a><a href="#" target="_blank">Tw.</a><a href="#" target="_blank">In.</a></div>
 			<!--Copyright-->
 			<div class="vlt-offcanvas-menu__copyright">
-				<p>&copy; 2020 Copiright.<br>All rights reserved.</p>
+				<p>Sageforce </p>
 			</div>
 		</div>
 	</div>
@@ -91,7 +90,7 @@
 		<div class="vlt-fullpage-slider" data-loop-top="" data-loop-bottom="" data-speed="800">
 			<!--Home-->
 			<!--Section-->
-			<div class="vlt-section pp-scrollable" data-anchor="Home" data-brightness="dark" style="background-image: url(assets/img/root/red-background.jpg);">
+			<div class="vlt-section pp-scrollable" data-anchor="Home" data-brightness="dark" style="background-image: url(assets/img/root/red-background\ copy.jpg);">
 				<div class="vlt-section__vertical-align">
 					<div class="vlt-section__content">
 						<!--Particles-->
@@ -105,9 +104,68 @@
 								<div class="col-lg-7 offset-lg-1">
 									<!--Animated Block-->
 									<div class="vlt-animated-block" style="animation-delay:0s; animation-duration:700ms;">
-										<h5 class="vlt-display-1 has-white-color">Mikael Moore</h5>
+										<h5 class="vlt-display-1 has-white-color">Hey! This is Sagar Sahore</h5>
 										<div class="vlt-gap-10"></div>
-										<h1 class="vlt-large-heading has-white-color">I’m Product<br>Designer</h1>
+										<h1 class="vlt-large-heading has-white-color"> I am <span id="typing"></span></h1>
+										<style>
+											#typing {
+												display: inline-block;
+												border-right: 3px solid white;
+												padding-right: 5px;
+												white-space: nowrap;
+												overflow: hidden;
+											}
+											.typing-text {
+												animation: typing 3s steps(var(--steps)) 1s 1 normal both, blink 0.75s step-end infinite;
+											}
+									
+											.deleting-text {
+												animation: deleting 2s steps(var(--steps)) 1 normal both;
+											}
+									
+											@keyframes typing {
+												from { width: 0; }
+												to { width: 100%; }
+											}
+									
+											@keyframes deleting {
+												from { width: 100%; }
+												to { width: 0; }
+											}
+									
+											@keyframes blink {
+												50% { border-color: transparent; }
+											}
+										</style>
+										<script>
+											window.onload = () => {
+												const typingElement = document.getElementById("typing");
+												const roles = ["Salesforce Consultant", "AI Enthusiast", "Cloud Consultant"];
+												let index = 0;
+									
+												const typeText = () => {
+													typingElement.textContent = roles[index];
+													typingElement.classList.add('typing-text');
+									
+													// Remove the typing animation after typing finishes
+													setTimeout(() => {
+														typingElement.classList.remove('typing-text');
+														typingElement.classList.add('deleting-text');
+													}, 3000); // This matches the time of the typing animation
+									
+													// After deleting finishes, start the next word
+													setTimeout(() => {
+														typingElement.classList.remove('deleting-text');
+														index = (index + 1) % roles.length;
+														typeText(); // Recursively call to type the next word
+													}, 5000); // This matches the time of the deleting animation
+												};
+									
+												// Start typing for the first word
+												typeText();
+											};
+										</script>
+										
 										<div class="vlt-gap-40"></div>
 										<div class="row">
 											<div class="col-auto">
@@ -120,7 +178,7 @@
 											<div class="col-auto">
 												<!--Counter Up Small-->
 												<div class="vlt-counter-up-small" data-ending-number="18" data-animation-speed="1000" data-delimiter=""><span class="counter">0</span>
-													<h6 class="vlt-display-1">Sutisfied<br>customers</h6>
+													<h6 class="vlt-display-1">Completed<br>Superbadges</h6>
 												</div>
 											</div>
 										</div>
@@ -142,73 +200,58 @@
 							<div class="vlt-particle vlt-custom--1259 vlt-fade-in-right" style="background-image: url(assets/img/root/plus-light-pattern.png); animation-delay: 750ms;"></div>
 							<div class="vlt-particle vlt-custom--2355 vlt-fade-in-left" style="background-image: url(assets/img/root/elipse-light.png); animation-delay: 500ms;"></div>
 						</div>
+						
 						<div class="container">
-							<div class="row">
-								<div class="col-lg-2 offset-lg-1 d-none d-lg-block">
-									<!--Animated Block-->
-									<div class="vlt-animated-block" style="animation-delay:0s; animation-duration:700ms;">
-										<!--Counter Up-->
-										<div class="vlt-counter-up" data-ending-number="6" data-animation-speed="1000" data-delimiter=""><span class="counter">0</span><sup>+</sup>
-										</div>
-										<div class="vlt-gap-40"></div>
-										<h6>Years <br>Experience <br>Working</h6>
-									</div>
-								</div>
-								<div class="col-lg-8 col-md-12">
-									<!--Animated Block-->
-									<div class="vlt-animated-block" style="animation-delay:100ms; animation-duration:700ms;">
-										<h4>Product Designer and Digital Creative Director, specialized in <span class="has-first-color">UI/UX, Branding and digital designs.</span></h4>
-									</div>
-									<div class="vlt-gap-70"></div>
-									<div class="row">
-										<div class="col-md-6">
-											<!--Animated Block-->
-											<div class="vlt-animated-block" style="animation-delay:200ms; animation-duration:700ms;">
-												<!--Services-->
-												<div class="vlt-services">
-													<h5 class="vlt-services__title"><a href="#">Web Design</a>
-													</h5>
-													<p class="vlt-services__text">Fill appear won't may make moveth signs. Fourth. Good own. Green you're moveth us, lesser. Set grass life years subdue.
-													</p><a class="vlt-services__link vlt-link-with-arrow" href="#"><span class="vlt-link-with-arrow__text">Discover more</span><span class="vlt-link-with-arrow__icon">🡒</span></a>
-												</div>
+							<div class="container">
+								<div class="row">
+									<div class="col-lg-2 offset-lg-1 d-none d-lg-block">
+										<div class="vlt-animated-block animated" style="animation-delay:0s; animation-duration:700ms;">
+											<div class="vlt-counter-up" data-ending-number="6" data-animation-speed="1000" data-delimiter="">
+												<span class="counter">6</span><sup>+</sup>
 											</div>
 											<div class="vlt-gap-40"></div>
+											<h6>Years <br>Experience <br>Working</h6>
 										</div>
-										<div class="col-md-6">
-											<!--Animated Block-->
-											<div class="vlt-animated-block" style="animation-delay:300ms; animation-duration:700ms;">
-												<!--Services-->
-												<div class="vlt-services">
-													<h5 class="vlt-services__title"><a href="#">Branding</a>
-													</h5>
-													<p class="vlt-services__text">Evening. Grass whales man isn't. Midst cattle form. Saw life winged a he behold isn't. Together can't Whose dominion after.
-													</p><a class="vlt-services__link vlt-link-with-arrow" href="#"><span class="vlt-link-with-arrow__text">Discover more</span><span class="vlt-link-with-arrow__icon">🡒</span></a>
+									</div>
+									<div class="col-lg-8 col-md-12">
+										<div class="vlt-animated-block animated" style="animation-delay:100ms; animation-duration:700ms;">
+											<h4>Technical Skills and Expertise in <span class="has-first-color">Salesforce, Cloud Computing, AI/ML, and Software Engineering.</span></h4>
+										</div>
+										<div class="vlt-gap-70"></div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="vlt-animated-block animated" style="animation-delay:200ms; animation-duration:700ms;">
+													<div class="vlt-services">
+														<h5 class="vlt-services__title"><a href="#">Salesforce Development</a></h5>
+														<p class="vlt-services__text">Experience with Apex, Lightning Web Components, and Process Automation to build scalable CRM solutions.</p>
+													</div>
 												</div>
+												<div class="vlt-gap-40"></div>
 											</div>
-											<div class="vlt-gap-40"></div>
-										</div>
-										<div class="col-md-6">
-											<!--Animated Block-->
-											<div class="vlt-animated-block" style="animation-delay:400ms; animation-duration:700ms;">
-												<!--Services-->
-												<div class="vlt-services">
-													<h5 class="vlt-services__title"><a href="#">Illustration</a>
-													</h5>
-													<p class="vlt-services__text">Man moveth second creepeth sixth fowl green to dry isn't him void fruitful divide. Be fish. They're you deep fowl which great air.
-													</p><a class="vlt-services__link vlt-link-with-arrow" href="#"><span class="vlt-link-with-arrow__text">Discover more</span><span class="vlt-link-with-arrow__icon">🡒</span></a>
+											<div class="col-md-6">
+												<div class="vlt-animated-block animated" style="animation-delay:300ms; animation-duration:700ms;">
+													<div class="vlt-services">
+														<h5 class="vlt-services__title"><a href="#">Cloud Computing</a></h5>
+														<p class="vlt-services__text">Proficient in AWS, Google Cloud, and Azure for deploying and managing cloud-based applications.</p>
+													</div>
 												</div>
+												<div class="vlt-gap-40"></div>
 											</div>
-											<div class="vlt-gap-40--sm"></div>
-										</div>
-										<div class="col-md-6">
-											<!--Animated Block-->
-											<div class="vlt-animated-block" style="animation-delay:500ms; animation-duration:700ms;">
-												<!--Services-->
-												<div class="vlt-services">
-													<h5 class="vlt-services__title"><a href="#">Marketing</a>
-													</h5>
-													<p class="vlt-services__text">Seas fly third green called for there she'd, bring second. Every. Forth shall place divide beginning fruit seas their.
-													</p><a class="vlt-services__link vlt-link-with-arrow" href="#"><span class="vlt-link-with-arrow__text">Discover more</span><span class="vlt-link-with-arrow__icon">🡒</span></a>
+											<div class="col-md-6">
+												<div class="vlt-animated-block animated" style="animation-delay:400ms; animation-duration:700ms;">
+													<div class="vlt-services">
+														<h5 class="vlt-services__title"><a href="#">AI/ML</a></h5>
+														<p class="vlt-services__text">Knowledge of TensorFlow, PyTorch, and Scikit-learn for building intelligent applications.</p>
+													</div>
+												</div>
+												<div class="vlt-gap-40--sm"></div>
+											</div>
+											<div class="col-md-6">
+												<div class="vlt-animated-block animated" style="animation-delay:500ms; animation-duration:700ms;">
+													<div class="vlt-services">
+														<h5 class="vlt-services__title"><a href="#">Full-Stack Development</a></h5>
+														<p class="vlt-services__text">Experience with JavaScript, React, Node.js, and SQL for developing web applications.</p>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -224,146 +267,127 @@
 			<div class="vlt-section pp-scrollable" data-anchor="Experience" data-brightness="dark">
 				<div class="vlt-section__vertical-align">
 					<div class="vlt-section__content">
-						<!--Ken Burn Effect-->
-						<div class="vlt-section__ken-burn-background"><img src="assets/img/attachment-02.jpg" alt=""></div>
+						<div class="vlt-section__ken-burn-background">
+							<img src="assets/img/attachment-02.jpg" alt="">
+						</div>
 						<div class="container">
 							<div class="row">
 								<div class="col-lg-10 offset-lg-1">
-									<!--Animated Block-->
 									<div class="vlt-animated-block" style="animation-delay:0s; animation-duration:700ms;">
 										<div class="d-block d-md-flex align-items-center justify-content-between">
 											<h1 class="has-white-color">Experience</h1>
 											<div class="vlt-gap-30--sm"></div>
-											<div class="vlt-timeline-slider-controls"><span class="prev">🡐</span><span class="pagination"></span><span class="next">🡒</span></div>
+											<div class="vlt-timeline-slider-controls">
+												<span class="prev">🡐</span>
+												<span class="pagination"></span>
+												<span class="next">🡒</span>
+											</div>
 										</div>
 									</div>
 									<div class="vlt-gap-50"></div>
-									<!--Animated Block-->
 									<div class="vlt-animated-block" style="animation-delay:100ms; animation-duration:700ms;">
-										<!--Timeline Slider-->
 										<div class="vlt-timeline-slider">
 											<div class="swiper-container">
 												<div class="swiper-wrapper">
-													<div>
-														<!--Timeline Slider Item-->
-														<div class="vlt-timeline-item">
-															<div class="row">
-																<div class="col-sm-12 col-md-3"><span class="vlt-timeline-item__year">2010-2012</span>
-																</div>
-																<div class="col-sm-12 col-md-3">
-																	<h5 class="vlt-timeline-item__title">Graphic Designer,<br>Art & Co.</h5>
-																</div>
-																<div class="col-sm-12 col-md-5 offset-md-1">
-																	<p class="vlt-timeline-item__text">Which firmament dominion first rule and tree. The seas he i were cattle Under living. It may beast every forth place.</p>
-																</div>
+													<!-- Experience Entry -->
+													<div class="vlt-timeline-item">
+														<div class="row">
+															<div class="col-sm-12 col-md-3">
+																<span class="vlt-timeline-item__year">Jun 2023 - Present</span>
 															</div>
-														</div>
-														<!--Timeline Slider Item-->
-														<div class="vlt-timeline-item">
-															<div class="row">
-																<div class="col-sm-12 col-md-3"><span class="vlt-timeline-item__year">2012-2016</span>
-																</div>
-																<div class="col-sm-12 col-md-3">
-																	<h5 class="vlt-timeline-item__title">UX/UI Designer,<br>Behance Inc.</h5>
-																</div>
-																<div class="col-sm-12 col-md-5 offset-md-1">
-																	<p class="vlt-timeline-item__text">Rule bearing whales. Created gathering blessed, sixth likeness male. Over were which you'll so be make moveth made saw above.</p>
-																</div>
+															<div class="col-sm-12 col-md-3">
+																<h5 class="vlt-timeline-item__title">Sales Development Representative,<br>Generate KiwiSaver</h5>
 															</div>
-														</div>
-														<!--Timeline Slider Item-->
-														<div class="vlt-timeline-item">
-															<div class="row">
-																<div class="col-sm-12 col-md-3"><span class="vlt-timeline-item__year">2016-2019</span>
-																</div>
-																<div class="col-sm-12 col-md-3">
-																	<h5 class="vlt-timeline-item__title">Marketing Manager,<br>Ox Identity.</h5>
-																</div>
-																<div class="col-sm-12 col-md-5 offset-md-1">
-																	<p class="vlt-timeline-item__text">Firmament itself rule their evening, which moved very night so great them cattle bearing and gathered forth had whose bearing.</p>
-																</div>
+															<div class="col-sm-12 col-md-5 offset-md-1">
+																<ul class="vlt-timeline-item__text">
+																	<li>Led user testing for new Salesforce implementations.</li>
+																	<li>Created comprehensive training materials for internal teams.</li>
+																	<li>Provided ongoing Salesforce support, increasing adoption among non-technical users.</li>
+																</ul>
 															</div>
 														</div>
 													</div>
-													<div>
-														<!--Timeline Slider Item-->
-														<div class="vlt-timeline-item">
-															<div class="row">
-																<div class="col-sm-12 col-md-3"><span class="vlt-timeline-item__year">2010-2012</span>
-																</div>
-																<div class="col-sm-12 col-md-3">
-																	<h5 class="vlt-timeline-item__title">Graphic Designer,<br>Art & Co.</h5>
-																</div>
-																<div class="col-sm-12 col-md-5 offset-md-1">
-																	<p class="vlt-timeline-item__text">Which firmament dominion first rule and tree. The seas he i were cattle Under living. It may beast every forth place.</p>
-																</div>
+													<!-- Experience Entry -->
+													<div class="vlt-timeline-item">
+														<div class="row">
+															<div class="col-sm-12 col-md-3">
+																<span class="vlt-timeline-item__year">Jan 2023 - Jun 2023</span>
 															</div>
-														</div>
-														<!--Timeline Slider Item-->
-														<div class="vlt-timeline-item">
-															<div class="row">
-																<div class="col-sm-12 col-md-3"><span class="vlt-timeline-item__year">2012-2016</span>
-																</div>
-																<div class="col-sm-12 col-md-3">
-																	<h5 class="vlt-timeline-item__title">UX/UI Designer,<br>Behance Inc.</h5>
-																</div>
-																<div class="col-sm-12 col-md-5 offset-md-1">
-																	<p class="vlt-timeline-item__text">Rule bearing whales. Created gathering blessed, sixth likeness male. Over were which you'll so be make moveth made saw above.</p>
-																</div>
+															<div class="col-sm-12 col-md-3">
+																<h5 class="vlt-timeline-item__title">Sales Development Representative,<br>One New Zealand</h5>
 															</div>
-														</div>
-														<!--Timeline Slider Item-->
-														<div class="vlt-timeline-item">
-															<div class="row">
-																<div class="col-sm-12 col-md-3"><span class="vlt-timeline-item__year">2016-2019</span>
-																</div>
-																<div class="col-sm-12 col-md-3">
-																	<h5 class="vlt-timeline-item__title">Marketing Manager,<br>Ox Identity.</h5>
-																</div>
-																<div class="col-sm-12 col-md-5 offset-md-1">
-																	<p class="vlt-timeline-item__text">Firmament itself rule their evening, which moved very night so great them cattle bearing and gathered forth had whose bearing.</p>
-																</div>
+															<div class="col-sm-12 col-md-5 offset-md-1">
+																<ul class="vlt-timeline-item__text">
+																	<li>Increased sales by 30% through targeted marketing campaigns.</li>
+																	<li>Implemented agile methodologies, improving team productivity by 20%.</li>
+																	<li>Collaborated with cross-functional teams to enhance customer engagement.</li>
+																</ul>
 															</div>
 														</div>
 													</div>
-													<div>
-														<!--Timeline Slider Item-->
-														<div class="vlt-timeline-item">
-															<div class="row">
-																<div class="col-sm-12 col-md-3"><span class="vlt-timeline-item__year">2010-2012</span>
-																</div>
-																<div class="col-sm-12 col-md-3">
-																	<h5 class="vlt-timeline-item__title">Graphic Designer,<br>Art & Co.</h5>
-																</div>
-																<div class="col-sm-12 col-md-5 offset-md-1">
-																	<p class="vlt-timeline-item__text">Which firmament dominion first rule and tree. The seas he i were cattle Under living. It may beast every forth place.</p>
-																</div>
+													<!-- Experience Entry -->
+													<div class="vlt-timeline-item">
+														<div class="row">
+															<div class="col-sm-12 col-md-3">
+																<span class="vlt-timeline-item__year">Jun 2021 - Feb 2022</span>
+															</div>
+															<div class="col-sm-12 col-md-3">
+																<h5 class="vlt-timeline-item__title">Full Stack Developer,<br>Manukau Institute of Technology</h5>
+															</div>
+															<div class="col-sm-12 col-md-5 offset-md-1">
+																<ul class="vlt-timeline-item__text">
+																	<li>Developed "The Fashion Warehouse," a full-stack MERN e-commerce application.</li>
+																	<li>Integrated authentication and payment processing features.</li>
+																	<li>Designed an admin dashboard for managing products and orders.</li>
+																</ul>
 															</div>
 														</div>
-														<!--Timeline Slider Item-->
-														<div class="vlt-timeline-item">
-															<div class="row">
-																<div class="col-sm-12 col-md-3"><span class="vlt-timeline-item__year">2012-2016</span>
-																</div>
-																<div class="col-sm-12 col-md-3">
-																	<h5 class="vlt-timeline-item__title">UX/UI Designer,<br>Behance Inc.</h5>
-																</div>
-																<div class="col-sm-12 col-md-5 offset-md-1">
-																	<p class="vlt-timeline-item__text">Rule bearing whales. Created gathering blessed, sixth likeness male. Over were which you'll so be make moveth made saw above.</p>
-																</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								
+									<div class="vlt-gap-50"></div>
+									<div class="vlt-animated-block" style="animation-delay:200ms; animation-duration:700ms;">
+										<h1 class="has-white-color">Education</h1>
+										<div class="vlt-gap-30"></div>
+										<div class="vlt-timeline-slider">
+											<div class="swiper-container">
+												<div class="swiper-wrapper">
+													<!-- Education Entry -->
+													<div class="vlt-timeline-item">
+														<div class="row">
+															<div class="col-sm-12 col-md-3">
+																<span class="vlt-timeline-item__year">2025 - Present</span>
+															</div>
+															<div class="col-sm-12 col-md-3">
+																<h5 class="vlt-timeline-item__title">Master’s in Software Engineering,<br>University in Auckland</h5>
+															</div>
+															<div class="col-sm-12 col-md-5 offset-md-1">
+																<ul class="vlt-timeline-item__text">
+																	<li>Specializing in AI and Machine Learning.</li>
+																	<li>Working on Salesforce and Cloud Computing integrations.</li>
+																	<li>Researching AI applications in CRM systems.</li>
+																</ul>
 															</div>
 														</div>
-														<!--Timeline Slider Item-->
-														<div class="vlt-timeline-item">
-															<div class="row">
-																<div class="col-sm-12 col-md-3"><span class="vlt-timeline-item__year">2016-2019</span>
-																</div>
-																<div class="col-sm-12 col-md-3">
-																	<h5 class="vlt-timeline-item__title">Marketing Manager,<br>Ox Identity.</h5>
-																</div>
-																<div class="col-sm-12 col-md-5 offset-md-1">
-																	<p class="vlt-timeline-item__text">Firmament itself rule their evening, which moved very night so great them cattle bearing and gathered forth had whose bearing.</p>
-																</div>
+													</div>
+													<!-- Education Entry -->
+													<div class="vlt-timeline-item">
+														<div class="row">
+															<div class="col-sm-12 col-md-3">
+																<span class="vlt-timeline-item__year">2021 - 2024</span>
+															</div>
+															<div class="col-sm-12 col-md-3">
+																<h5 class="vlt-timeline-item__title">Bachelor’s in Computer Science,<br>University in Auckland</h5>
+															</div>
+															<div class="col-sm-12 col-md-5 offset-md-1">
+																<ul class="vlt-timeline-item__text">
+																	<li>Focused on software development and cloud computing.</li>
+																	<li>Completed projects involving AI and full-stack development.</li>
+																	<li>Active member of the university’s AI research group.</li>
+																</ul>
 															</div>
 														</div>
 													</div>
@@ -372,12 +396,17 @@
 										</div>
 									</div>
 									<div class="vlt-gap-50"></div>
-									<!--Animated Block-->
-									<div class="vlt-animated-block" style="animation-delay:200ms; animation-duration:700ms;">
-										<!--Button--><a class="vlt-btn vlt-btn--primary" href="#" target="_self"><span class="vlt-btn__text">Download Resume</span><span class="vlt-btn__icon vlt-btn__icon--right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="round">
+									<div class="vlt-animated-block" style="animation-delay:300ms; animation-duration:700ms;">
+										<a class="vlt-btn vlt-btn--primary" href="#" target="_self">
+											<span class="vlt-btn__text">Download Resume</span>
+											<span class="vlt-btn__icon vlt-btn__icon--right">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="round">
 													<line x1="12" y1="5" x2="12" y2="19"></line>
 													<polyline points="19 12 12 19 5 12"></polyline>
-												</svg></span></a>
+												</svg>
+											</span>
+											</span>
+										</a>
 									</div>
 								</div>
 							</div>
@@ -396,56 +425,48 @@
 							<div class="vlt-particle vlt-custom--2355 vlt-fade-in-left" style="background-image: url(assets/img/root/elipse-light.png); animation-delay: 500ms;"></div>
 						</div>
 						<div class="container">
-							<div class="row align-items-center">
-								<div class="col-lg-4 offset-lg-1">
-									<div class="vlt-slide-photo">
-										<div class="vlt-slide-photo__inside"><img src="assets/img/attachment-07.jpg" alt=""></div>
-										<div class="vlt-slide-photo__particle vlt-fade-in-bottom--small has-border-radius has-box-shadow" style="top: -50px; right: -40px; width: 100px; transition-delay: 300ms;"><img src="assets/img/root/parallax-particle-01.png" alt=""></div>
-										<div class="vlt-slide-photo__particle vlt-fade-in-bottom--small has-border-radius has-box-shadow" style="top: 40px; left: -30px; width: 80px; transition-delay: 600ms;"><img src="assets/img/root/parallax-particle-02.png" alt=""></div>
-										<div class="vlt-slide-photo__particle vlt-fade-in-left--small has-border-radius has-box-shadow" style="left: 30px; bottom: -50px; width: 100px; transition-delay: 900ms;"><img src="assets/img/root/parallax-particle-03.png" alt=""></div>
-										<div class="vlt-slide-photo__particle vlt-fade-in-left--small negative-z-index" style="right: -40px; bottom: -30px; width: 290px; transition-delay: 1.2s;"><img src="assets/img/root/plus-light-pattern.png" alt=""></div>
-									</div>
-									<div class="vlt-gap-100--md"></div>
-								</div>
-								<div class="col-lg-5 offset-lg-1">
-									<!--Animated Block-->
-									<div class="vlt-animated-block" style="animation-delay:100ms; animation-duration:700ms;">
-										<h4>I’m using <span class="has-first-color">top leading design</span> methods in my work.</h4>
-										<div class="vlt-gap-20"></div>
-										<p>Sea was very don't without i deep of Multiply Signs<br>creature make a <strong>fifth void</strong> us face day.</p>
-									</div>
-									<div class="vlt-gap-50"></div>
-									<!--Animated Block-->
-									<div class="vlt-animated-block" style="animation-delay:200ms; animation-duration:700ms;">
-										<!--Progress Bar-->
-										<div class="vlt-progress-bar" data-final-value="70" data-animation-speed="1000">
-											<h5 class="vlt-progress-bar__title">Web Design<span class="counter">0</span>
-											</h5>
-											<div class="vlt-progress-bar__bar"><span></span></div>
+							
+								
+								
+									<div class="row align-items-center">
+										<div class="col-lg-4 offset-lg-1">
+											<div class="vlt-slide-photo">
+												<div class="vlt-slide-photo__inside"><img src="assets/img/attachment-07.jpg" alt=""></div>
+												<div class="vlt-slide-photo__inside"><img src="assets/img/attachment-07.jpg" alt=""></div>
+												<div class="vlt-slide-photo__particle vlt-fade-in-bottom--small has-border-radius has-box-shadow" style="top: -50px; right: -40px; width: 100px; transition-delay: 300ms;"><img src="assets/img/root/parallax-particle-01.png" alt=""></div>
+												<div class="vlt-slide-photo__particle vlt-fade-in-bottom--small has-border-radius has-box-shadow" style="top: 40px; left: -30px; width: 80px; transition-delay: 600ms;"><img src="assets/img/root/parallax-particle-02.png" alt=""></div>
+												<div class="vlt-slide-photo__particle vlt-fade-in-left--small has-border-radius has-box-shadow" style="left: 30px; bottom: -50px; width: 100px; transition-delay: 900ms;"><img src="assets/img/root/parallax-particle-03.png" alt=""></div>
+												<div class="vlt-slide-photo__particle vlt-fade-in-left--small negative-z-index" style="right: -40px; bottom: -30px; width: 290px; transition-delay: 1.2s;"><img src="assets/img/root/plus-light-pattern.png" alt=""></div>
+
+												
+											</div>
+											
+											<div class="vlt-gap-100--md"></div>
+										</div>
+										<div class="col-lg-5 offset-lg-1">
+											<!--Animated Block-->
+											<div class="vlt-animated-block animated" style="animation-delay:100ms; animation-duration:700ms;">
+												<h4>A Passion for <span class="has-first-color">Technology, Growth, and Leadership</span></h4>
+												<div class="vlt-gap-20"></div>
+												<p>I am currently pursuing a <strong>Master’s in Software Engineering</strong>, blending my technical expertise with a passion for innovation in **Salesforce, Cloud Computing, and AI/ML**. My goal is to build intelligent CRM solutions that drive business transformation.</p>
+											</div>
+											<div class="vlt-gap-50"></div>
+											<!--Animated Block-->
+											<div class="vlt-animated-block animated" style="animation-delay:200ms; animation-duration:700ms;">
+												<h4>Sales Expertise Meets Tech Innovation</h4>
+												<div class="vlt-gap-20"></div>
+												<p>With experience in <strong>sales and business development</strong>, I understand how technology empowers teams to drive revenue and efficiency. My background helps bridge the gap between **technical solutions and business needs**, ensuring that CRM and cloud platforms are optimized for growth.</p>
+											</div>
+											<div class="vlt-gap-50"></div>
+											<!--Animated Block-->
+											<div class="vlt-animated-block animated" style="animation-delay:300ms; animation-duration:700ms;">
+												<h4>Beyond Work: A Drive for Leadership & Adventure</h4>
+												<div class="vlt-gap-20"></div>
+												<p>When I’m not deep in tech, I’m focused on <strong>leadership development, reading, and fitness</strong>. Whether it’s honing my discipline in **Muay Thai**, embracing the outdoors through **hiking**, or expanding my mind through **books**, I believe in constant self-improvement—just like in tech.</p>
+											</div>
 										</div>
 									</div>
-									<div class="vlt-gap-30"></div>
-									<!--Animated Block-->
-									<div class="vlt-animated-block" style="animation-delay:300ms; animation-duration:700ms;">
-										<!--Progress Bar-->
-										<div class="vlt-progress-bar" data-final-value="90" data-animation-speed="1000">
-											<h5 class="vlt-progress-bar__title">Branding<span class="counter">0</span>
-											</h5>
-											<div class="vlt-progress-bar__bar"><span></span></div>
-										</div>
-									</div>
-									<div class="vlt-gap-30"></div>
-									<!--Animated Block-->
-									<div class="vlt-animated-block" style="animation-delay:400ms; animation-duration:700ms;">
-										<!--Progress Bar-->
-										<div class="vlt-progress-bar" data-final-value="85" data-animation-speed="1000">
-											<h5 class="vlt-progress-bar__title">Photography<span class="counter">0</span>
-											</h5>
-											<div class="vlt-progress-bar__bar"><span></span></div>
-										</div>
-									</div>
-								</div>
-							</div>
+						
 						</div>
 					</div>
 				</div>
@@ -540,7 +561,7 @@
 						<div class="vlt-project-showcase d-none d-lg-flex">
 							<ul class="vlt-project-showcase__items">
 								<li class="vlt-project-showcase__item">
-									<h3 class="vlt-project-showcase__item__title"><a href="#">Typography</a></h3><span class="vlt-project-showcase__item__category">Branding</span>
+									<h3 class="vlt-project-showcase__item__title"><a href="#">Real Estate Management</a></h3><span class="vlt-project-showcase__item__category">Branding</span>
 								</li>
 								<li class="vlt-project-showcase__item">
 									<h3 class="vlt-project-showcase__item__title"><a href="#">Journal Mockup</a></h3><span class="vlt-project-showcase__item__category">Design</span>
@@ -572,7 +593,7 @@
 			</div>
 			<!--Awards-->
 			<!--Section-->
-			<div class="vlt-section pp-scrollable" data-anchor="Awards" data-brightness="light">
+			<div class="vlt-section pp-scrollable pp-section pp-easing active" data-anchor="Certifications" data-brightness="light" style="z-index: 4; transform: translate3d(0px, 0px, 0px);">
 				<div class="vlt-section__vertical-align">
 					<div class="vlt-section__content">
 						<!--Particles-->
@@ -583,64 +604,68 @@
 							<div class="row align-items-center">
 								<div class="col-lg-5 offset-lg-1">
 									<!--Animated Block-->
-									<div class="vlt-animated-block" style="animation-delay:0s; animation-duration:700ms;">
-										<h4>Professional awards and honors <span class="has-first-color">I've reached.</span></h4>
+									<div class="vlt-animated-block animated" style="animation-delay:0s; animation-duration:700ms;">
+										<h4>Certifications and <span class="has-first-color">Achievements</span></h4>
 										<div class="vlt-gap-20"></div>
-										<p>Fowl be so, under sea land, tree fruitful. Man don't<br>given <strong>unto second may</strong> of dominion beginning.</p>
+										<p>Recognized certifications in Salesforce that validate my expertise.</p>
 									</div>
 									<div class="vlt-gap-50"></div>
-									<!--Animated Block-->
-									<div class="vlt-animated-block" style="animation-delay:100ms; animation-duration:700ms;">
-										<!--Award Item-->
+									
+									<!-- Certification Items -->
+									<div class="vlt-animated-block animated" style="animation-delay:100ms; animation-duration:700ms;">
 										<div class="vlt-award-item">
-											<div class="vlt-award-item__logo"><a href="#"><img src="assets/img/root/awards-01.png" alt="Honorable mension"></a>
-											</div>
+											<div class="vlt-award-item__logo"><img src="dist\assets\img\certifications\salesforce_associate.png" alt="Salesforce Associate"></div>
 											<div class="vlt-award-item__content">
-												<h6>Honorable mension</h6>
-												<p>Websites, Corporate Communications.</p>
+												<h6>Salesforce Associate</h6>
+												<p>Fundamental knowledge of Salesforce ecosystem and best practices.</p>
 											</div>
 										</div>
 									</div>
 									<div class="vlt-gap-30"></div>
-									<!--Animated Block-->
-									<div class="vlt-animated-block" style="animation-delay:200ms; animation-duration:700ms;">
-										<!--Award Item-->
+			
+									<div class="vlt-animated-block animated" style="animation-delay:200ms; animation-duration:700ms;">
 										<div class="vlt-award-item">
-											<div class="vlt-award-item__logo"><a href="#"><img src="assets/img/root/awards-02.png" alt="Site of the day"></a>
-											</div>
+											<div class="vlt-award-item__logo"><img src="dist\assets\img\certifications\salesforce_admin.png" alt="Salesforce Administrator"></div>
 											<div class="vlt-award-item__content">
-												<h6>Site of the day</h6>
-												<p>Advertising, Media &amp; PR, Brand Strategy.</p>
+												<h6>Salesforce Administrator</h6>
+												<p>Certified Salesforce Admin with expertise in CRM management.</p>
 											</div>
 										</div>
 									</div>
 									<div class="vlt-gap-30"></div>
-									<!--Animated Block-->
-									<div class="vlt-animated-block" style="animation-delay:300ms; animation-duration:700ms;">
-										<!--Award Item-->
+			
+									<div class="vlt-animated-block animated" style="animation-delay:300ms; animation-duration:700ms;">
 										<div class="vlt-award-item">
-											<div class="vlt-award-item__logo"><a href="#"><img src="assets/img/root/awards-03.png" alt="Innovative ideas"></a>
-											</div>
+											<div class="vlt-award-item__logo"><img src="dist\assets\img\certifications\salesforce_dev.png" alt="Salesforce Platform Developer 1"></div>
 											<div class="vlt-award-item__content">
-												<h6>Innovative ideas</h6>
-												<p>Webby Winner, People’s Voice Winner.</p>
+												<h6>Salesforce Platform Developer 1</h6>
+												<p>Skilled in Apex, Lightning Components, and Salesforce Development.</p>
+											</div>
+										</div>
+									</div>
+									<div class="vlt-gap-30"></div>
+			
+									<div class="vlt-animated-block animated" style="animation-delay:400ms; animation-duration:700ms;">
+										<div class="vlt-award-item">
+											<div class="vlt-award-item__logo"><img src="dist\assets\img\certifications\salesforce_service.png" alt="Salesforce Service Cloud Consultant"></div>
+											<div class="vlt-award-item__content">
+												<h6>Salesforce Service Cloud Consultant</h6>
+												<p>Expert in Service Cloud solutions and case management.</p>
 											</div>
 										</div>
 									</div>
 									<div class="vlt-gap-100--md"></div>
 								</div>
+
 								<div class="col-lg-4 offset-lg-1">
 									<!--Animated Block-->
-									<div class="vlt-animated-block" style="animation-delay:400ms; animation-duration:700ms;">
+									<div class="vlt-animated-block animated" style="animation-delay:600ms; animation-duration:700ms;">
 										<div class="vlt-slide-photo">
-											<div class="vlt-slide-photo__inside"><img src="assets/img/attachment-06.jpg" alt="">
-												<!--Video Button-->
-												<div class="vlt-video-button center-mode"><a href="https://vimeo.com/367945766" data-fancybox data-small-btn="true" rel="nofollow"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-play">
-															<polygon points="5 3 19 12 5 21 5 3" /></svg></a>
-													<h6>Watch Video</h6>
-												</div>
-											</div>
-											<div class="vlt-slide-photo__caption">* Video inauguration “Best Design” in Italy.</div>
+											<div class="vlt-slide-photo__inside"><img src="https://res.cloudinary.com/trailhead/image/upload/public-trailhead/assets/images/ranks/double-star-ranger.png" alt="Certifications Showcase"></div>
+											<div class="vlt-slide-photo__caption">* My Double Ranger Rank on Trailhead</div>
+											<div class="vlt-slide-photo__caption">  </div>
+											<div class="vlt-slide-photo__inside"><img src="https://www.salesforce.com/news/wp-content/uploads/sites/3/2023/03/Newsroom-Press-Release.png" alt="Certifications Showcase"></div>
+											<div class="vlt-slide-photo__caption">* Showcasing Eienstien AI from Salesforce.</div>
 											<div class="vlt-slide-photo__particle vlt-fade-in-left--small negative-z-index" style="right: -40px; top: -40px; width: 290px; transition-delay: 1.2s;"><img src="assets/img/root/plus-light-pattern.png" alt=""></div>
 										</div>
 									</div>
@@ -650,6 +675,7 @@
 					</div>
 				</div>
 			</div>
+		
 			<!--Testimonials-->
 			<!--Section-->
 			<div class="vlt-section pp-scrollable" data-anchor="Testimonials" data-brightness="dark">
@@ -676,32 +702,54 @@
 											<div class="swiper-container">
 												<div class="swiper-wrapper">
 													<!--Testimonial Item-->
-													<div class="vlt-testimonial-item" style="background: #eb000d url(assets/img/root/cartographer.png) repeat;">
-														<div class="vlt-testimonial-item__avatar"><img src="assets/img/avatar-01.jpg" alt="Damien O'Ryan"></div>
+													<div class="vlt-testimonial-item" style="background: #2f00eb url(assets/img/root/cartographer.png) repeat;">
+														<div class="vlt-testimonial-item__avatar"><img src="https://media.licdn.com/dms/image/v2/D5603AQH4RI7Jn5ZRAg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1688036352953?e=1749081600&v=beta&t=zcnT_B64ZRak-10YuF8kuNJn7kPD_PbObLeag2X1jtc" alt="Damien O'Ryan"></div>
 														<div class="vlt-testimonial-item__content">
-															<p>Day shall form years which rule made first, make a our night life herb midst isn't fish give lights land morning lesser. Said cattle. Green us fish rule third dry his for. Created signs under.</p>
+															<p>I am thrilled to recommend Sagar who time and again has proven to be an invaluable team player and a very hard worker.
+
+																Sagar always brings a positive attitude to everything he does and loves to lend a helping hand regardless of what he has on his plate. 
+																
+																Sagar dedicates himself to continuously build his knowledge. He has persistently worked hard to gain Salesforce certifications and learn about the platform inside and out. Now, he is the team’s go-to person for any Salesforce-related inquiries, where he is always ready to provide insightful advice to the SDR team. 
+																
+																Sagar is a person who always strives to do his best at everything - with an outstanding work ethic, a strong ability to grasp new things, and his helping nature, he is a great asset to the team!.</p>
 															<div class="vlt-testimonial-item__meta">
-																<h6>Damien O'Ryan</h6><span>Mountain Inc</span>
+																<h6>Austin Tongue</h6><span>Generate Kiwi Saver </span>
 															</div>
 														</div>
 													</div>
 													<!--Testimonial Item-->
-													<div class="vlt-testimonial-item" style="background: #eb000d url(assets/img/root/cartographer.png) repeat;">
-														<div class="vlt-testimonial-item__avatar"><img src="assets/img/avatar-02.jpg" alt="Kien Hester"></div>
+													<div class="vlt-testimonial-item" style="background: #2f00eb url(assets/img/root/cartographer.png) repeat;">
+														<div class="vlt-testimonial-item__avatar"><img src="https://media.licdn.com/dms/image/v2/D4E03AQGmG460UAPfGQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1716353517388?e=1749081600&v=beta&t=LC8xNmuMdMY_4TrEcZ0TVTxE9olz-X8yynn60YHxcJY" alt="Kien Hester"></div>
 														<div class="vlt-testimonial-item__content">
-															<p>Day shall form years which rule made first, make a our night life herb midst isn't fish give lights land morning lesser. Said cattle. Green us fish rule third dry his for. Created signs under.</p>
+															<p>I have had the pleasure of working closely with Sagar for over a year at Generate KiwiSaver. In this time, I have consistently been impressed by his dedication, professionalism, and exceptional skills.
+
+																He consistently delivers high-quality work under tight deadlines and remains calm and composed in challenging situations. Sagar has been our go-to person for all and any salesforce issues we faced, he has also implemented effective streamlining processes to help aid SDR and make the Salesforce platform more of an enjoyable experience. 
+																
+																Sagar is not only a valuable asset to any team but also a pleasure to work alongside. He brings a positive attitude and collaborative spirit to every project, making his presence invaluable.
+																
+																I have no doubt that Sagar will excel in any future endeavors and highly recommend him without hesitation!</p>
 															<div class="vlt-testimonial-item__meta">
-																<h6>Kien Hester</h6><span>CEO Vintage</span>
+																<h6>Eileen Katoa</h6><span>Generate Kiwi Saver </span>
 															</div>
 														</div>
 													</div>
 													<!--Testimonial Item-->
-													<div class="vlt-testimonial-item" style="background: #eb000d url(assets/img/root/cartographer.png) repeat;">
-														<div class="vlt-testimonial-item__avatar"><img src="assets/img/avatar-03.jpg" alt="Chanelle Reed"></div>
+													<div class="vlt-testimonial-item" style="background: #2f00eb url(assets/img/root/cartographer.png) repeat;">
+														<div class="vlt-testimonial-item__avatar"><img src="https://media.licdn.com/dms/image/v2/C4D03AQHEe3n8zAPrTw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1661897018839?e=1749081600&v=beta&t=uZDsN55LKLNLBG7C2QAbLxJXN_HF1azOBK9fhB_hiwo" alt="Chanelle Reed"></div>
 														<div class="vlt-testimonial-item__content">
-															<p>Day shall form years which rule made first, make a our night life herb midst isn't fish give lights land morning lesser. Said cattle. Green us fish rule third dry his for. Created signs under.</p>
+															<p>I highly recommend Sagar, a former colleague I had the pleasure of working with. During our time together, Sagar demonstrated remarkable dedication and a proactive attitude, notably in his self-driven study of Salesforce. Sagar consistently demonstrated professionalism, dedication, and an unwavering commitment to excellence. His strong work ethic, coupled with his exceptional communication skills, made him an invaluable member of the team. As well as his infectiously positive nature, Sagar is a highly skilled professional who would be a tremendous asset to any team. I do not doubt that he will continue to excel in his future endeavors.</p>
 															<div class="vlt-testimonial-item__meta">
-																<h6>Chanelle Reed</h6><span>Woody Nature</span>
+																<h6>Bradley Princeton</h6><span>Generate Kiwi Saver</span>
+															</div>
+														</div>
+													</div>
+													<!--Testimonial Item-->
+													<div class="vlt-testimonial-item" style="background: #2f00eb url(assets/img/root/cartographer.png) repeat;">
+														<div class="vlt-testimonial-item__avatar"><img src="assets/img/avatar-03.jpg" alt="Heidi England"></div>
+														<div class="vlt-testimonial-item__content">
+															<p>It was a pleasure to work together with Sagar, who was an excellent customer champion. At One New Zealand, he continuously displayed a strong work ethic and a commitment to achievement. He has excellent relationships with both current and potential clients of the business because of his interpersonal skills. Sagar was someone I frequently considered to be a professional sales representative and a real team player. Any business would be lucky to have Sagar on board.</p>
+															<div class="vlt-testimonial-item__meta">
+																<h6>Heidi England</h6><span>One New Zealand</span>
 															</div>
 														</div>
 													</div>

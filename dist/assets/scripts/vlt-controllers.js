@@ -1,6 +1,21 @@
 /***********************************************
  * WIDGET: ANIMATED BLOCK
  ***********************************************/
+window.onload = () => {
+	const typingElement = document.getElementById("typing");
+	const roles = ["Salesforce Consultant", "AI Enthusiast", "Cloud Consultant"];
+	let index = 0;
+  
+	const typeText = () => {
+	  typingElement.textContent = roles[index];
+	  typingElement.classList.add('typing-text');
+	  index = (index + 1) % roles.length;
+	};
+  
+	setInterval(typeText, 4000);
+  };
+  
+
 (function ($) {
 
 	'use strict';

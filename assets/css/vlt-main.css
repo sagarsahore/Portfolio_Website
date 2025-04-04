@@ -14,9 +14,15 @@
 /* 01. Helpers */
 :root
 {
-    --p1: #c3323a;
+    --p1: #5932c3;
     --pf: Inter;
 }
+
+  @keyframes blink {
+	50% {
+	  border-color: transparent;
+	}
+  }  
 
 @-webkit-keyframes vlt_animate_icon_bottom
 {

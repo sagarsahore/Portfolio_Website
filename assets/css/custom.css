@@ -1,3 +1,31 @@
+#typing {
+	display: inline-block;
+	border-right: 3px solid white;
+	padding-right: 5px;
+	white-space: nowrap;
+	overflow: hidden;
+  }
+  
+  .typing-text {
+	animation: typing 3s steps(30) 1s 1 normal both, blink 0.75s step-end infinite;
+  }
+  
+  @keyframes typing {
+	from {
+	  width: 0;
+	}
+	to {
+	  width: 100%;
+	}
+  }
+  
+  @keyframes blink {
+	50% {
+	  border-color: transparent;
+	}
+  }  
+
+
 .vlt-custom--8131 {
 	bottom: -250px;
 	left: -200px;
