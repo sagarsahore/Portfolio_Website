@@ -145,6 +145,39 @@
                 transform: scale(1);
     }
 }
+typing-text {
+	animation: typing 3s steps(30, end) forwards;
+	white-space: nowrap;
+	overflow: hidden;
+	border-right: 2px solid #a855f7; /* optional cursor effect */
+}
+
+/* Deleting effect */
+.deleting-text {
+	animation: deleting 2s steps(30, end) forwards;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+/* Keyframes for typing */
+@keyframes typing {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
+	}
+}
+
+/* Keyframes for deleting */
+@keyframes deleting {
+	from {
+		width: 100%;
+	}
+	to {
+		width: 0;
+	}
+}
 
 .vlt-display-1,
 .vlt-navbar-contacts ul,
@@ -2317,7 +2350,7 @@ body .pp-scrollable
 .vlt-btn--primary
 {
     color: #fff;
-    background-color: var(--p1);
+    background-color:  #3f15d9;
 }
 .vlt-btn--primary:hover
 {
