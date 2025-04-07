@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -8,51 +8,47 @@ require 'php/PHPMailer-5.2.28/src/PHPMailer.php';
 require 'php/PHPMailer-5.2.28/src/SMTP.php';
 
 $mail = new PHPMailer(true);
-$mail_subject = 'Subject';
-$mail_to_email = '***@gmail.com'; // your email
-$mail_to_name = 'Webmaster';
+
+// Your details
+$mail_subject = 'New Contact Form Message';
+$mail_to_email = 'sagarsahoredev@gmail.com'; // You will receive this
+$mail_to_name = 'Sagar Sahore';
 
 try {
+	// Get POST data
+	$mail_from_name = isset($_POST['name']) ? $_POST['name'] : '';
+	$mail_from_email = isset($_POST['email']) ? $_POST['email'] : '';
+	$mail_category = isset($_POST['category']) ? $_POST['category'] : '';
+	$mail_budget = isset($_POST['budget']) ? $_POST['budget'] : '';
+	$mail_message = isset($_POST['message']) ? $_POST['message'] : '';
 
-	$mail_from_name = isset( $_POST['name'] ) ? $_POST['name'] : '';
-	$mail_from_email = isset( $_POST['email'] ) ? $_POST['email'] : '';
-	$mail_category = isset( $_POST['category'] ) ? $_POST['category'] : '';
-	$mail_budget = isset( $_POST['budget'] ) ? $_POST['budget'] : '';
-	$mail_message = isset( $_POST['message'] ) ? $_POST['message'] : '';
+	// SMTP settings
+	$mail->isSMTP();                                            
+	$mail->Host       = 'smtp.gmail.com';                      
+	$mail->SMTPAuth   = true;                                   
+	$mail->Username   = 'sagarsahoredev@gmail.com';            
+	$mail->Password   = 'isivgakrdqrmlwdv';                    
+	$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;           
+	$mail->Port       = 465;                                    
 
-	// Server settings
-	$mail->isSMTP(); // Send using SMTP
-	$mail->Host = 'smtp.***.com'; // Set the SMTP server to send through
-	$mail->SMTPAuth = true; // Enable SMTP authentication
-	$mail->Username = '***'; // SMTP username
-	$mail->Password = '***'; // SMTP password
-	$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-	$mail->Port = 465; // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+	$mail->setFrom('sagarsahoredev@gmail.com', 'Portfolio Contact Form'); // From
+	$mail->addAddress($mail_to_email, $mail_to_name); // To (your inbox)
 
-	$mail->setFrom($mail_to_email, $mail_to_name); // Your email
-	$mail->addAddress($mail_from_email, $mail_from_name); // Add a recipient
-
-	// for($ct=0; $ct<count($_FILES['file_attach']['tmp_name']); $ct++) {
-	// 	$mail->AddAttachment($_FILES['file_attach']['tmp_name'][$ct], $_FILES['file_attach']['name'][$ct]);
-	// }
-
-	// Content
-	$mail->isHTML(true); // Set email format to HTML
-
+	// Email format
+	$mail->isHTML(true);                                        
 	$mail->Subject = $mail_subject;
-	$mail->Body = '
-		<strong>Name:</strong> ' . $mail_from_name . '<br>
-		<strong>Email:</strong> ' . $mail_from_email . '<br>
-		<strong>Category:</strong> ' . $mail_category . '<br>
-		<strong>Budget:</strong> ' . $mail_budget . '<br>
-		<strong>Message:</strong> ' . $mail_message;
+	$mail->Body    = "
+		<strong>Name:</strong> {$mail_from_name}<br>
+		<strong>Email:</strong> {$mail_from_email}<br>
+		<strong>Company:</strong> {$mail_category}<br>
+		<strong>Reason:</strong> {$mail_budget}<br><br>
+		<strong>Message:</strong><br>{$mail_message}
+	";
 
-	$mail->Send();
-
-	echo 'Message has been sent';
+	$mail->send();
+	echo 'success'; // JS will detect this for frontend success message
 
 } catch (Exception $e) {
-
-	echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-
+	echo "Mailer Error: {$mail->ErrorInfo}";
 }
+?>
