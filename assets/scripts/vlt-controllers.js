@@ -314,12 +314,12 @@ window.onload = () => {
 					VLTJS.window.trigger('vlt.change-slide');
 				},
 				onLeave: function (index, nextIndex, direction) {
-					vlthemes_page_brightness();
 					vlthemes_navigation(direction, nextIndex);
 					vlthemes_slide_counter();
 					VLTJS.window.trigger('vlt.change-slide');
 				},
 				afterLoad: function (anchorLink, index) {
+					vlthemes_page_brightness(); // moved here for proper animation
 					progress_bar.find('li.active').prevAll().addClass('prev');
 					vlthemes_navbar_solid();
 				}
@@ -327,7 +327,9 @@ window.onload = () => {
 
 			numbers.on('click', '>a', function (e) {
 				e.preventDefault();
-				$.fn.pagepiling.moveSectionDown();
+				if (typeof $.fn.pagepiling !== 'undefined' && $.isFunction($.fn.pagepiling.moveSectionDown)) {
+					$.fn.pagepiling.moveSectionDown();
+				}
 			});
 
 			el.find('.pp-scrollable').on('scroll', function () {
@@ -343,6 +345,7 @@ window.onload = () => {
 	};
 	VLTJS.fullpageSlider.init();
 })(jQuery);
+
 /***********************************************
  * MENU OFFCANVAS
  ***********************************************/
