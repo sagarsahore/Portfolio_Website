@@ -4,6 +4,11 @@ html, body {
     scroll-behavior: smooth;
 }
 
+.vlt-section {
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevent unwanted scrolling */
+}
+
 @media (max-width: 768px) {
     .vlt-section {
         height: auto; /* Allow sections to adjust height on mobile */
