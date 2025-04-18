@@ -306,6 +306,7 @@ window.onload = () => {
 				loopBottom: loop_bottom,
 				anchors: anchors,
 				sectionSelector: '.vlt-section',
+				touchsenstivity: 5,
 				navigation: false,
 				afterRender: function () {
 					vlthemes_show_navigation();
