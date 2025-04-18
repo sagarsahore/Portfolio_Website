@@ -458,121 +458,131 @@
         function addTableClass(element) {
             element.addClass('pp-table').wrapInner('<div class="pp-tableCell" style="height:100%" />');
         }
-
-
         /**
-         * Retuns `up` or `down` depending on the scrolling movement to reach its destination
-         * from the current section.
-         */
-        function getYmovement(destiny) {
-            var fromIndex = $('.pp-section.active').index('.pp-section');
-            var toIndex = destiny.index('.pp-section');
+ * Returns `up` or `down` depending on the scrolling movement to reach its destination
+ * from the current section.
+ */
+function getYmovement(destiny) {
+    var fromIndex = $('.pp-section.active').index('.pp-section');
+    var toIndex = destiny.index('.pp-section');
 
-            if (fromIndex > toIndex) {
-                return 'up';
-            }
-            return 'down';
-        }
+    return fromIndex > toIndex ? 'up' : 'down';
+}
 
-        /**
-        * Scrolls the page to the given destination
-        */
-        function scrollPage(destination, animated) {
-            var v = {
-                destination: destination,
-                animated: animated,
-                activeSection: $('.pp-section.active'),
-                anchorLink: destination.data('anchor'),
-                sectionIndex: destination.index('.pp-section'),
-                toMove: destination,
-                yMovement: getYmovement(destination),
-                leavingSection: $('.pp-section.active').index('.pp-section') + 1
-            };
+/**
+ * Detects if the user is on a mobile device.
+ */
+function isMobileDevice() {
+    return /Mobi|Android|iPhone/i.test(navigator.userAgent);
+}
 
-            //quiting when activeSection is the target element
-            if (v.activeSection.is(destination)) { return; }
+/**
+ * Scrolls the page to the given destination
+ */
+function scrollPage(destination, animated) {
+    var v = {
+        destination: destination,
+        animated: animated,
+        activeSection: $('.pp-section.active'),
+        anchorLink: destination.data('anchor'),
+        sectionIndex: destination.index('.pp-section'),
+        toMove: destination,
+        yMovement: getYmovement(destination),
+        leavingSection: $('.pp-section.active').index('.pp-section') + 1
+    };
 
-            if (typeof v.animated === 'undefined') {
-                v.animated = true;
-            }
+    if (v.activeSection.is(destination)) return;
 
-            if (typeof v.anchorLink !== 'undefined') {
-                setURLHash(v.anchorLink, v.sectionIndex);
-            }
+    if (typeof v.animated === 'undefined') v.animated = true;
 
-            v.destination.addClass('active').siblings().removeClass('active');
+    if (typeof v.anchorLink !== 'undefined') {
+        setURLHash(v.anchorLink, v.sectionIndex);
+    }
 
-            v.sectionsToMove = getSectionsToMove(v);
+    v.destination.addClass('active').siblings().removeClass('active');
 
-            //scrolling down (moving sections up making them disappear)
-            if (v.yMovement === 'down') {
-                v.translate3d = getTranslate3d();
-                v.scrolling = '-100%';
+    // 📱 Use native scroll for mobile
+    if (isMobileDevice()) {
+        destination[0].scrollIntoView({ behavior: 'smooth' });
+        activateMenuElement(v.anchorLink);
+        activateNavDots(v.anchorLink, v.sectionIndex);
+        lastScrolledDestiny = v.anchorLink;
+        return;
+    }
 
-                if (!options.css3) {
-                    v.sectionsToMove.each(function (index) {
-                        if (index != v.activeSection.index('.pp-section')) {
-                            $(this).css(getScrollProp(v.scrolling));
-                        }
-                    });
+    // 💻 Original full-section scroll for desktop
+    v.sectionsToMove = getSectionsToMove(v);
+
+    if (v.yMovement === 'down') {
+        v.translate3d = getTranslate3d();
+        v.scrolling = '-100%';
+
+        if (!options.css3) {
+            v.sectionsToMove.each(function (index) {
+                if (index !== v.activeSection.index('.pp-section')) {
+                    $(this).css(getScrollProp(v.scrolling));
                 }
-
-                v.animateSection = v.activeSection;
-            }
-
-            //scrolling up (moving section down to the viewport)
-            else {
-                v.translate3d = 'translate3d(0px, 0px, 0px)';
-                v.scrolling = '0';
-
-                v.animateSection = destination;
-            }
-
-            $.isFunction(options.onLeave) && options.onLeave.call(this, v.leavingSection, (v.sectionIndex + 1), v.yMovement);
-
-            performMovement(v);
-
-            activateMenuElement(v.anchorLink);
-            activateNavDots(v.anchorLink, v.sectionIndex);
-            lastScrolledDestiny = v.anchorLink;
-
-            var timeNow = new Date().getTime();
-            lastAnimation = timeNow;
+            });
         }
 
-        /**
-        * Performs the movement (by CSS3 or by jQuery)
-        */
-        function performMovement(v) {
-            if (options.css3) {
-                transformContainer(v.animateSection, v.translate3d, v.animated);
+        v.animateSection = v.activeSection;
+    } else {
+        v.translate3d = 'translate3d(0px, 0px, 0px)';
+        v.scrolling = '0';
+        v.animateSection = destination;
+    }
 
-                v.sectionsToMove.each(function () {
-                    transformContainer($(this), v.translate3d, v.animated);
-                });
+    if ($.isFunction(options.onLeave)) {
+        options.onLeave.call(this, v.leavingSection, (v.sectionIndex + 1), v.yMovement);
+    }
 
-                setTimeout(function () {
+    performMovement(v);
+
+    activateMenuElement(v.anchorLink);
+    activateNavDots(v.anchorLink, v.sectionIndex);
+    lastScrolledDestiny = v.anchorLink;
+    lastAnimation = new Date().getTime();
+}
+
+/**
+ * Performs the movement (by CSS3 or by jQuery)
+ */
+function performMovement(v) {
+    if (options.css3) {
+        transformContainer(v.animateSection, v.translate3d, v.animated);
+
+        v.sectionsToMove.each(function () {
+            transformContainer($(this), v.translate3d, v.animated);
+        });
+
+        setTimeout(function () {
+            afterSectionLoads(v);
+        }, options.scrollingSpeed);
+    } else {
+        v.scrollOptions = getScrollProp(v.scrolling);
+
+        if (v.animated) {
+            v.animateSection.animate(
+                v.scrollOptions,
+                options.scrollingSpeed,
+                options.easing,
+                function () {
+                    readjustSections(v);
                     afterSectionLoads(v);
-                }, options.scrollingSpeed);
-            } else {
-                v.scrollOptions = getScrollProp(v.scrolling);
-
-                if (v.animated) {
-                    v.animateSection.animate(
-                        v.scrollOptions,
-                        options.scrollingSpeed, options.easing, function () {
-                            readjustSections(v);
-                            afterSectionLoads(v);
-                        });
-                } else {
-                    v.animateSection.css(getScrollProp(v.scrolling));
-                    setTimeout(function () {
-                        readjustSections(v);
-                        afterSectionLoads(v);
-                    }, 400);
                 }
-            }
+            );
+        } else {
+            v.animateSection.css(getScrollProp(v.scrolling));
+            setTimeout(function () {
+                readjustSections(v);
+                afterSectionLoads(v);
+            }, 400);
         }
+    }
+}
+
+
+
 
         /**
         * Actions to execute after a secion is loaded

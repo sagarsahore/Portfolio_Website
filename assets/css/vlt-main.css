@@ -1581,6 +1581,26 @@ select:focus::-webkit-input-placeholder
 /* 04. Pages */
 /* PAGE: FULLPAGE SLIDER
 -------------------------------------------- */
+.vlt-education-slider .swiper-container {
+    /* Ensure this container has styles specific to the education slider */
+    width: 100%;
+    height: 100%;
+  }
+  
+  .education-controls .education-prev,
+  .education-controls .education-next {
+    cursor: pointer;
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 10px;
+  }
+  
+  .education-controls .education-pagination {
+    font-size: 1.2rem;
+    color: #fff;
+  }
+  
+
 .vlt-fullpage-slider
 {
     height: 100vh;

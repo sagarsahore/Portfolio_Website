@@ -739,6 +739,67 @@ window.onload = () => {
 	VLTJS.testimonialSlider.init()
 
 })(jQuery);
+
+/***********************************************
+ * WIDGET: Experience SLIDER
+ ***********************************************/
+var experienceSlider = $('.swiper-container-experience');
+experienceSlider.each(function () {
+  var $this = $(this);
+  $this.find('.swiper-wrapper > *').wrap('<div class="swiper-slide">');
+
+  new Swiper(this, {
+    speed: 1000,
+    spaceBetween: 30,
+    grabCursor: true,
+    effect: 'coverflow',
+    slidesPerView: 1,
+    navigation: {
+      nextEl: $this.closest('.vlt-timeline-slider').prev().find('.experience-controls .next')[0],
+      prevEl: $this.closest('.vlt-timeline-slider').prev().find('.experience-controls .prev')[0],
+    },
+    pagination: {
+      el: $this.closest('.vlt-timeline-slider').prev().find('.experience-controls .pagination')[0],
+      clickable: false,
+      type: 'fraction',
+      renderFraction: function (currentClass, totalClass) {
+        return '<span class="' + currentClass + '"></span>' +
+               '<span class="sep">/</span>' +
+               '<span class="' + totalClass + '"></span>';
+      }
+    }
+  });
+});
+
+var educationSlider = $('.swiper-container-education');
+educationSlider.each(function () {
+  var $this = $(this);
+  $this.find('.swiper-wrapper > *').wrap('<div class="swiper-slide">');
+
+  new Swiper(this, {
+    speed: 1000,
+    spaceBetween: 30,
+    grabCursor: true,
+    effect: 'coverflow',
+    slidesPerView: 1,
+    navigation: {
+      nextEl: $this.closest('.vlt-timeline-slider').prev().find('.education-controls .next')[0],
+      prevEl: $this.closest('.vlt-timeline-slider').prev().find('.education-controls .prev')[0],
+    },
+    pagination: {
+      el: $this.closest('.vlt-timeline-slider').prev().find('.education-controls .pagination')[0],
+      clickable: false,
+      type: 'fraction',
+      renderFraction: function (currentClass, totalClass) {
+        return '<span class="' + currentClass + '"></span>' +
+               '<span class="sep">/</span>' +
+               '<span class="' + totalClass + '"></span>';
+      }
+    }
+  });
+});
+
+
 /***********************************************
  * WIDGET: TIMELINE SLIDER
  ***********************************************/
