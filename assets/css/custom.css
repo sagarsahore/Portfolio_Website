@@ -9,16 +9,6 @@ html, body {
     overflow: hidden; /* Prevent unwanted scrolling */
 }
 
-@media (max-width: 768px) {
-    .vlt-section {
-        height: auto; /* Allow sections to adjust height on mobile */
-        overflow: auto; /* Enable normal scrolling */
-    }
-
-    .vlt-fullpage-slider {
-        overflow: visible; /* Ensure the fullpage slider doesn't interfere with scrolling */
-    }
-}
 .vlt-custom--8131 {
 	bottom: -250px;
 	left: -200px;
