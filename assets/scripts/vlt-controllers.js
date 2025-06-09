@@ -54,31 +54,12 @@ window.onload = () => {
 				var thisForm = $(this),
 					successMessage = thisForm.find('.message.success'),
 					errorMessage = thisForm.find('.message.danger');
-				thisForm.validate({
-					errorClass: 'error',
-					submitHandler: function (form) {
-						$.ajax({
-							type: 'POST',
-							url: 'handler.php',
-							data: new FormData(form),
-							cache: false,
-							contentType: false,
-							processData: false,
-							success: function () {
-								successMessage.fadeIn();
-								setTimeout(function () {
-									successMessage.fadeOut();
-								}, 5000);
-							},
-							error: function () {
-								errorMessage.fadeIn();
-								setTimeout(function () {
-									errorMessage.fadeOut();
-								}, 5000);
-							}
-						});
-					}
-				});
+                                thisForm.validate({
+                                        errorClass: 'error',
+                                        submitHandler: function (form) {
+                                                // Validation passed. Submission is handled in form.js
+                                        }
+                                });
 
 			});
 		}
@@ -644,14 +625,20 @@ window.onload = () => {
 				},
 			});
 		},
-		initParallax: function () {
-			// check if plugin defined
-			if (typeof gsap == 'undefined') {
-				return;
-			}
-			var el = $('.vlt-project-showcase'),
-				items = el.find('.vlt-project-showcase__items'),
-				item = items.find('.vlt-project-showcase__item'),
+                initParallax: function () {
+                        // check if plugin defined
+                        if (typeof gsap == 'undefined') {
+                                return;
+                        }
+                        var el = $('.vlt-project-showcase');
+
+                        // stop if element doesn't exist
+                        if (!el.length) {
+                                return;
+                        }
+
+                        var items = el.find('.vlt-project-showcase__items'),
+                                item = items.find('.vlt-project-showcase__item'),
 				images = el.find('.vlt-project-showcase__images'),
 				image = images.find('.vlt-project-showcase__image'),
 				wDiff,

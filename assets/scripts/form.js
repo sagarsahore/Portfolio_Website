@@ -12,9 +12,9 @@ document.addEventListener('DOMContentLoaded', function () {
       method: 'POST',
       body: formData
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
-      if (data.trim() === 'success') {
+      if (data.status === 'success') {
         successMsg.style.display = 'block';
         errorMsg.style.display = 'none';
         form.reset();
