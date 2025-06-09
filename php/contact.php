@@ -1,8 +1,13 @@
 <?php
 header('Content-Type: application/json');
 
-// Include PHPMailer
-require_once __DIR__ . '/PHPMailer-5.2.28/PHPMailerAutoload.php';
+// Include PHPMailer classes
+require_once __DIR__ . '/PHPMailer-5.2.28/src/PHPMailer.php';
+require_once __DIR__ . '/PHPMailer-5.2.28/src/SMTP.php';
+require_once __DIR__ . '/PHPMailer-5.2.28/src/Exception.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 $mail = new PHPMailer(true);
 
