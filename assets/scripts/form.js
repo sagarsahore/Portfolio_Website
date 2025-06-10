@@ -12,9 +12,16 @@ document.addEventListener('DOMContentLoaded', function () {
       method: 'POST',
       body: formData
     })
-    .then(response => response.text())
+    .then(async response => {
+      try {
+        return await response.json();
+      } catch (err) {
+        const text = await response.text();
+        throw new Error(text);
+      }
+    })
     .then(data => {
-      if (data.trim() === 'success') {
+      if (data.status === 'success') {
         successMsg.style.display = 'block';
         errorMsg.style.display = 'none';
         form.reset();
