@@ -10,8 +10,11 @@
 			if (typeof $.fn.pagepiling == 'undefined') {
 				return;
 			}
-			var el = $('.vlt-fullpage-slider'),
-				progress_bar = el.find('.vlt-fullpage-slider-progress-bar'),
+			var el = $(".vlt-fullpage-slider");
+                        if (!el.length) {
+                                return;
+                        }
+                        var progress_bar = el.find('.vlt-fullpage-slider-progress-bar'),
 				numbers = el.find('.vlt-fullpage-slider-numbers'),
 				loop_top = el.data('loop-top') ? true : false,
 				loop_bottom = el.data('loop-bottom') ? true : false,
