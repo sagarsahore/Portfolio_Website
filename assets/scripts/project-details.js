@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('project-title').textContent = data.title;
   document.getElementById('project-summary').textContent = data.summary;
   document.getElementById('project-github').href = data.repo;
-  document.getElementById('project-image').src = data.image;
+  const imageEl = document.getElementById('project-image');
+  imageEl.src = data.image;
+  imageEl.alt = data.title;
 
   // Role - use bullet list
   const roleContainer = document.getElementById('project-role');
