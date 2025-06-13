@@ -631,8 +631,11 @@ window.onload = () => {
 			if (typeof Swiper == 'undefined') {
 				return;
 			}
-			var el = $('.vlt-project-showcase-slider .swiper-container');
-			new Swiper(el, {
+                        var el = $('.vlt-project-showcase-slider .swiper-container');
+                        if(!el.length){
+                                return;
+                        }
+                        new Swiper(el, {
 				speed: 1000,
 				spaceBetween: 30,
 				grabCursor: true,
@@ -649,8 +652,12 @@ window.onload = () => {
 			if (typeof gsap == 'undefined') {
 				return;
 			}
-			var el = $('.vlt-project-showcase'),
-				items = el.find('.vlt-project-showcase__items'),
+                        var el = $('.vlt-project-showcase');
+                        if(!el.length){
+                                return;
+                        }
+                        var
+                                items = el.find('.vlt-project-showcase__items'),
 				item = items.find('.vlt-project-showcase__item'),
 				images = el.find('.vlt-project-showcase__images'),
 				image = images.find('.vlt-project-showcase__image'),
