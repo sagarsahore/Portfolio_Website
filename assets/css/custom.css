@@ -74,3 +74,6 @@ html, body {
 	width: 389px;
 	height: 550px;
 }
+/* Hide extra projects by default */
+#additional-projects { display: none; }
+
