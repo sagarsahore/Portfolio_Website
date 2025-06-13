@@ -1,3 +1,4 @@
+// Simple toggle for extra portfolio items
 $(document).ready(function(){
     const btn = $('#toggle-projects');
     const projects = $('#additional-projects');
