@@ -11,14 +11,15 @@
 			if (typeof Swiper == 'undefined') {
 				return;
 			}
-                       var el = $('.vlt-timeline-slider .swiper-container');
-                       var controls = $('.vlt-timeline-slider-controls');
-                       el.each(function (index) {
-                                var $this = $(this);
-                                $this.find('.swiper-wrapper > *').wrap('<div class="swiper-slide">');
+                       var sliders = $('.vlt-timeline-slider');
+                       sliders.each(function () {
+                                var $slider = $(this);
+                                var $container = $slider.find('.swiper-container');
+                                var $ctrl = $slider.prev('.vlt-timeline-slider-controls');
 
-                                var $ctrl = controls.eq(index);
-                                new Swiper(this, {
+                                $container.find('.swiper-wrapper > *').wrap('<div class="swiper-slide">');
+
+                                new Swiper($container[0], {
                                         speed: 1000,
                                         spaceBetween: 0,
                                         grabCursor: true,
