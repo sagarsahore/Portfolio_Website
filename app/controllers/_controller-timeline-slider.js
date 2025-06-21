@@ -44,6 +44,6 @@
 		}
 	};
 
-	VLTJS.timelineSlider.init()
+       VLTJS.timelineSlider.init();
 
 })(jQuery);
