@@ -11,35 +11,39 @@
 			if (typeof Swiper == 'undefined') {
 				return;
 			}
-			var el = $('.vlt-timeline-slider .swiper-container');
-			el.each(function () {
-				var $this = $(this);
-				$this.find('.swiper-wrapper > *').wrap('<div class="swiper-slide">');
-				new Swiper(this, {
-					speed: 1000,
-					spaceBetween: 0,
-					grabCursor: true,
-					slidesPerView: 1,
-					navigation: {
-						nextEl: $('.vlt-timeline-slider-controls .next'),
-						prevEl: $('.vlt-timeline-slider-controls .prev'),
-					},
-					pagination: {
-						el: $('.vlt-timeline-slider-controls .pagination'),
-						clickable: false,
-						type: 'fraction',
-						renderFraction: function (currentClass, totalClass) {
-							return '<span class="' + currentClass + '"></span>' +
-								'<span class="sep">/</span>' +
-								'<span class="' + totalClass + '"></span>';
-						}
-					}
-				});
-			});
+                       var sliders = $('.vlt-timeline-slider');
+                       sliders.each(function () {
+                                var $slider = $(this);
+                                var $container = $slider.find('.swiper-container');
+                                var $ctrl = $slider.prevAll('.vlt-timeline-slider-controls').first();
+
+                                $container.find('.swiper-wrapper > *').wrap('<div class="swiper-slide">');
+
+                                new Swiper($container[0], {
+                                        speed: 1000,
+                                        spaceBetween: 0,
+                                        grabCursor: true,
+                                        slidesPerView: 1,
+                                        navigation: {
+                                                nextEl: $ctrl.find('.next')[0],
+                                                prevEl: $ctrl.find('.prev')[0]
+                                        },
+                                        pagination: {
+                                                el: $ctrl.find('.pagination')[0],
+                                                clickable: false,
+                                                type: 'fraction',
+                                                renderFraction: function (currentClass, totalClass) {
+                                                        return '<span class="' + currentClass + '"></span>' +
+                                                                '<span class="sep">/</span>' +
+                                                                '<span class="' + totalClass + '"></span>';
+                                                }
+                                        }
+                                });
+                       });
 
 		}
 	};
 
-	VLTJS.timelineSlider.init()
+       VLTJS.timelineSlider.init();
 
 })(jQuery);
