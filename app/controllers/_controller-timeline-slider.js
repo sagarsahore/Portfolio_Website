@@ -15,7 +15,7 @@
                        sliders.each(function () {
                                 var $slider = $(this);
                                 var $container = $slider.find('.swiper-container');
-                                var $ctrl = $slider.prev('.vlt-timeline-slider-controls');
+                                var $ctrl = $slider.prevAll('.vlt-timeline-slider-controls').first();
 
                                 $container.find('.swiper-wrapper > *').wrap('<div class="swiper-slide">');
 
