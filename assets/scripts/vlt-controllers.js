@@ -242,7 +242,7 @@ window.onload = () => {
                         if (!el.length) {
                                 return;
                         }
-                        if (VLTJS.isMobile.any()) {
+                        if (VLTJS.isMobile.any() || VLTJS.window.width() < 992) {
                                 return;
                         }
                         var progress_bar = el.find('.vlt-fullpage-slider-progress-bar'),
