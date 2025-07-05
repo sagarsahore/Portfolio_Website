@@ -10,8 +10,11 @@
 			if (typeof $.fn.pagepiling == 'undefined') {
 				return;
 			}
-			var el = $(".vlt-fullpage-slider");
+                       var el = $(".vlt-fullpage-slider");
                         if (!el.length) {
+                                return;
+                        }
+                        if (VLTJS.isMobile.any()) {
                                 return;
                         }
                         var progress_bar = el.find('.vlt-fullpage-slider-progress-bar'),
@@ -80,8 +83,9 @@
 				loopTop: loop_top,
 				loopBottom: loop_bottom,
 				anchors: anchors,
-				sectionSelector: '.vlt-section',
-				navigation: false,
+                               sectionSelector: '.vlt-section',
+                               touchSensitivity: 5,
+                               navigation: false,
 				afterRender: function () {
 					vlthemes_show_navigation();
 					vlthemes_page_brightness();
@@ -100,10 +104,12 @@
 				}
 			});
 
-			numbers.on('click', '>a', function (e) {
-				e.preventDefault();
-				$.fn.pagepiling.moveSectionDown();
-			});
+                        numbers.on('click', '>a', function (e) {
+                                e.preventDefault();
+                                if (typeof $.fn.pagepiling !== 'undefined' && $.isFunction($.fn.pagepiling.moveSectionDown)) {
+                                        $.fn.pagepiling.moveSectionDown();
+                                }
+                        });
 
 			el.find('.pp-scrollable').on('scroll', function () {
 				var scrollTop = $(this).scrollTop();

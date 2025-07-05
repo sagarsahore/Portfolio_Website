@@ -238,8 +238,14 @@ window.onload = () => {
 			if (typeof $.fn.pagepiling == 'undefined') {
 				return;
 			}
-			var el = $('.vlt-fullpage-slider'),
-				progress_bar = el.find('.vlt-fullpage-slider-progress-bar'),
+                        var el = $('.vlt-fullpage-slider');
+                        if (!el.length) {
+                                return;
+                        }
+                        if (VLTJS.isMobile.any()) {
+                                return;
+                        }
+                        var progress_bar = el.find('.vlt-fullpage-slider-progress-bar'),
 				numbers = el.find('.vlt-fullpage-slider-numbers'),
 				loop_top = el.data('loop-top') ? true : false,
 				loop_bottom = el.data('loop-bottom') ? true : false,
@@ -305,9 +311,9 @@ window.onload = () => {
 				loopTop: loop_top,
 				loopBottom: loop_bottom,
 				anchors: anchors,
-				sectionSelector: '.vlt-section',
-				touchsenstivity: 5,
-				navigation: false,
+                                sectionSelector: '.vlt-section',
+                                touchSensitivity: 5,
+                                navigation: false,
 				afterRender: function () {
 					vlthemes_show_navigation();
 					vlthemes_page_brightness();
