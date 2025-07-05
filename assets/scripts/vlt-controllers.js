@@ -19,20 +19,33 @@ window.onload = () => {
 
 	'use strict';
 
-	VLTJS.animatedBlock = {
-		init: function () {
-			var el = $('.vlt-animated-block');
-			el.each(function () {
-				var $this = $(this);
-				VLTJS.window.on('vlt.change-slide', function () {
-					$this.removeClass('animated');
-					if ($this.parents('.vlt-section').hasClass('active')) {
-						$this.addClass('animated');
-					}
-				});
-			});
-		}
-	}
+        VLTJS.animatedBlock = {
+                init: function () {
+                        var el = $('.vlt-animated-block');
+                        if (window.innerWidth < 768) {
+                                var observer = new IntersectionObserver(function(entries){
+                                        entries.forEach(function(entry){
+                                                if(entry.isIntersecting){
+                                                        $(entry.target).addClass('animated');
+                                                }
+                                        });
+                                }, {threshold: 0.2});
+                                el.each(function(){
+                                        observer.observe(this);
+                                });
+                                return;
+                        }
+                        el.each(function () {
+                                var $this = $(this);
+                                VLTJS.window.on('vlt.change-slide', function () {
+                                        $this.removeClass('animated');
+                                        if ($this.parents('.vlt-section').hasClass('active')) {
+                                                $this.addClass('animated');
+                                        }
+                                });
+                        });
+                }
+        }
 	VLTJS.animatedBlock.init();
 
 })(jQuery);
@@ -233,21 +246,27 @@ window.onload = () => {
 
 	'use strict';
 
-	VLTJS.fullpageSlider = {
-		init: function () {
-			if (typeof $.fn.pagepiling == 'undefined') {
-				return;
-			}
-			var el = $('.vlt-fullpage-slider'),
-				progress_bar = el.find('.vlt-fullpage-slider-progress-bar'),
-				numbers = el.find('.vlt-fullpage-slider-numbers'),
-				loop_top = el.data('loop-top') ? true : false,
-				loop_bottom = el.data('loop-bottom') ? true : false,
-				speed = el.data('speed') || 800,
-				anchors = [];
+        VLTJS.fullpageSlider = {
+                init: function () {
+                        if (typeof $.fn.pagepiling == 'undefined') {
+                                return;
+                        }
+                        var el = $('.vlt-fullpage-slider'),
+                                progress_bar = el.find('.vlt-fullpage-slider-progress-bar'),
+                                numbers = el.find('.vlt-fullpage-slider-numbers'),
+                                loop_top = el.data('loop-top') ? true : false,
+                                loop_bottom = el.data('loop-bottom') ? true : false,
+                                speed = el.data('speed') || 800,
+                                anchors = [];
 
-			VLTJS.body.css('overflow', 'hidden');
-			VLTJS.html.css('overflow', 'hidden');
+                        if (window.innerWidth < 768) {
+                                VLTJS.body.css('overflow', '');
+                                VLTJS.html.css('overflow', '');
+                                return;
+                        }
+
+                        VLTJS.body.css('overflow', 'hidden');
+                        VLTJS.html.css('overflow', 'hidden');
 
 			el.find('[data-anchor]').each(function () {
 				anchors.push($(this).data('anchor'));

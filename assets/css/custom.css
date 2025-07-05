@@ -5,8 +5,15 @@ html, body {
 }
 
 .vlt-section {
-    height: 100vh; /* Full viewport height */
+    height: 100vh; /* Full viewport height for desktop */
     overflow: hidden; /* Prevent unwanted scrolling */
+}
+
+@media (max-width: 767px) {
+    .vlt-section {
+        height: auto; /* Natural height on mobile */
+        overflow: visible;
+    }
 }
 
 .vlt-custom--8131 {
