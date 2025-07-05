@@ -20,9 +20,11 @@
                                 $container.find('.swiper-wrapper > *').wrap('<div class="swiper-slide">');
 
                                 new Swiper($container[0], {
-                                        speed: 1000,
+                                        speed: 600,
                                         spaceBetween: 0,
                                         grabCursor: true,
+                                        effect: 'fade',
+                                        fadeEffect: { crossFade: true },
                                         slidesPerView: 1,
                                         navigation: {
                                                 nextEl: $ctrl.find('.next')[0],
