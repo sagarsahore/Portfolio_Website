@@ -40,5 +40,6 @@ window.onload = () => {
         setTimeout(typeRole, delay);
     }
 
-    typeRole(); 
-}// Start the an
+    typeRole();
+}; // Start the animation once the window has loaded
+
