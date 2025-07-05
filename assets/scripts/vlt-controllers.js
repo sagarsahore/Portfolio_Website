@@ -547,23 +547,12 @@ window.onload = () => {
  * SITE: PRELOADER
  ***********************************************/
 (function ($) {
-	'use strict';
-	// check if plugin defined
-	if (typeof $.fn.animsition == 'undefined') {
-		return;
-	}
-	var el = $('.animsition');
-	el.animsition({
-		inDuration: 500,
-		outDuration: 500,
-		linkElement: 'a:not([target="_blank"]):not([href^="#"]):not([rel="nofollow"]):not([href~="#"]):not([href^=mailto]):not([href^=tel]):not(.sf-with-ul)',
-		loadingClass: 'animsition-loading-2',
-		loadingInner: '<div class="spinner"><span class="double-bounce-one"></span><span class="double-bounce-two"></span></div>',
-	});
-	el.on('animsition.inEnd', function () {
-		VLTJS.window.trigger('vlt.preloader_done');
-		VLTJS.html.addClass('vlt-is-page-loaded');
-	});
+        'use strict';
+        // Skip page transition animation and mark the page as loaded
+        $(window).on('load', function () {
+                VLTJS.window.trigger('vlt.preloader_done');
+                VLTJS.html.addClass('vlt-is-page-loaded');
+        });
 })(jQuery);
 /***********************************************
  * WIDGET: PROGRESS BAR
@@ -649,13 +638,17 @@ window.onload = () => {
 			if (typeof gsap == 'undefined') {
 				return;
 			}
-			var el = $('.vlt-project-showcase'),
-				items = el.find('.vlt-project-showcase__items'),
-				item = items.find('.vlt-project-showcase__item'),
-				images = el.find('.vlt-project-showcase__images'),
-				image = images.find('.vlt-project-showcase__image'),
-				wDiff,
-				value;
+                        var el = $('.vlt-project-showcase'),
+                                items = el.find('.vlt-project-showcase__items'),
+                                item = items.find('.vlt-project-showcase__item'),
+                                images = el.find('.vlt-project-showcase__images'),
+                                image = images.find('.vlt-project-showcase__image'),
+                                wDiff,
+                                value;
+
+                        if (!items.length || !item.length || !images.length || !image.length) {
+                                return;
+                        }
 
 			var sliderWidth = el.outerWidth(true),
 				sliderImageWidth = images.outerWidth(true),
@@ -740,69 +733,9 @@ window.onload = () => {
 		}
 	};
 
-	VLTJS.testimonialSlider.init()
+VLTJS.testimonialSlider.init()
 
 })(jQuery);
-
-/***********************************************
- * WIDGET: Experience SLIDER
- ***********************************************/
-var experienceSlider = $('.swiper-container-experience');
-experienceSlider.each(function () {
-  var $this = $(this);
-  $this.find('.swiper-wrapper > *').wrap('<div class="swiper-slide">');
-
-  new Swiper(this, {
-    speed: 1000,
-    spaceBetween: 30,
-    grabCursor: true,
-    effect: 'coverflow',
-    slidesPerView: 1,
-    navigation: {
-      nextEl: $this.closest('.vlt-timeline-slider').prev().find('.experience-controls .next')[0],
-      prevEl: $this.closest('.vlt-timeline-slider').prev().find('.experience-controls .prev')[0],
-    },
-    pagination: {
-      el: $this.closest('.vlt-timeline-slider').prev().find('.experience-controls .pagination')[0],
-      clickable: false,
-      type: 'fraction',
-      renderFraction: function (currentClass, totalClass) {
-        return '<span class="' + currentClass + '"></span>' +
-               '<span class="sep">/</span>' +
-               '<span class="' + totalClass + '"></span>';
-      }
-    }
-  });
-});
-
-var educationSlider = $('.swiper-container-education');
-educationSlider.each(function () {
-  var $this = $(this);
-  $this.find('.swiper-wrapper > *').wrap('<div class="swiper-slide">');
-
-  new Swiper(this, {
-    speed: 1000,
-    spaceBetween: 30,
-    grabCursor: true,
-    effect: 'coverflow',
-    slidesPerView: 1,
-    navigation: {
-      nextEl: $this.closest('.vlt-timeline-slider').prev().find('.education-controls .next')[0],
-      prevEl: $this.closest('.vlt-timeline-slider').prev().find('.education-controls .prev')[0],
-    },
-    pagination: {
-      el: $this.closest('.vlt-timeline-slider').prev().find('.education-controls .pagination')[0],
-      clickable: false,
-      type: 'fraction',
-      renderFraction: function (currentClass, totalClass) {
-        return '<span class="' + currentClass + '"></span>' +
-               '<span class="sep">/</span>' +
-               '<span class="' + totalClass + '"></span>';
-      }
-    }
-  });
-});
-
 
 /***********************************************
  * WIDGET: TIMELINE SLIDER
@@ -817,35 +750,39 @@ educationSlider.each(function () {
 			if (typeof Swiper == 'undefined') {
 				return;
 			}
-			var el = $('.vlt-timeline-slider .swiper-container');
-			el.each(function () {
-				var $this = $(this);
-				$this.find('.swiper-wrapper > *').wrap('<div class="swiper-slide">');
-				new Swiper(this, {
-					speed: 1000,
-					spaceBetween: 0,
-					grabCursor: true,
-					slidesPerView: 1,
-					navigation: {
-						nextEl: $('.vlt-timeline-slider-controls .next'),
-						prevEl: $('.vlt-timeline-slider-controls .prev'),
-					},
-					pagination: {
-						el: $('.vlt-timeline-slider-controls .pagination'),
-						clickable: false,
-						type: 'fraction',
-						renderFraction: function (currentClass, totalClass) {
-							return '<span class="' + currentClass + '"></span>' +
-								'<span class="sep">/</span>' +
-								'<span class="' + totalClass + '"></span>';
-						}
-					}
-				});
-			});
+                       var sliders = $('.vlt-timeline-slider');
+                       sliders.each(function () {
+                                var $slider = $(this);
+                                var $container = $slider.find('.swiper-container');
+                                var $ctrl = $slider.prevAll('.vlt-timeline-slider-controls').first();
+
+                                $container.find('.swiper-wrapper > *').wrap('<div class="swiper-slide">');
+
+                                new Swiper($container[0], {
+                                        speed: 1000,
+                                        spaceBetween: 0,
+                                        grabCursor: true,
+                                        slidesPerView: 1,
+                                        navigation: {
+                                                nextEl: $ctrl.find('.next')[0],
+                                                prevEl: $ctrl.find('.prev')[0]
+                                        },
+                                        pagination: {
+                                                el: $ctrl.find('.pagination')[0],
+                                                clickable: false,
+                                                type: 'fraction',
+                                                renderFraction: function (currentClass, totalClass) {
+                                                        return '<span class="' + currentClass + '"></span>' +
+                                                                '<span class="sep">/</span>' +
+                                                                '<span class="' + totalClass + '"></span>';
+                                                }
+                                        }
+                                });
+                        });
 
 		}
 	};
 
-	VLTJS.timelineSlider.init()
+       VLTJS.timelineSlider.init();
 
 })(jQuery);
