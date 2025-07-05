@@ -6,12 +6,17 @@ html, body {
 
 .vlt-section {
     height: 100vh; /* Full viewport height for desktop */
+    min-height: 100vh;
     overflow: hidden; /* Prevent unwanted scrolling */
 }
 
 @media (max-width: 767px) {
+    .vlt-fullpage-slider {
+        height: auto; /* allow sections to stack naturally */
+    }
     .vlt-section {
         height: auto; /* Natural height on mobile */
+        min-height: 100vh; /* ensure full viewport height but expand if needed */
         overflow: visible;
     }
 }
