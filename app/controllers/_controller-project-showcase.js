@@ -12,6 +12,9 @@
 				return;
 			}
 			var el = $('.vlt-project-showcase-slider .swiper-container');
+			if (el.length === 0) {
+				return;
+			}
 			new Swiper(el, {
 				speed: 1000,
 				spaceBetween: 30,
@@ -29,12 +32,24 @@
 			if (typeof gsap == 'undefined') {
 				return;
 			}
-			var el = $('.vlt-project-showcase'),
-				items = el.find('.vlt-project-showcase__items'),
+			var el = $('.vlt-project-showcase');
+			
+			// Check if the required elements exist
+			if (el.length === 0) {
+				return;
+			}
+			
+			var items = el.find('.vlt-project-showcase__items'),
 				item = items.find('.vlt-project-showcase__item'),
 				images = el.find('.vlt-project-showcase__images'),
-				image = images.find('.vlt-project-showcase__image'),
-				wDiff,
+				image = images.find('.vlt-project-showcase__image');
+
+			// Only initialize parallax if all required elements exist
+			if (items.length === 0 || item.length === 0 || images.length === 0 || image.length === 0) {
+				return;
+			}
+
+			var wDiff,
 				value;
 
 			var sliderWidth = el.outerWidth(true),

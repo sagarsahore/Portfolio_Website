@@ -1,5 +1,12 @@
 window.onload = () => {
     const typingElement = document.getElementById("typing");
+    
+    // Check if the typing element exists before proceeding
+    if (!typingElement) {
+        console.warn("Typing element with id 'typing' not found");
+        return;
+    }
+    
     const roles = ["Salesforce Consultant", "AI Enthusiast", "Cloud Consultant"];
     let roleIndex = 0;
     let charIndex = 0;
@@ -41,4 +48,4 @@ window.onload = () => {
     }
 
     typeRole(); 
-}// Start the an
+};

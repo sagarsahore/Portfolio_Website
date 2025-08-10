@@ -12,6 +12,12 @@
 				return;
 			}
 			var el = $('.vlt-progress-bar');
+			
+			// Only initialize if progress bar elements exist
+			if (el.length === 0) {
+				return;
+			}
+			
 			el.each(function () {
 				var $this = $(this),
 					final_value = $this.data('final-value') || 0,
@@ -25,22 +31,33 @@
 					if ($this.parents('.vlt-section').hasClass('active')) {
 
 						obj.count = 0;
-						$this.find('.vlt-progress-bar__title > .counter').text(Math.round(obj.count));
-						gsap.set($this.find('.vlt-progress-bar__bar > span'), {
-							width: 0
-						});
-						gsap.to(obj, (animation_duration / 1000) / 2, {
-							count: final_value,
-							delay: delay / 1000,
-							onUpdate: function () {
-								$this.find('.vlt-progress-bar__title > .counter').text(Math.round(obj.count));
-							}
-						});
-
-						gsap.to($this.find('.vlt-progress-bar__bar > span'), animation_duration / 1000, {
-							width: final_value + '%',
-							delay: delay / 1000
-						});
+						var counterEl = $this.find('.vlt-progress-bar__title > .counter');
+						var barEl = $this.find('.vlt-progress-bar__bar > span');
+						
+						// Check if required elements exist before animating
+						if (counterEl.length > 0) {
+							counterEl.text(Math.round(obj.count));
+						}
+						
+						if (barEl.length > 0) {
+							gsap.set(barEl, {
+								width: 0
+							});
+							gsap.to(barEl, animation_duration / 1000, {
+								width: final_value + '%',
+								delay: delay / 1000
+							});
+						}
+						
+						if (counterEl.length > 0) {
+							gsap.to(obj, (animation_duration / 1000) / 2, {
+								count: final_value,
+								delay: delay / 1000,
+								onUpdate: function () {
+									counterEl.text(Math.round(obj.count));
+								}
+							});
+						}
 
 					}
 				});
