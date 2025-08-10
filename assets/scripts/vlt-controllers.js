@@ -1,20 +1,6 @@
 /***********************************************
  * WIDGET: ANIMATED BLOCK
  ***********************************************/
-window.onload = () => {
-	const typingElement = document.getElementById("typing");
-	const roles = ["Salesforce Consultant", "AI Enthusiast", "Cloud Consultant"];
-	let index = 0;
-  
-	const typeText = () => {
-	  typingElement.textContent = roles[index];
-	  typingElement.classList.add('typing-text');
-	  index = (index + 1) % roles.length;
-	};
-  
-	setInterval(typeText, 4000);
-  };
-  
 (function ($) {
 
 	'use strict';
@@ -424,48 +410,48 @@ window.onload = () => {
 		open_menu: function (menu, siteOverlay, navigationItem, header, footer) {
 			menuIsOpen = true;
 			if (typeof gsap != 'undefined') {
-				gsap.timeline({
-						defaults: {
-							ease: this.config.easing
-						}
-					})
-					// set overflow for html
-					.set(VLTJS.html, {
-						overflow: 'hidden'
-					})
-					// overlay animation
-					.to(siteOverlay, .3, {
+				var timeline = gsap.timeline({
+					defaults: {
+						ease: this.config.easing
+					}
+				});
+
+				// set overflow for html
+				timeline.set(VLTJS.html, {
+					overflow: 'hidden'
+				});
+
+				// overlay animation
+				if (siteOverlay && siteOverlay.length) {
+					timeline.to(siteOverlay, .3, {
 						autoAlpha: 1,
-					})
-					// menu animation
-					.fromTo(menu, .6, {
+					});
+				}
+
+				// menu animation
+				if (menu && menu.length) {
+					timeline.fromTo(menu, .6, {
 						x: '100%',
 					}, {
 						x: 0,
 						visibility: 'visible'
-					}, '-=.3')
-					// header animation
-					.fromTo(header, .3, {
+					}, '-=.3');
+				}
+
+				// header animation
+				if (header && header.length) {
+					timeline.fromTo(header, .3, {
 						x: 50,
 						autoAlpha: 0
 					}, {
 						x: 0,
 						autoAlpha: 1
-					}, '-=.3')
-					// navigation item animation
-					.fromTo(navigationItem, .3, {
-						x: 50,
-						autoAlpha: 0
-					}, {
-						x: 0,
-						autoAlpha: 1,
-						stagger: {
-							each: .1,
-							from: 'start',
-						}
-					}, '-=.15')
-					// footer animation
-					.fromTo(footer, .3, {
+					}, '-=.3');
+				}
+
+				// navigation item animation
+				if (navigationItem && navigationItem.length) {
+					timeline.fromTo(navigationItem, .3, {
 						x: 50,
 						autoAlpha: 0
 					}, {
@@ -476,55 +462,87 @@ window.onload = () => {
 							from: 'start',
 						}
 					}, '-=.15');
+				}
+
+				// footer animation
+				if (footer && footer.length) {
+					timeline.fromTo(footer, .3, {
+						x: 50,
+						autoAlpha: 0
+					}, {
+						x: 0,
+						autoAlpha: 1,
+						stagger: {
+							each: .1,
+							from: 'start',
+						}
+					}, '-=.15');
+				}
 			}
 		},
 		close_menu: function (menu, siteOverlay, navigationItem, header, footer) {
 			menuIsOpen = false;
 			if (typeof gsap != 'undefined') {
-				gsap.timeline({
-						defaults: {
-							ease: this.config.easing
-						}
-					})
-					// set overflow for html
-					.set(VLTJS.html, {
-						overflow: 'inherit'
-					})
-					// footer animation
-					.to(footer, .3, {
+				var timeline = gsap.timeline({
+					defaults: {
+						ease: this.config.easing
+					}
+				});
+
+				// set overflow for html
+				timeline.set(VLTJS.html, {
+					overflow: 'inherit'
+				});
+
+				// footer animation
+				if (footer && footer.length) {
+					timeline.to(footer, .3, {
 						x: 50,
 						autoAlpha: 0,
 						stagger: {
 							each: .1,
 							from: 'end',
 						}
-					})
-					// navigation item animation
-					.to(navigationItem, .3, {
+					});
+				}
+
+				// navigation item animation
+				if (navigationItem && navigationItem.length) {
+					timeline.to(navigationItem, .3, {
 						x: 50,
 						autoAlpha: 0,
 						stagger: {
 							each: .1,
 							from: 'end',
 						},
-					}, '-=.15')
-					// header animation
-					.to(header, .3, {
+					}, '-=.15');
+				}
+
+				// header animation
+				if (header && header.length) {
+					timeline.to(header, .3, {
 						x: 50,
 						autoAlpha: 0,
-					}, '-=.15')
-					// menu animation
-					.to(menu, .6, {
+					}, '-=.15');
+				}
+
+				// menu animation
+				if (menu && menu.length) {
+					timeline.to(menu, .6, {
 						x: '100%',
 					}, '-=.15')
 					// set visibility menu after animation
 					.set(menu, {
 						visibility: 'hidden'
-					})
-					// overlay animation
-					.to(siteOverlay, .3, {
+					});
+				}
+
+				// overlay animation
+				if (siteOverlay && siteOverlay.length) {
+					timeline.to(siteOverlay, .3, {
 						autoAlpha: 0
 					}, '-=.6');
+				}
 			}
 		}
 	};
@@ -655,7 +673,12 @@ window.onload = () => {
 				images = el.find('.vlt-project-showcase__images'),
 				image = images.find('.vlt-project-showcase__image'),
 				wDiff,
-				value;
+				value = 0; // Initialize value to prevent undefined errors
+
+			// Check if required elements exist before proceeding
+			if (el.length === 0 || items.length === 0 || images.length === 0) {
+				return;
+			}
 
 			var sliderWidth = el.outerWidth(true),
 				sliderImageWidth = images.outerWidth(true),
@@ -672,22 +695,37 @@ window.onload = () => {
 				image.eq($(this).index()).addClass('is-active');
 			});
 
-			item.eq(0).trigger('mouseenter');
+			if (item.length > 0) {
+				item.eq(0).trigger('mouseenter');
+			}
 
-			VLTJS.window.on('mousemove', function (e) {
-				value = e.pageX - el.offset().left;
+			VLTJS.window.off('mousemove.projectShowcase').on('mousemove.projectShowcase', function (e) {
+				var elOffset = el.offset();
+				if (elOffset && typeof elOffset.left !== 'undefined') {
+					value = e.pageX - elOffset.left;
+				}
 			});
 
-			gsap.ticker.add(function () {
-				gsap.set(items, {
-					x: value * wDiff,
-					ease: 'power3.out'
-				});
-				gsap.set(images, {
-					right: value * sliderImageDiff,
-					ease: 'power3.out'
-				});
-			});
+			// Remove any existing ticker before adding a new one
+			if (typeof VLTJS.projectShowcaseTicker !== 'undefined') {
+				gsap.ticker.remove(VLTJS.projectShowcaseTicker);
+			}
+
+			// Store ticker function reference for cleanup
+			VLTJS.projectShowcaseTicker = function () {
+				if (items.length > 0 && images.length > 0 && typeof value !== 'undefined') {
+					gsap.set(items[0], {
+						x: value * wDiff,
+						ease: 'power3.out'
+					});
+					gsap.set(images[0], {
+						right: value * sliderImageDiff,
+						ease: 'power3.out'
+					});
+				}
+			};
+
+			gsap.ticker.add(VLTJS.projectShowcaseTicker);
 
 		}
 	}
