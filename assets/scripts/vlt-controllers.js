@@ -1,78 +1,49 @@
 /***********************************************
- * WIDGET: ANIMATED BLOCK
+ * WIDGET: TESTIMONIAL SLIDER
  ***********************************************/
 (function ($) {
 
 	'use strict';
 
-	VLTJS.animatedBlock = {
-		init: function () {
-			var el = $('.vlt-animated-block');
-			el.each(function () {
-				var $this = $(this);
-				VLTJS.window.on('vlt.change-slide', function () {
-					$this.removeClass('animated');
-					if ($this.parents('.vlt-section').hasClass('active')) {
-						$this.addClass('animated');
-					}
-				});
-			});
-		}
-	}
-	VLTJS.animatedBlock.init();
-
-})(jQuery);
-/***********************************************
- * WIDGET: CONTACT FORM
- ***********************************************/
-(function ($) {
-
-	'use strict';
-
-	VLTJS.contactForm = {
+	VLTJS.testimonialSlider = {
 		init: function () {
 			// check if plugin defined
-			if (typeof $.fn.validate == 'undefined') {
+			if (typeof Swiper == 'undefined') {
 				return;
 			}
-			var el = $('.vlt-contact-form');
+			var el = $('.vlt-testimonial-slider .swiper-container');
 			el.each(function () {
-				var thisForm = $(this),
-					successMessage = thisForm.find('.message.success'),
-					errorMessage = thisForm.find('.message.danger');
-				thisForm.validate({
-					errorClass: 'error',
-					submitHandler: function (form) {
-						$.ajax({
-							type: 'POST',
-							url: 'handler.php',
-							data: new FormData(form),
-							cache: false,
-							contentType: false,
-							processData: false,
-							success: function () {
-								successMessage.fadeIn();
-								setTimeout(function () {
-									successMessage.fadeOut();
-								}, 5000);
-							},
-							error: function () {
-								errorMessage.fadeIn();
-								setTimeout(function () {
-									errorMessage.fadeOut();
-								}, 5000);
-							}
-						});
+				var $this = $(this);
+				$this.find('.swiper-wrapper > *').wrap('<div class="swiper-slide">');
+				new Swiper(this, {
+					speed: 1000,
+					spaceBetween: 30,
+					grabCursor: true,
+					effect: 'coverflow',
+					slidesPerView: 1,
+					navigation: {
+						nextEl: $('.vlt-testimonial-slider-controls .next'),
+						prevEl: $('.vlt-testimonial-slider-controls .prev'),
+					},
+					pagination: {
+						el: $('.vlt-testimonial-slider-controls .pagination'),
+						clickable: false,
+						type: 'fraction',
+						renderFraction: function (currentClass, totalClass) {
+							return '<span class="' + currentClass + '"></span>' +
+								'<span class="sep">/</span>' +
+								'<span class="' + totalClass + '"></span>';
+						}
 					}
 				});
-
 			});
-		}
-	}
-	VLTJS.contactForm.init();
 
-})(jQuery);
-/***********************************************
+		}
+	};
+
+	VLTJS.testimonialSlider.init()
+
+})(jQuery);/***********************************************
  * WIDGET: COUNTER UP
  ***********************************************/
 (function ($) {
@@ -111,8 +82,99 @@
 	}
 	VLTJS.counterUp.init();
 
-})(jQuery);
-/***********************************************
+})(jQuery);/***********************************************
+ * WIDGET: PROGRESS BAR
+ ***********************************************/
+(function ($) {
+
+	'use strict';
+
+	VLTJS.progressBar = {
+		init: function () {
+			// check if plugin defined
+			if (typeof gsap == 'undefined') {
+				return;
+			}
+			var el = $('.vlt-progress-bar');
+			
+			// Only initialize if progress bar elements exist
+			if (el.length === 0) {
+				return;
+			}
+			
+			el.each(function () {
+				var $this = $(this),
+					final_value = $this.data('final-value') || 0,
+					animation_duration = $this.data('animation-speed') || 0,
+					delay = 500,
+					obj = {
+						count: 0
+					};
+
+				VLTJS.window.on('vlt.change-slide', function () {
+					if ($this.parents('.vlt-section').hasClass('active')) {
+
+						obj.count = 0;
+						var counterEl = $this.find('.vlt-progress-bar__title > .counter');
+						var barEl = $this.find('.vlt-progress-bar__bar > span');
+						
+						// Check if required elements exist before animating
+						if (counterEl.length > 0) {
+							counterEl.text(Math.round(obj.count));
+						}
+						
+						if (barEl.length > 0) {
+							gsap.set(barEl, {
+								width: 0
+							});
+							gsap.to(barEl, animation_duration / 1000, {
+								width: final_value + '%',
+								delay: delay / 1000
+							});
+						}
+						
+						if (counterEl.length > 0) {
+							gsap.to(obj, (animation_duration / 1000) / 2, {
+								count: final_value,
+								delay: delay / 1000,
+								onUpdate: function () {
+									counterEl.text(Math.round(obj.count));
+								}
+							});
+						}
+
+					}
+				});
+
+			});
+		}
+	}
+	VLTJS.progressBar.init();
+
+})(jQuery);/***********************************************
+ * WIDGET: ANIMATED BLOCK
+ ***********************************************/
+(function ($) {
+
+	'use strict';
+
+	VLTJS.animatedBlock = {
+		init: function () {
+			var el = $('.vlt-animated-block');
+			el.each(function () {
+				var $this = $(this);
+				VLTJS.window.on('vlt.change-slide', function () {
+					$this.removeClass('animated');
+					if ($this.parents('.vlt-section').hasClass('active')) {
+						$this.addClass('animated');
+					}
+				});
+			});
+		}
+	}
+	VLTJS.animatedBlock.init();
+
+})(jQuery);/***********************************************
  * SITE: CUSTOM CURSOR
  ***********************************************/
 (function ($) {
@@ -136,8 +198,8 @@
 					y: 0
 				},
 				delta = .25;
-			if (typeof gsap != 'undefined' && circle.length > 0) {
-				gsap.set(circle[0], {
+			if (typeof gsap != 'undefined') {
+				gsap.set(circle, {
 					xPercent: -50,
 					yPercent: -50
 				});
@@ -149,45 +211,45 @@
 				gsap.ticker.add(function () {
 					endPosition.x += (startPosition.x - endPosition.x) * delta;
 					endPosition.y += (startPosition.y - endPosition.y) * delta;
-					gsap.set(circle[0], {
+					gsap.set(circle, {
 						x: endPosition.x,
 						y: endPosition.y
 					})
 				});
 				VLTJS.document.on('mousedown', function () {
-					gsap.to(circle[0], .3, {
+					gsap.to(circle, .3, {
 						scale: .7
 					});
 				}).on('mouseup', function () {
-					gsap.to(circle[0], .3, {
+					gsap.to(circle, .3, {
 						scale: 1
 					});
 				});
 				VLTJS.document.on('mouseenter', 'input, textarea, select, .vlt-video-button > a', function () {
-					gsap.to(circle[0], .3, {
+					gsap.to(circle, .3, {
 						scale: 0,
 						opacity: 0
 					});
 				}).on('mouseleave', 'input, textarea, select, .vlt-video-button > a', function () {
-					gsap.to(circle[0], .3, {
+					gsap.to(circle, .3, {
 						scale: 1,
 						opacity: .1
 					});
 				});
 				VLTJS.document.on('mouseenter', 'a, button, [role="button"]', function () {
-					gsap.to(circle[0], .3, {
+					gsap.to(circle, .3, {
 						height: 60,
 						width: 60,
 					});
 				}).on('mouseleave blur', 'a, button, [role="button"]', function () {
-					gsap.to(circle[0], .3, {
+					gsap.to(circle, .3, {
 						height: 15,
 						width: 15,
 					});
 				});
 				VLTJS.document.on('mouseenter', '[data-cursor]', function () {
 					var $this = $(this);
-					gsap.to(circle[0], .3, {
+					gsap.to(circle, .3, {
 						height: 80,
 						width: 80,
 						opacity: 1,
@@ -196,7 +258,7 @@
 						}
 					});
 				}).on('mouseleave', '[data-cursor]', function () {
-					gsap.to(circle[0], .3, {
+					gsap.to(circle, .3, {
 						height: 15,
 						width: 15,
 						opacity: .1,
@@ -211,8 +273,282 @@
 	if (!VLTJS.isMobile.any()) {
 		VLTJS.customCursor.init();
 	}
-})(jQuery);
-/***********************************************
+})(jQuery);/***********************************************
+ * WIDGET: PROJECT SHOWCASE
+ ***********************************************/
+(function ($) {
+
+	'use strict';
+
+	VLTJS.projectShowcase = {
+		initSlider: function () {
+			// check if plugin defined
+			if (typeof Swiper == 'undefined') {
+				return;
+			}
+			var el = $('.vlt-project-showcase-slider .swiper-container');
+			if (el.length === 0) {
+				return;
+			}
+			new Swiper(el, {
+				speed: 1000,
+				spaceBetween: 30,
+				grabCursor: true,
+				slidesPerView: 1,
+				breakpoints: {
+					575: {
+						slidesPerView: 2,
+					},
+				},
+			});
+		},
+		initParallax: function () {
+			// check if plugin defined
+			if (typeof gsap == 'undefined') {
+				return;
+			}
+			var el = $('.vlt-project-showcase');
+			
+			// Check if the required elements exist
+			if (el.length === 0) {
+				return;
+			}
+			
+			var items = el.find('.vlt-project-showcase__items'),
+				item = items.find('.vlt-project-showcase__item'),
+				images = el.find('.vlt-project-showcase__images'),
+				image = images.find('.vlt-project-showcase__image');
+
+			// Only initialize parallax if all required elements exist
+			if (items.length === 0 || item.length === 0 || images.length === 0 || image.length === 0) {
+				return;
+			}
+
+			var wDiff,
+				value;
+
+			var sliderWidth = el.outerWidth(true),
+				sliderImageWidth = images.outerWidth(true),
+				itemsWidth = items.outerWidth(),
+				sliderImageDiff = (sliderWidth - sliderImageWidth) / sliderWidth;
+
+			wDiff = (itemsWidth / sliderWidth) - 1;
+			wDiff = (sliderWidth - itemsWidth) / sliderWidth;
+
+			item.on('mouseenter', function () {
+				item.removeClass('is-active');
+				image.removeClass('is-active');
+				$(this).addClass('is-active');
+				image.eq($(this).index()).addClass('is-active');
+			});
+
+			item.eq(0).trigger('mouseenter');
+
+			VLTJS.window.on('mousemove', function (e) {
+				value = e.pageX - el.offset().left;
+			});
+
+			gsap.ticker.add(function () {
+				gsap.set(items, {
+					x: value * wDiff,
+					ease: 'power3.out'
+				});
+				gsap.set(images, {
+					right: value * sliderImageDiff,
+					ease: 'power3.out'
+				});
+			});
+
+		}
+	}
+	VLTJS.projectShowcase.initSlider();
+	VLTJS.projectShowcase.initParallax();
+	VLTJS.debounceResize(function () {
+		VLTJS.projectShowcase.initParallax();
+	});
+})(jQuery);/***********************************************
+ * MENU OFFCANVAS
+ ***********************************************/
+(function ($) {
+
+	'use strict';
+
+	var menuIsOpen = false;
+
+	VLTJS.menuOffcanvas = {
+		config: {
+			easing: 'power2.out'
+		},
+		init: function () {
+			var menu = $('.vlt-offcanvas-menu'),
+				navigation = menu.find('ul.sf-menu'),
+				navigationItem = navigation.find('> li'),
+				header = $('.vlt-offcanvas-menu__header'),
+				footer = $('.vlt-offcanvas-menu__footer > div'),
+				menuOpen = $('.js-offcanvas-menu-open'),
+				menuClose = $('.js-offcanvas-menu-close'),
+				siteOverlay = $('.vlt-site-overlay');
+
+			if (typeof $.fn.superclick !== 'undefined') {
+				navigation.superclick({
+					delay: 300,
+					cssArrows: false,
+					animation: {
+						opacity: 'show',
+						height: 'show'
+					},
+					animationOut: {
+						opacity: 'hide',
+						height: 'hide'
+					},
+				});
+			}
+
+			menuOpen.on('click', function (e) {
+				e.preventDefault();
+				if (!menuIsOpen) {
+					VLTJS.menuOffcanvas.open_menu(menu, siteOverlay, navigationItem, header, footer);
+				}
+			});
+
+			menuClose.on('click', function (e) {
+				e.preventDefault();
+				if (menuIsOpen) {
+					VLTJS.menuOffcanvas.close_menu(menu, siteOverlay, navigationItem, header, footer);
+				}
+			});
+
+			siteOverlay.on('click', function (e) {
+				e.preventDefault();
+				if (menuIsOpen) {
+					VLTJS.menuOffcanvas.close_menu(menu, siteOverlay, navigationItem, header, footer);
+				}
+			});
+
+			VLTJS.document.keyup(function (e) {
+				if (e.keyCode === 27 && menuIsOpen) {
+					e.preventDefault();
+					VLTJS.menuOffcanvas.close_menu(menu, siteOverlay, navigationItem, header, footer);
+				}
+			});
+
+			// Close after click to anchor.
+			navigationItem.filter('[data-menuanchor]').on('click', 'a', function () {
+				if (menuIsOpen) {
+					VLTJS.menuOffcanvas.close_menu(menu, siteOverlay, navigationItem, header, footer);
+				}
+			});
+
+		},
+		open_menu: function (menu, siteOverlay, navigationItem, header, footer) {
+			menuIsOpen = true;
+			if (typeof gsap != 'undefined') {
+				gsap.timeline({
+						defaults: {
+							ease: this.config.easing
+						}
+					})
+					// set overflow for html
+					.set(VLTJS.html, {
+						overflow: 'hidden'
+					})
+					// overlay animation
+					.to(siteOverlay, .3, {
+						autoAlpha: 1,
+					})
+					// menu animation
+					.fromTo(menu, .6, {
+						x: '100%',
+					}, {
+						x: 0,
+						visibility: 'visible'
+					}, '-=.3')
+					// header animation
+					.fromTo(header, .3, {
+						x: 50,
+						autoAlpha: 0
+					}, {
+						x: 0,
+						autoAlpha: 1
+					}, '-=.3')
+					// navigation item animation
+					.fromTo(navigationItem, .3, {
+						x: 50,
+						autoAlpha: 0
+					}, {
+						x: 0,
+						autoAlpha: 1,
+						stagger: {
+							each: .1,
+							from: 'start',
+						}
+					}, '-=.15')
+					// footer animation
+					.fromTo(footer, .3, {
+						x: 50,
+						autoAlpha: 0
+					}, {
+						x: 0,
+						autoAlpha: 1,
+						stagger: {
+							each: .1,
+							from: 'start',
+						}
+					}, '-=.15');
+			}
+		},
+		close_menu: function (menu, siteOverlay, navigationItem, header, footer) {
+			menuIsOpen = false;
+			if (typeof gsap != 'undefined') {
+				gsap.timeline({
+						defaults: {
+							ease: this.config.easing
+						}
+					})
+					// set overflow for html
+					.set(VLTJS.html, {
+						overflow: 'inherit'
+					})
+					// footer animation
+					.to(footer, .3, {
+						x: 50,
+						autoAlpha: 0,
+						stagger: {
+							each: .1,
+							from: 'end',
+						}
+					})
+					// navigation item animation
+					.to(navigationItem, .3, {
+						x: 50,
+						autoAlpha: 0,
+						stagger: {
+							each: .1,
+							from: 'end',
+						},
+					}, '-=.15')
+					// header animation
+					.to(header, .3, {
+						x: 50,
+						autoAlpha: 0,
+					}, '-=.15')
+					// menu animation
+					.to(menu, .6, {
+						x: '100%',
+					}, '-=.15')
+					// set visibility menu after animation
+					.set(menu, {
+						visibility: 'hidden'
+					})
+					// overlay animation
+					.to(siteOverlay, .3, {
+						autoAlpha: 0
+					}, '-=.6');
+			}
+		}
+	};
+	VLTJS.menuOffcanvas.init();
+})(jQuery);/***********************************************
  * PAGE: FULLPAGE SLIDER
  ***********************************************/
 (function ($) {
@@ -292,7 +628,6 @@
 				loopBottom: loop_bottom,
 				anchors: anchors,
 				sectionSelector: '.vlt-section',
-				touchsenstivity: 5,
 				navigation: false,
 				afterRender: function () {
 					vlthemes_show_navigation();
@@ -301,12 +636,12 @@
 					VLTJS.window.trigger('vlt.change-slide');
 				},
 				onLeave: function (index, nextIndex, direction) {
+					vlthemes_page_brightness();
 					vlthemes_navigation(direction, nextIndex);
 					vlthemes_slide_counter();
 					VLTJS.window.trigger('vlt.change-slide');
 				},
 				afterLoad: function (anchorLink, index) {
-					vlthemes_page_brightness(); // moved here for proper animation
 					progress_bar.find('li.active').prevAll().addClass('prev');
 					vlthemes_navbar_solid();
 				}
@@ -314,9 +649,7 @@
 
 			numbers.on('click', '>a', function (e) {
 				e.preventDefault();
-				if (typeof $.fn.pagepiling !== 'undefined' && $.isFunction($.fn.pagepiling.moveSectionDown)) {
-					$.fn.pagepiling.moveSectionDown();
-				}
+				$.fn.pagepiling.moveSectionDown();
 			});
 
 			el.find('.pp-scrollable').on('scroll', function () {
@@ -331,237 +664,7 @@
 		}
 	};
 	VLTJS.fullpageSlider.init();
-})(jQuery);
-
-/***********************************************
- * MENU OFFCANVAS
- ***********************************************/
-(function ($) {
-
-	'use strict';
-
-	var menuIsOpen = false;
-
-	VLTJS.menuOffcanvas = {
-		config: {
-			easing: 'power2.out'
-		},
-		init: function () {
-			var menu = $('.vlt-offcanvas-menu'),
-				navigation = menu.find('ul.sf-menu'),
-				navigationItem = navigation.find('> li'),
-				header = $('.vlt-offcanvas-menu__header'),
-				footer = $('.vlt-offcanvas-menu__footer > div'),
-				menuOpen = $('.js-offcanvas-menu-open'),
-				menuClose = $('.js-offcanvas-menu-close'),
-				siteOverlay = $('.vlt-site-overlay');
-
-			if (typeof $.fn.superclick !== 'undefined') {
-				navigation.superclick({
-					delay: 300,
-					cssArrows: false,
-					animation: {
-						opacity: 'show',
-						height: 'show'
-					},
-					animationOut: {
-						opacity: 'hide',
-						height: 'hide'
-					},
-				});
-			}
-
-			menuOpen.on('click', function (e) {
-				e.preventDefault();
-				if (!menuIsOpen) {
-					VLTJS.menuOffcanvas.open_menu(menu, siteOverlay, navigationItem, header, footer);
-				}
-			});
-
-			menuClose.on('click', function (e) {
-				e.preventDefault();
-				if (menuIsOpen) {
-					VLTJS.menuOffcanvas.close_menu(menu, siteOverlay, navigationItem, header, footer);
-				}
-			});
-
-			siteOverlay.on('click', function (e) {
-				e.preventDefault();
-				if (menuIsOpen) {
-					VLTJS.menuOffcanvas.close_menu(menu, siteOverlay, navigationItem, header, footer);
-				}
-			});
-
-			VLTJS.document.keyup(function (e) {
-				if (e.keyCode === 27 && menuIsOpen) {
-					e.preventDefault();
-					VLTJS.menuOffcanvas.close_menu(menu, siteOverlay, navigationItem, header, footer);
-				}
-			});
-
-			// Close after click to anchor.
-			navigationItem.filter('[data-menuanchor]').on('click', 'a', function () {
-				if (menuIsOpen) {
-					VLTJS.menuOffcanvas.close_menu(menu, siteOverlay, navigationItem, header, footer);
-				}
-			});
-
-		},
-		open_menu: function (menu, siteOverlay, navigationItem, header, footer) {
-			menuIsOpen = true;
-			if (typeof gsap != 'undefined') {
-				var timeline = gsap.timeline({
-					defaults: {
-						ease: this.config.easing
-					}
-				});
-
-				// set overflow for html
-				timeline.set(VLTJS.html, {
-					overflow: 'hidden'
-				});
-
-				// overlay animation
-				if (siteOverlay && siteOverlay.length) {
-					timeline.to(siteOverlay, .3, {
-						autoAlpha: 1,
-					});
-				}
-
-				// menu animation
-				if (menu && menu.length) {
-					timeline.fromTo(menu, .6, {
-						x: '100%',
-					}, {
-						x: 0,
-						visibility: 'visible'
-					}, '-=.3');
-				}
-
-				// header animation
-				if (header && header.length) {
-					timeline.fromTo(header, .3, {
-						x: 50,
-						autoAlpha: 0
-					}, {
-						x: 0,
-						autoAlpha: 1
-					}, '-=.3');
-				}
-
-				// navigation item animation
-				if (navigationItem && navigationItem.length) {
-					timeline.fromTo(navigationItem, .3, {
-						x: 50,
-						autoAlpha: 0
-					}, {
-						x: 0,
-						autoAlpha: 1,
-						stagger: {
-							each: .1,
-							from: 'start',
-						}
-					}, '-=.15');
-				}
-
-				// footer animation
-				if (footer && footer.length) {
-					timeline.fromTo(footer, .3, {
-						x: 50,
-						autoAlpha: 0
-					}, {
-						x: 0,
-						autoAlpha: 1,
-						stagger: {
-							each: .1,
-							from: 'start',
-						}
-					}, '-=.15');
-				}
-			}
-		},
-		close_menu: function (menu, siteOverlay, navigationItem, header, footer) {
-			menuIsOpen = false;
-			if (typeof gsap != 'undefined') {
-				var timeline = gsap.timeline({
-					defaults: {
-						ease: this.config.easing
-					}
-				});
-
-				// set overflow for html
-				timeline.set(VLTJS.html, {
-					overflow: 'inherit'
-				});
-
-				// footer animation
-				if (footer && footer.length) {
-					timeline.to(footer, .3, {
-						x: 50,
-						autoAlpha: 0,
-						stagger: {
-							each: .1,
-							from: 'end',
-						}
-					});
-				}
-
-				// navigation item animation
-				if (navigationItem && navigationItem.length) {
-					timeline.to(navigationItem, .3, {
-						x: 50,
-						autoAlpha: 0,
-						stagger: {
-							each: .1,
-							from: 'end',
-						},
-					}, '-=.15');
-				}
-
-				// header animation
-				if (header && header.length) {
-					timeline.to(header, .3, {
-						x: 50,
-						autoAlpha: 0,
-					}, '-=.15');
-				}
-
-				// menu animation
-				if (menu && menu.length) {
-					timeline.to(menu, .6, {
-						x: '100%',
-					}, '-=.15')
-					// set visibility menu after animation
-					.set(menu, {
-						visibility: 'hidden'
-					});
-				}
-
-				// overlay animation
-				if (siteOverlay && siteOverlay.length) {
-					timeline.to(siteOverlay, .3, {
-						autoAlpha: 0
-					}, '-=.6');
-				}
-			}
-		}
-	};
-	VLTJS.menuOffcanvas.init();
-})(jQuery);
-/***********************************************
- * INIT THIRD PARTY SCRIPTS
- ***********************************************/
-(function ($) {
-
-	'use strict';
-
-	// Fast click
-	if (typeof FastClick === 'function') {
-		FastClick.attach(document.body);
-	}
-
-})(jQuery);
-/***********************************************
+})(jQuery);/***********************************************
  * SITE: PRELOADER
  ***********************************************/
 (function ($) {
@@ -582,267 +685,19 @@
 		VLTJS.window.trigger('vlt.preloader_done');
 		VLTJS.html.addClass('vlt-is-page-loaded');
 	});
-})(jQuery);
-/***********************************************
- * WIDGET: PROGRESS BAR
+})(jQuery);/***********************************************
+ * INIT THIRD PARTY SCRIPTS
  ***********************************************/
 (function ($) {
 
 	'use strict';
 
-	VLTJS.progressBar = {
-		init: function () {
-			// check if plugin defined
-			if (typeof gsap == 'undefined') {
-				return;
-			}
-			var el = $('.vlt-progress-bar');
-			el.each(function () {
-				var $this = $(this),
-					final_value = $this.data('final-value') || 0,
-					animation_duration = $this.data('animation-speed') || 0,
-					delay = 500,
-					obj = {
-						count: 0
-					};
-
-				VLTJS.window.on('vlt.change-slide', function () {
-					if ($this.parents('.vlt-section').hasClass('active')) {
-
-						obj.count = 0;
-						$this.find('.vlt-progress-bar__title > .counter').text(Math.round(obj.count));
-						gsap.set($this.find('.vlt-progress-bar__bar > span'), {
-							width: 0
-						});
-						gsap.to(obj, (animation_duration / 1000) / 2, {
-							count: final_value,
-							delay: delay / 1000,
-							onUpdate: function () {
-								$this.find('.vlt-progress-bar__title > .counter').text(Math.round(obj.count));
-							}
-						});
-
-						gsap.to($this.find('.vlt-progress-bar__bar > span'), animation_duration / 1000, {
-							width: final_value + '%',
-							delay: delay / 1000
-						});
-
-					}
-				});
-
-			});
-		}
+	// Fast click
+	if (typeof FastClick === 'function') {
+		FastClick.attach(document.body);
 	}
-	VLTJS.progressBar.init();
 
-})(jQuery);
-/***********************************************
- * WIDGET: PROJECT SHOWCASE
- ***********************************************/
-(function ($) {
-
-	'use strict';
-
-	VLTJS.projectShowcase = {
-		initSlider: function () {
-			// check if plugin defined
-			if (typeof Swiper == 'undefined') {
-				return;
-			}
-			var el = $('.vlt-project-showcase-slider .swiper-container');
-			new Swiper(el, {
-				speed: 1000,
-				spaceBetween: 30,
-				grabCursor: true,
-				slidesPerView: 1,
-				breakpoints: {
-					575: {
-						slidesPerView: 2,
-					},
-				},
-			});
-		},
-		initParallax: function () {
-			// check if plugin defined
-			if (typeof gsap == 'undefined') {
-				return;
-			}
-			var el = $('.vlt-project-showcase'),
-				items = el.find('.vlt-project-showcase__items'),
-				item = items.find('.vlt-project-showcase__item'),
-				images = el.find('.vlt-project-showcase__images'),
-				image = images.find('.vlt-project-showcase__image'),
-				wDiff,
-				value = 0; // Initialize value to prevent undefined errors
-
-			// Check if required elements exist before proceeding
-			if (el.length === 0 || items.length === 0 || images.length === 0) {
-				return;
-			}
-
-			var sliderWidth = el.outerWidth(true),
-				sliderImageWidth = images.outerWidth(true),
-				itemsWidth = items.outerWidth(),
-				sliderImageDiff = (sliderWidth - sliderImageWidth) / sliderWidth;
-
-			wDiff = (itemsWidth / sliderWidth) - 1;
-			wDiff = (sliderWidth - itemsWidth) / sliderWidth;
-
-			item.on('mouseenter', function () {
-				item.removeClass('is-active');
-				image.removeClass('is-active');
-				$(this).addClass('is-active');
-				image.eq($(this).index()).addClass('is-active');
-			});
-
-			if (item.length > 0) {
-				item.eq(0).trigger('mouseenter');
-			}
-
-			VLTJS.window.off('mousemove.projectShowcase').on('mousemove.projectShowcase', function (e) {
-				var elOffset = el.offset();
-				if (elOffset && typeof elOffset.left !== 'undefined') {
-					value = e.pageX - elOffset.left;
-				}
-			});
-
-			// Remove any existing ticker before adding a new one
-			if (typeof VLTJS.projectShowcaseTicker !== 'undefined') {
-				gsap.ticker.remove(VLTJS.projectShowcaseTicker);
-			}
-
-			// Store ticker function reference for cleanup
-			VLTJS.projectShowcaseTicker = function () {
-				if (items.length > 0 && images.length > 0 && typeof value !== 'undefined') {
-					gsap.set(items[0], {
-						x: value * wDiff,
-						ease: 'power3.out'
-					});
-					gsap.set(images[0], {
-						right: value * sliderImageDiff,
-						ease: 'power3.out'
-					});
-				}
-			};
-
-			gsap.ticker.add(VLTJS.projectShowcaseTicker);
-
-		}
-	}
-	VLTJS.projectShowcase.initSlider();
-	VLTJS.projectShowcase.initParallax();
-	VLTJS.debounceResize(function () {
-		VLTJS.projectShowcase.initParallax();
-	});
-})(jQuery);
-/***********************************************
- * WIDGET: TESTIMONIAL SLIDER
- ***********************************************/
-(function ($) {
-
-	'use strict';
-
-	VLTJS.testimonialSlider = {
-		init: function () {
-			// check if plugin defined
-			if (typeof Swiper == 'undefined') {
-				return;
-			}
-			var el = $('.vlt-testimonial-slider .swiper-container');
-			el.each(function () {
-				var $this = $(this);
-				$this.find('.swiper-wrapper > *').wrap('<div class="swiper-slide">');
-				new Swiper(this, {
-					speed: 1000,
-					spaceBetween: 30,
-					grabCursor: true,
-					effect: 'coverflow',
-					slidesPerView: 1,
-					navigation: {
-						nextEl: $('.vlt-testimonial-slider-controls .next'),
-						prevEl: $('.vlt-testimonial-slider-controls .prev'),
-					},
-					pagination: {
-						el: $('.vlt-testimonial-slider-controls .pagination'),
-						clickable: false,
-						type: 'fraction',
-						renderFraction: function (currentClass, totalClass) {
-							return '<span class="' + currentClass + '"></span>' +
-								'<span class="sep">/</span>' +
-								'<span class="' + totalClass + '"></span>';
-						}
-					}
-				});
-			});
-
-		}
-	};
-
-	VLTJS.testimonialSlider.init()
-
-})(jQuery);
-
-/***********************************************
- * WIDGET: Experience SLIDER
- ***********************************************/
-var experienceSlider = $('.swiper-container-experience');
-experienceSlider.each(function () {
-  var $this = $(this);
-  $this.find('.swiper-wrapper > *').wrap('<div class="swiper-slide">');
-
-  new Swiper(this, {
-    speed: 1000,
-    spaceBetween: 30,
-    grabCursor: true,
-    effect: 'coverflow',
-    slidesPerView: 1,
-    navigation: {
-      nextEl: $this.closest('.vlt-timeline-slider').prev().find('.experience-controls .next')[0],
-      prevEl: $this.closest('.vlt-timeline-slider').prev().find('.experience-controls .prev')[0],
-    },
-    pagination: {
-      el: $this.closest('.vlt-timeline-slider').prev().find('.experience-controls .pagination')[0],
-      clickable: false,
-      type: 'fraction',
-      renderFraction: function (currentClass, totalClass) {
-        return '<span class="' + currentClass + '"></span>' +
-               '<span class="sep">/</span>' +
-               '<span class="' + totalClass + '"></span>';
-      }
-    }
-  });
-});
-
-var educationSlider = $('.swiper-container-education');
-educationSlider.each(function () {
-  var $this = $(this);
-  $this.find('.swiper-wrapper > *').wrap('<div class="swiper-slide">');
-
-  new Swiper(this, {
-    speed: 1000,
-    spaceBetween: 30,
-    grabCursor: true,
-    effect: 'coverflow',
-    slidesPerView: 1,
-    navigation: {
-      nextEl: $this.closest('.vlt-timeline-slider').prev().find('.education-controls .next')[0],
-      prevEl: $this.closest('.vlt-timeline-slider').prev().find('.education-controls .prev')[0],
-    },
-    pagination: {
-      el: $this.closest('.vlt-timeline-slider').prev().find('.education-controls .pagination')[0],
-      clickable: false,
-      type: 'fraction',
-      renderFraction: function (currentClass, totalClass) {
-        return '<span class="' + currentClass + '"></span>' +
-               '<span class="sep">/</span>' +
-               '<span class="' + totalClass + '"></span>';
-      }
-    }
-  });
-});
-
-
-/***********************************************
+})(jQuery);/***********************************************
  * WIDGET: TIMELINE SLIDER
  ***********************************************/
 (function ($) {
@@ -885,5 +740,54 @@ educationSlider.each(function () {
 	};
 
 	VLTJS.timelineSlider.init()
+
+})(jQuery);/***********************************************
+ * WIDGET: CONTACT FORM
+ ***********************************************/
+(function ($) {
+
+	'use strict';
+
+	VLTJS.contactForm = {
+		init: function () {
+			// check if plugin defined
+			if (typeof $.fn.validate == 'undefined') {
+				return;
+			}
+			var el = $('.vlt-contact-form');
+			el.each(function () {
+				var thisForm = $(this),
+					successMessage = thisForm.find('.message.success'),
+					errorMessage = thisForm.find('.message.danger');
+				thisForm.validate({
+					errorClass: 'error',
+					submitHandler: function (form) {
+						$.ajax({
+							type: 'POST',
+							url: 'handler.php',
+							data: new FormData(form),
+							cache: false,
+							contentType: false,
+							processData: false,
+							success: function () {
+								successMessage.fadeIn();
+								setTimeout(function () {
+									successMessage.fadeOut();
+								}, 5000);
+							},
+							error: function () {
+								errorMessage.fadeIn();
+								setTimeout(function () {
+									errorMessage.fadeOut();
+								}, 5000);
+							}
+						});
+					}
+				});
+
+			});
+		}
+	}
+	VLTJS.contactForm.init();
 
 })(jQuery);
