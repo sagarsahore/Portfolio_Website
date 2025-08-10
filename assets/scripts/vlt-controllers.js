@@ -150,8 +150,8 @@ window.onload = () => {
 					y: 0
 				},
 				delta = .25;
-			if (typeof gsap != 'undefined') {
-				gsap.set(circle, {
+			if (typeof gsap != 'undefined' && circle.length > 0) {
+				gsap.set(circle[0], {
 					xPercent: -50,
 					yPercent: -50
 				});
@@ -163,45 +163,45 @@ window.onload = () => {
 				gsap.ticker.add(function () {
 					endPosition.x += (startPosition.x - endPosition.x) * delta;
 					endPosition.y += (startPosition.y - endPosition.y) * delta;
-					gsap.set(circle, {
+					gsap.set(circle[0], {
 						x: endPosition.x,
 						y: endPosition.y
 					})
 				});
 				VLTJS.document.on('mousedown', function () {
-					gsap.to(circle, .3, {
+					gsap.to(circle[0], .3, {
 						scale: .7
 					});
 				}).on('mouseup', function () {
-					gsap.to(circle, .3, {
+					gsap.to(circle[0], .3, {
 						scale: 1
 					});
 				});
 				VLTJS.document.on('mouseenter', 'input, textarea, select, .vlt-video-button > a', function () {
-					gsap.to(circle, .3, {
+					gsap.to(circle[0], .3, {
 						scale: 0,
 						opacity: 0
 					});
 				}).on('mouseleave', 'input, textarea, select, .vlt-video-button > a', function () {
-					gsap.to(circle, .3, {
+					gsap.to(circle[0], .3, {
 						scale: 1,
 						opacity: .1
 					});
 				});
 				VLTJS.document.on('mouseenter', 'a, button, [role="button"]', function () {
-					gsap.to(circle, .3, {
+					gsap.to(circle[0], .3, {
 						height: 60,
 						width: 60,
 					});
 				}).on('mouseleave blur', 'a, button, [role="button"]', function () {
-					gsap.to(circle, .3, {
+					gsap.to(circle[0], .3, {
 						height: 15,
 						width: 15,
 					});
 				});
 				VLTJS.document.on('mouseenter', '[data-cursor]', function () {
 					var $this = $(this);
-					gsap.to(circle, .3, {
+					gsap.to(circle[0], .3, {
 						height: 80,
 						width: 80,
 						opacity: 1,
@@ -210,7 +210,7 @@ window.onload = () => {
 						}
 					});
 				}).on('mouseleave', '[data-cursor]', function () {
-					gsap.to(circle, .3, {
+					gsap.to(circle[0], .3, {
 						height: 15,
 						width: 15,
 						opacity: .1,
