@@ -1,3 +1,16 @@
+/**
+ * Legacy form handler - DEPRECATED
+ * 
+ * This file is deprecated and replaced by contact-form.js 
+ * which uses Web3Forms instead of Formspree.
+ * 
+ * Keeping file for reference but functionality is disabled.
+ */
+
+console.warn('form.js is deprecated - contact form now handled by contact-form.js with Web3Forms');
+
+// Legacy code disabled
+/*
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('contact-form');
   const successMsg = document.querySelector('.message.success');
@@ -30,3 +43,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+*/
