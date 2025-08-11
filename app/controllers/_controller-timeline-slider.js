@@ -14,18 +14,23 @@
 			var el = $('.vlt-timeline-slider .swiper-container');
 			el.each(function () {
 				var $this = $(this);
+				var $slider = $this.closest('.vlt-timeline-slider');
+				var sliderType = $slider.attr('data-slider') || 'default';
+				var $controls = $('.vlt-timeline-slider-controls[data-slider="' + sliderType + '"]');
+				
 				$this.find('.swiper-wrapper > *').wrap('<div class="swiper-slide">');
+				
 				new Swiper(this, {
 					speed: 1000,
 					spaceBetween: 0,
 					grabCursor: true,
 					slidesPerView: 1,
 					navigation: {
-						nextEl: $('.vlt-timeline-slider-controls .next'),
-						prevEl: $('.vlt-timeline-slider-controls .prev'),
+						nextEl: $controls.find('.next')[0],
+						prevEl: $controls.find('.prev')[0],
 					},
 					pagination: {
-						el: $('.vlt-timeline-slider-controls .pagination'),
+						el: $controls.find('.pagination')[0],
 						clickable: false,
 						type: 'fraction',
 						renderFraction: function (currentClass, totalClass) {
