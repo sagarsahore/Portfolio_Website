@@ -2,6 +2,23 @@
 
 ## 🚀 Recent Improvements & Bug Fixes
 
+### Contact Form Migration to Web3Forms ✅
+- **Issue**: Contact form had 405 Method Not Allowed errors with PHP backend on GitHub Pages
+- **Solution**: 
+  - Migrated from PHP/Formspree to Web3Forms static backend
+  - Added honeypot and timestamp-based spam protection
+  - Implemented progressive enhancement (works without JavaScript)
+  - Added proper autocomplete attributes for better UX
+  - See [CONTACT.md](CONTACT.md) for setup instructions
+
+### Unload Deprecation Warnings Fixed ✅
+- **Issue**: Browser console showing "Deprecated feature used: unload" warnings
+- **Solution**:
+  - Created unload-to-pagehide compatibility shim
+  - Automatically redirects deprecated `unload` events to `pagehide`
+  - Supports both vanilla JavaScript and jQuery event handling
+  - Loaded before all other scripts to catch all usage
+
 ### GSAP Errors Fixed ✅
 - **Issue**: Multiple "GSAP target [object Object] not found" errors in browser console
 - **Root Cause**: JavaScript controllers were attempting to animate DOM elements that didn't exist in the HTML structure
@@ -39,7 +56,7 @@
 - Responsive design with smooth animations
 - Typing animation displaying multiple roles
 - Project showcase with detailed case studies
-- Contact form integration with Formspree
+- Contact form integration with Web3Forms
 - Social media links and professional profiles
 
 ### 🔧 Build Process
@@ -56,6 +73,11 @@ The website uses a Gulp-based build system for:
 - Skills and certification displays
 - Contact form for collaboration inquiries
 
+### 📝 Configuration
+
+#### Contact Form Setup
+See [CONTACT.md](CONTACT.md) for detailed instructions on configuring the Web3Forms contact backend.
+
 ---
 
-**Note**: All GSAP animation errors have been resolved and the website now loads without console warnings or errors.
+**Note**: All console errors and deprecation warnings have been resolved. The website now loads without warnings and provides an enhanced user experience with proper accessibility features.

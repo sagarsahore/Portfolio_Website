@@ -143,7 +143,11 @@
 												</div>
 											</div>
 										</div>
-										<div class="vlt-gap-40"></div><a class="vlt-link has-white-color" href="https://github.com/sagarsahore/Resume/blob/main/Sagar_Sahore_-_Salesforce_Administrator.pdf">Watch Resume</a>
+										<div class="vlt-gap-40"></div>
+										<div class="d-flex align-items-center flex-wrap gap-3">
+											<a class="vlt-link has-white-color" href="https://github.com/sagarsahore/Resume/raw/main/Sagar_Sahore_-_Salesforce_Administrator.pdf" target="_blank">Resume</a>
+											<a class="vlt-link has-white-color" href="#Portfolio">Portfolio</a>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -287,7 +291,7 @@
 										<div class="d-block d-md-flex align-items-center justify-content-between">
 											<h1 class="has-white-color">Experience</h1>
 											<div class="vlt-gap-30--sm"></div>
-											<div class="vlt-timeline-slider-controls">
+											<div class="vlt-timeline-slider-controls" data-slider="experience">
 												<span class="prev">🡐</span>
 												<span class="pagination"></span>
 												<span class="next">🡒</span>
@@ -296,7 +300,7 @@
 									</div>
 									<div class="vlt-gap-50"></div>
 									<div class="vlt-animated-block" style="animation-delay:100ms; animation-duration:700ms;">
-										<div class="vlt-timeline-slider">
+										<div class="vlt-timeline-slider" data-slider="experience">
 											<div class="swiper-container">
 												<div class="swiper-wrapper">
 													<!-- Experience Entry -->
@@ -345,9 +349,17 @@
 									</div>
 							
 									<div class="vlt-animated-block" style="animation-delay:200ms; animation-duration:700ms;">
-										<h1 class="has-white-color">Education</h1>
+										<div class="d-block d-md-flex align-items-center justify-content-between">
+											<h1 class="has-white-color">Education</h1>
+											<div class="vlt-gap-30--sm"></div>
+											<div class="vlt-timeline-slider-controls" data-slider="education">
+												<span class="prev">🡐</span>
+												<span class="pagination"></span>
+												<span class="next">🡒</span>
+											</div>
+										</div>
 										<div class="vlt-gap-30"></div>
-										<div class="vlt-timeline-slider">
+										<div class="vlt-timeline-slider" data-slider="education">
 											<div class="swiper-container">
 												<div class="swiper-wrapper">
 													<!-- Education Entry -->
@@ -396,7 +408,7 @@
 									</div>
 									<div class="vlt-gap-50"></div>
 									<div class="vlt-animated-block" style="animation-delay:300ms; animation-duration:700ms;">
-										<a class="vlt-btn vlt-btn--primary" href="https://github.com/sagarsahore/Resume/blob/main/Sagar_Sahore_-_Salesforce_Administrator.pdf" target="_self">
+										<a class="vlt-btn vlt-btn--primary" href="https://github.com/sagarsahore/Resume/raw/main/Sagar_Sahore_-_Salesforce_Administrator.pdf" target="_blank">
 											<span class="vlt-btn__text">Download Resume</span>
 											<span class="vlt-btn__icon vlt-btn__icon--right">
 												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="round">
@@ -877,37 +889,48 @@
 				<div class="vlt-gap-40"></div>
   
 				<!-- FORM STARTS -->
-				<form id="contact-form" class="vlt-contact-form" method="POST" action="https://formspree.io/f/xvgkvabb">
+				<form id="contact-form" class="vlt-contact-form" method="POST" action="https://api.web3forms.com/submit" autocomplete="on">
+					<!-- Web3Forms Configuration -->
+					<input type="hidden" name="access_key" value="9794c554-b9e1-47b6-ab6e-1336f981419f">
+					<input type="hidden" name="subject" value="New Contact Form Submission from Portfolio Website">
+					<input type="hidden" name="from_name" value="Portfolio Contact Form">
+					<!-- Honeypot field for spam protection -->
+					<input type="checkbox" name="botcheck" style="display: none;" autocomplete="off">
+					<!-- Timestamp for spam protection -->
+					<input type="hidden" name="_timestamp" id="form-timestamp">
+					
 					<div class="vlt-form-row two-col">
 					  <div class="vlt-form-group">
 						<label class="has-white-color" for="name">Your name (required)</label>
-						<input type="text" id="name" name="name" required placeholder="Your Name">
+						<input type="text" id="name" name="name" required placeholder="Your Name" autocomplete="name" aria-describedby="name-error">
 					  </div>
 					  <div class="vlt-form-group">
 						<label class="has-white-color" for="email">Your email (required)</label>
-						<input type="email" id="email" name="email" required placeholder="Your Email">
+						<input type="email" id="email" name="email" required placeholder="Your Email" autocomplete="email" aria-describedby="email-error">
 					  </div>
 					</div>
 					<div class="vlt-form-row two-col">
 					  <div class="vlt-form-group">
-						<label class="has-white-color" for="category">Company</label>
-						<input type="text" id="category" name="category" placeholder="Company">
+						<label class="has-white-color" for="company">Company</label>
+						<input type="text" id="company" name="company" placeholder="Company" autocomplete="organization">
 					  </div>
 					  <div class="vlt-form-group">
-						<label class="has-white-color" for="budget">Reason</label>
-						<select id="budget" name="budget">
-						  <option value="Job">Job</option>
-						  <option value="Freelance">Freelance</option>
+						<label class="has-white-color" for="reason">Reason</label>
+						<select id="reason" name="reason" autocomplete="off">
+						  <option value="">Select reason</option>
+						  <option value="Job">Job Opportunity</option>
+						  <option value="Freelance">Freelance Project</option>
 						  <option value="Collaboration">Collaboration</option>
+						  <option value="General">General Inquiry</option>
 						</select>
 					  </div>
 					</div>
 					<div class="vlt-form-group">
 					  <label class="has-white-color" for="message">Your Message</label>
-					  <textarea name="message" id="message" rows="3" placeholder="Message"></textarea>
+					  <textarea name="message" id="message" rows="3" placeholder="Message" required aria-describedby="message-error"></textarea>
 					</div>
-					<div class="message success" style="display:none;">Your message is successfully sent...</div>
-					<div class="message danger" style="display:none;">Sorry something went wrong!</div>
+					<div class="message success" style="display:none;" role="alert" aria-live="polite">Thanks! Your message has been sent successfully.</div>
+					<div class="message danger" style="display:none;" role="alert" aria-live="polite">Sorry, something went wrong. Please try again.</div>
 					<button type="submit" class="vlt-btn vlt-btn--primary">
 					  <span class="vlt-btn__text">Contact Me</span>
 					  <span class="vlt-btn__icon vlt-btn__icon--right"></span>
@@ -947,12 +970,15 @@
 			</div>
 		</footer>
 	</main>
+	<!--Unload Compatibility Shim (must load first)-->
+	<script src="assets/scripts/unload-compat.js"></script>
 	<!--Libs-->
 	<script src="assets/vendors/jquery-3.5.1.min.js"></script>
 	<script src="assets/vendors/gsap.min.js"></script>
 	<script src="assets/scripts/vlt-plugins.min.js"></script>
 	<script src="assets/scripts/vlt-helpers.js"></script>
 	<script src="assets/scripts/vlt-controllers.min.js"></script>
+	<script src="assets/scripts/contact-form.js"></script>
 </body>
 
 </html>
