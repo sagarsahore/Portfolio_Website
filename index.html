@@ -7,19 +7,85 @@
 	<meta name="description" content="Sagar Sahore's Portfolio">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<!--Resource Hints-->
+	<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+	<link rel="dns-prefetch" href="https://fonts.googleapis.com">
 	<!--Favicon-->
 	<link rel="icon" type="image/png" href="assets/img/root/logo-white.png">
 	<!--Framework-->
 	<link rel="stylesheet" href="assets/css/framework/bootstrap.min.css">
+	<!--Critical CSS - Inline for above-the-fold-->
+	<style>
+		/* Critical CSS for above-the-fold content */
+		.vlt-fullpage-slider {
+			height: 100vh;
+		}
+		.vlt-fullpage-slider .vlt-section {
+			display: flex;
+			flex-direction: column;
+			background-color: #fff;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: cover;
+			flex: 1 1 auto;
+		}
+		.vlt-section__vertical-align {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			min-height: 100%;
+		}
+		.vlt-section__content {
+			position: relative;
+			flex: 1 1 auto;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+		.vlt-services {
+			text-align: center;
+		}
+		.vlt-services__title a {
+			text-decoration: none;
+			color: inherit;
+		}
+		.vlt-animated-block {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		.vlt-animated-block.animated {
+			opacity: 1;
+			transform: translateY(0);
+			transition: opacity 0.7s ease, transform 0.7s ease;
+		}
+		/* GPU acceleration for animations */
+		.vlt-particle {
+			will-change: transform;
+		}
+		/* Prevent layout shift */
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+	</style>
 	<!--Fonts-->
-	<link rel="stylesheet" href="assets/fonts/Inter/style.css">
-	<!--Plugins-->
-	<link rel="stylesheet" href="assets/css/vlt-plugins.min.css">
-	<!--Style-->
-	<link rel="stylesheet" href="assets/css/vlt-main.min.css">
-	<!--Custom-->
-	<link rel="stylesheet" href="assets/css/custom.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+	<link rel="preload" href="assets/fonts/Inter/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="stylesheet" href="assets/fonts/Inter/style.css" media="print" onload="this.media='all'">
+	<!--Non-critical CSS deferred-->
+	<link rel="stylesheet" href="assets/css/vlt-plugins.min.css" media="print" onload="this.media='all'">
+	<link rel="stylesheet" href="assets/css/vlt-main.min.css" media="print" onload="this.media='all'">
+	<link rel="stylesheet" href="assets/css/custom.css" media="print" onload="this.media='all'">
+	<link rel="stylesheet" href="assets/css/performance.css" media="print" onload="this.media='all'">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+	<!--Fallback for browsers that don't support onload-->
+	<noscript>
+		<link rel="stylesheet" href="assets/fonts/Inter/style.css">
+		<link rel="stylesheet" href="assets/css/vlt-plugins.min.css">
+		<link rel="stylesheet" href="assets/css/vlt-main.min.css">
+		<link rel="stylesheet" href="assets/css/custom.css">
+		<link rel="stylesheet" href="assets/css/performance.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+	</noscript>
 
 </head>
 
@@ -30,11 +96,11 @@
 			<div class="vlt-navbar-background"></div>
 			<div class="vlt-navbar-inner">
 				<div class="vlt-navbar-inner--left">
-					<!--Logo--><a class="vlt-navbar-logo" href="index.html"><img class="black" src="assets/img/root/logo-black.png" alt="S.Sahore"><img class="white" src="assets/img/root/logo-white.png" alt="Mikael"></a>
+					<!--Logo--><a class="vlt-navbar-logo" href="index.html"><img class="black" src="assets/img/root/logo-black.png" alt="S.Sahore" width="120" height="40"><img class="white" src="assets/img/root/logo-white.png" alt="S.Sahore" width="120" height="40"></a>
 					<!--Contacts-->
 					<nav class="vlt-navbar-contacts d-none d-md-block">
 						<ul>
-							<li><a href="https://www.google.com/maps?q=Auckland,+New+Zealand" target="_blank">Auckland, New Zealand</a></li>
+							<li><a href="https://www.google.com/maps?q=Auckland,+New+Zealand" target="_blank" rel="noopener">Auckland, New Zealand</a></li>
 							<li class="sep">/</li>
 							<li><a href="mailto:sagarsahoredev@gmail.com">sagarsahoredev@gmail.com</a></li>
 							
@@ -97,9 +163,9 @@
 	<!--Fixed Socials-->
 	<div class="vlt-fixed-socials">
 		<a href="https://github.com/sagarsahore" target="_blank"><i class="fab fa-github"></i> </a>
-		<a href="https://www.salesforce.com/trailblazer/sagarsahore" target="_blank"><i class="fab fa-salesforce"></i></a>
-		<a href="https://x.com/sagar_sahore" target="_blank"><i class="fab fa-x"></i></a>
-		<a href="https://www.linkedin.com/in/sagar-s-70b08b187/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+		<a href="https://www.salesforce.com/trailblazer/sagarsahore" target="_blank" rel="noopener"><i class="fab fa-salesforce"></i></a>
+		<a href="https://x.com/sagar_sahore" target="_blank" rel="noopener"><i class="fab fa-x"></i></a>
+		<a href="https://www.linkedin.com/in/sagar-s-70b08b187/" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
 	  </div>
 	  
 	<!--Main-->
@@ -280,7 +346,7 @@
 				<div class="vlt-section__vertical-align">
 					<div class="vlt-section__content">
 						<div class="vlt-section__ken-burn-background">
-							<img src="assets/img/attachment-02.jpg" alt="">
+							<img src="assets/img/attachment-02.jpg" alt="Experience background" loading="lazy" decoding="async" width="1200" height="800">
 						</div>
 						<div class="container">
 							<div class="row">
@@ -442,11 +508,11 @@
 									<div class="row align-items-center">
 										<div class="col-lg-4 offset-lg-1">
 											<div class="vlt-slide-photo">
-												<div class="vlt-slide-photo__inside"><img src="assets/img/sagarsahore.jpeg" alt=""></div>
-												<div class="vlt-slide-photo__inside"><img src="assets/img/sagarcoding.png" alt=""></div>
-												<div class="vlt-slide-photo__particle vlt-fade-in-bottom--small has-border-radius has-box-shadow" style="top: -50px; right: -40px; width: 100px; transition-delay: 300ms;"><img src="assets/img/root/parallax-particle-01.png" alt=""></div>
-												<div class="vlt-slide-photo__particle vlt-fade-in-bottom--small has-border-radius has-box-shadow" style="top: 40px; left: -30px; width: 80px; transition-delay: 600ms;"><img src="assets/img/root/parallax-particle-02.png" alt=""></div>
-												<div class="vlt-slide-photo__particle vlt-fade-in-left--small has-border-radius has-box-shadow" style="left: 30px; bottom: -50px; width: 100px; transition-delay: 900ms;"><img src="assets/img/root/parallax-particle-03.png" alt=""></div>
+												<div class="vlt-slide-photo__inside"><img src="assets/img/sagarsahore.jpeg" alt="Sagar Sahore profile" loading="lazy" decoding="async" width="300" height="300"></div>
+												<div class="vlt-slide-photo__inside"><img src="assets/img/sagarcoding.png" alt="Sagar coding workspace" loading="lazy" decoding="async" width="400" height="300"></div>
+												<div class="vlt-slide-photo__particle vlt-fade-in-bottom--small has-border-radius has-box-shadow" style="top: -50px; right: -40px; width: 100px; transition-delay: 300ms;"><img src="assets/img/root/parallax-particle-01.png" alt="Decorative particle" loading="lazy" decoding="async" width="100" height="100"></div>
+												<div class="vlt-slide-photo__particle vlt-fade-in-bottom--small has-border-radius has-box-shadow" style="top: 40px; left: -30px; width: 80px; transition-delay: 600ms;"><img src="assets/img/root/parallax-particle-02.png" alt="Decorative particle" loading="lazy" decoding="async" width="80" height="80"></div>
+												<div class="vlt-slide-photo__particle vlt-fade-in-left--small has-border-radius has-box-shadow" style="left: 30px; bottom: -50px; width: 100px; transition-delay: 900ms;"><img src="assets/img/root/parallax-particle-03.png" alt="Decorative particle" loading="lazy" decoding="async" width="100" height="100"></div>
 												<div class="vlt-slide-photo__particle vlt-fade-in-left--small negative-z-index" style="right: -40px; bottom: -30px; width: 290px; transition-delay: 1.2s;"><img src="assets/img/root/plus-light-pattern.png" alt=""></div>
 
 												
@@ -970,13 +1036,45 @@
 	</main>
 	<!--Unload Compatibility Shim (must load first)-->
 	<script src="assets/scripts/unload-compat.js"></script>
-	<!--Libs-->
+	<!--Critical Libraries-->
 	<script src="assets/vendors/jquery-3.5.1.min.js"></script>
 	<script src="assets/vendors/gsap.min.js"></script>
-	<script src="assets/scripts/vlt-plugins.min.js"></script>
-	<script src="assets/scripts/vlt-helpers.js"></script>
-	<script src="assets/scripts/vlt-controllers.min.js"></script>
-	<script src="assets/scripts/contact-form.js"></script>
+	<!--Deferred Non-Critical Scripts-->
+	<script>
+	// Optimized script loading with performance monitoring
+	function loadScript(src, async = true) {
+		const script = document.createElement('script');
+		script.src = src;
+		script.async = async;
+		document.head.appendChild(script);
+	}
+	
+	// Load non-critical scripts after page load
+	window.addEventListener('load', function() {
+		loadScript('assets/scripts/performance.js');
+		loadScript('assets/scripts/vlt-plugins.min.js');
+		loadScript('assets/scripts/vlt-helpers.js');
+		loadScript('assets/scripts/vlt-controllers.min.js');
+		loadScript('assets/scripts/contact-form.js');
+	});
+	
+	// Performance optimization for scroll events
+	let ticking = false;
+	function updateAnimations() {
+		// Batched animation updates
+		ticking = false;
+	}
+	
+	// Use passive listeners for better performance
+	if ('passive' in (function() { let opts; try { opts = Object.defineProperty({}, 'passive', { get: function() { return true; } }); window.addEventListener('test', null, opts); } catch (e) {} return opts; })()) {
+		document.addEventListener('scroll', function() {
+			if (!ticking) {
+				requestAnimationFrame(updateAnimations);
+				ticking = true;
+			}
+		}, { passive: true });
+	}
+	</script>
 </body>
 
 </html>
