@@ -67,24 +67,34 @@
 			max-width: 100%;
 			height: auto;
 		}
+		/* Fallback for blocked Font Awesome icons */
+		.fab, .fas, .far {
+			display: inline-block;
+			width: 1em;
+			height: 1em;
+			text-align: center;
+		}
+		.fab::before, .fas::before, .far::before {
+			font-family: inherit;
+		}
+		.fa-github::before { content: "🔗"; }
+		.fa-salesforce::before { content: "☁"; }
+		.fa-x::before { content: "✕"; }
+		.fa-linkedin-in::before { content: "💼"; }
 	</style>
 	<!--Fonts-->
 	<link rel="preload" href="assets/fonts/Inter/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
-	<link rel="stylesheet" href="assets/fonts/Inter/style.css" media="print" onload="this.media='all'">
+	<link rel="stylesheet" href="assets/fonts/Inter/style.css">
+	<!--Critical CSS - Load immediately-->
+	<link rel="stylesheet" href="assets/css/vlt-plugins.min.css">
+	<link rel="stylesheet" href="assets/css/vlt-main.min.css">
+	<link rel="stylesheet" href="assets/css/custom.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 	<!--Non-critical CSS deferred-->
-	<link rel="stylesheet" href="assets/css/vlt-plugins.min.css" media="print" onload="this.media='all'">
-	<link rel="stylesheet" href="assets/css/vlt-main.min.css" media="print" onload="this.media='all'">
-	<link rel="stylesheet" href="assets/css/custom.css" media="print" onload="this.media='all'">
 	<link rel="stylesheet" href="assets/css/performance.css" media="print" onload="this.media='all'">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
 	<!--Fallback for browsers that don't support onload-->
 	<noscript>
-		<link rel="stylesheet" href="assets/fonts/Inter/style.css">
-		<link rel="stylesheet" href="assets/css/vlt-plugins.min.css">
-		<link rel="stylesheet" href="assets/css/vlt-main.min.css">
-		<link rel="stylesheet" href="assets/css/custom.css">
 		<link rel="stylesheet" href="assets/css/performance.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 	</noscript>
 
 </head>
@@ -1049,13 +1059,28 @@
 		document.head.appendChild(script);
 	}
 	
-	// Load non-critical scripts after page load
+	// Load non-critical scripts after page load in correct order
 	window.addEventListener('load', function() {
-		loadScript('assets/scripts/performance.js');
-		loadScript('assets/scripts/vlt-plugins.min.js');
-		loadScript('assets/scripts/vlt-helpers.js');
-		loadScript('assets/scripts/vlt-controllers.min.js');
-		loadScript('assets/scripts/contact-form.js');
+		// Load core scripts first, then dependent scripts
+		Promise.all([
+			new Promise(resolve => {
+				const script = document.createElement('script');
+				script.src = 'assets/scripts/vlt-plugins.min.js';
+				script.onload = resolve;
+				document.head.appendChild(script);
+			}),
+			new Promise(resolve => {
+				const script = document.createElement('script');
+				script.src = 'assets/scripts/vlt-helpers.js';
+				script.onload = resolve;
+				document.head.appendChild(script);
+			})
+		]).then(() => {
+			// Load dependent scripts after core scripts
+			loadScript('assets/scripts/performance.js');
+			loadScript('assets/scripts/vlt-controllers.min.js');
+			loadScript('assets/scripts/contact-form.js');
+		});
 	});
 	
 	// Performance optimization for scroll events
