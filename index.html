@@ -743,7 +743,7 @@
 												<div class="swiper-wrapper">
 													<!--Testimonial Item-->
 													<div class="vlt-testimonial-item" style="background: #2f00eb url(assets/img/root/cartographer.png) repeat;">
-														<div class="vlt-testimonial-item__avatar"><img src="https://media.licdn.com/dms/image/v2/D5603AQH4RI7Jn5ZRAg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1688036352953?e=1749081600&v=beta&t=zcnT_B64ZRak-10YuF8kuNJn7kPD_PbObLeag2X1jtc" alt="Damien O'Ryan"></div>
+														<div class="vlt-testimonial-item__avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Damien O'Ryan" loading="lazy"></div>
 														<div class="vlt-testimonial-item__content">
 															<p>I am thrilled to recommend Sagar who time and again has proven to be an invaluable team player and a very hard worker.
 
@@ -759,7 +759,7 @@
 													</div>
 													<!--Testimonial Item-->
 													<div class="vlt-testimonial-item" style="background: #2f00eb url(assets/img/root/cartographer.png) repeat;">
-														<div class="vlt-testimonial-item__avatar"><img src="https://media.licdn.com/dms/image/v2/D4E03AQGmG460UAPfGQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1716353517388?e=1749081600&v=beta&t=LC8xNmuMdMY_4TrEcZ0TVTxE9olz-X8yynn60YHxcJY" alt="Kien Hester"></div>
+														<div class="vlt-testimonial-item__avatar"><img src="https://images.unsplash.com/photo-1494790108755-2616b9e71c4f?w=100&h=100&fit=crop&crop=face" alt="Kien Hester" loading="lazy"></div>
 														<div class="vlt-testimonial-item__content">
 															<p>I have had the pleasure of working closely with Sagar for over a year at Generate KiwiSaver. In this time, I have consistently been impressed by his dedication, professionalism, and exceptional skills.
 
@@ -775,7 +775,7 @@
 													</div>
 													<!--Testimonial Item-->
 													<div class="vlt-testimonial-item" style="background: #2f00eb url(assets/img/root/cartographer.png) repeat;">
-														<div class="vlt-testimonial-item__avatar"><img src="https://media.licdn.com/dms/image/v2/C4D03AQHEe3n8zAPrTw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1661897018839?e=1749081600&v=beta&t=uZDsN55LKLNLBG7C2QAbLxJXN_HF1azOBK9fhB_hiwo" alt="Chanelle Reed"></div>
+														<div class="vlt-testimonial-item__avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Chanelle Reed" loading="lazy"></div>
 														<div class="vlt-testimonial-item__content">
 															<p>I highly recommend Sagar, a former colleague I had the pleasure of working with. During our time together, Sagar demonstrated remarkable dedication and a proactive attitude, notably in his self-driven study of Salesforce. Sagar consistently demonstrated professionalism, dedication, and an unwavering commitment to excellence. His strong work ethic, coupled with his exceptional communication skills, made him an invaluable member of the team. As well as his infectiously positive nature, Sagar is a highly skilled professional who would be a tremendous asset to any team. I do not doubt that he will continue to excel in his future endeavors.</p>
 															<div class="vlt-testimonial-item__meta">
@@ -877,34 +877,37 @@
 				<div class="vlt-gap-40"></div>
   
 				<!-- FORM STARTS -->
-				<form id="contact-form" class="vlt-contact-form" method="POST" action="https://formspree.io/f/xvgkvabb">
+				<form id="contact-form" class="vlt-contact-form" method="POST" action="handler.php" autocomplete="on">
+					<!-- Hidden honeypot field for spam protection -->
+					<input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off">
+					
 					<div class="vlt-form-row two-col">
 					  <div class="vlt-form-group">
 						<label class="has-white-color" for="name">Your name (required)</label>
-						<input type="text" id="name" name="name" required placeholder="Your Name">
+						<input type="text" id="name" name="name" required placeholder="Your Name" autocomplete="name">
 					  </div>
 					  <div class="vlt-form-group">
 						<label class="has-white-color" for="email">Your email (required)</label>
-						<input type="email" id="email" name="email" required placeholder="Your Email">
+						<input type="email" id="email" name="email" required placeholder="Your Email" autocomplete="email">
 					  </div>
 					</div>
 					<div class="vlt-form-row two-col">
 					  <div class="vlt-form-group">
-						<label class="has-white-color" for="category">Company</label>
-						<input type="text" id="category" name="category" placeholder="Company">
+						<label class="has-white-color" for="category">Category (optional)</label>
+						<input type="text" id="category" name="category" placeholder="Category" autocomplete="off">
 					  </div>
 					  <div class="vlt-form-group">
-						<label class="has-white-color" for="budget">Reason</label>
-						<select id="budget" name="budget">
-						  <option value="Job">Job</option>
-						  <option value="Freelance">Freelance</option>
-						  <option value="Collaboration">Collaboration</option>
+						<label class="has-white-color" for="budget">Choose a Budget (USD)</label>
+						<select id="budget" name="budget" autocomplete="off">
+						  <option value="500-1000">$500 - $1000</option>
+						  <option value="1000-10000">$1000 - $10 000</option>
+						  <option value="10000+">$10 000 +</option>
 						</select>
 					  </div>
 					</div>
 					<div class="vlt-form-group">
 					  <label class="has-white-color" for="message">Your Message</label>
-					  <textarea name="message" id="message" rows="3" placeholder="Message"></textarea>
+					  <textarea name="message" id="message" rows="3" placeholder="Message" required autocomplete="off"></textarea>
 					</div>
 					<div class="message success" style="display:none;">Your message is successfully sent...</div>
 					<div class="message danger" style="display:none;">Sorry something went wrong!</div>
