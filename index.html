@@ -7,9 +7,7 @@
 	<meta name="description" content="Sagar Sahore's Portfolio">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<!--Resource Hints-->
-	<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-	<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+	<!--Resource Hints - removed external CDN dependencies for reliability-->
 	<!--Favicon-->
 	<link rel="icon" type="image/png" href="assets/img/root/logo-white.png">
 	<!--Framework-->
@@ -17,8 +15,21 @@
 	<!--Critical CSS - Inline for above-the-fold-->
 	<style>
 		/* Critical CSS for above-the-fold content */
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+			visibility: visible !important;
+			opacity: 1 !important;
+		}
+		main, .vlt-main {
+			visibility: visible !important;
+			opacity: 1 !important;
+		}
 		.vlt-fullpage-slider {
 			height: 100vh;
+			visibility: visible !important;
+		}
 		}
 		.vlt-fullpage-slider .vlt-section {
 			display: flex;
@@ -89,7 +100,7 @@
 	<link rel="stylesheet" href="assets/css/vlt-plugins.min.css">
 	<link rel="stylesheet" href="assets/css/vlt-main.min.css">
 	<link rel="stylesheet" href="assets/css/custom.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+	<!--Font Awesome CDN removed - using emoji fallbacks for reliability-->
 	<!--Non-critical CSS deferred-->
 	<link rel="stylesheet" href="assets/css/performance.css" media="print" onload="this.media='all'">
 	<!--Fallback for browsers that don't support onload-->
@@ -157,10 +168,10 @@
 		<div class="vlt-offcanvas-menu__footer">
 			<!--Socials-->
 			<div class="vlt-offcanvas-menu__socials">
-				<a href="https://github.com/sagarsahore" target="_blank"><i class="fab fa-github"></i> </a>
-				<a href="https://www.salesforce.com/trailblazer/sagarsahore" target="_blank"><i class="fab fa-salesforce"></i></a>
-				<a href="https://x.com/sagar_sahore" target="_blank"><i class="fab fa-x"></i></a>
-				<a href="https://www.linkedin.com/in/sagar-s-70b08b187/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+				<a href="https://github.com/sagarsahore" target="_blank">🔗</a>
+				<a href="https://www.salesforce.com/trailblazer/sagarsahore" target="_blank">☁</a>
+				<a href="https://x.com/sagar_sahore" target="_blank">✕</a>
+				<a href="https://www.linkedin.com/in/sagar-s-70b08b187/" target="_blank">💼</a>
 			  </div>
 			<!--Copyright-->
 			<div class="vlt-offcanvas-menu__copyright">
@@ -172,10 +183,10 @@
 	<div class="vlt-site-overlay"></div>
 	<!--Fixed Socials-->
 	<div class="vlt-fixed-socials">
-		<a href="https://github.com/sagarsahore" target="_blank"><i class="fab fa-github"></i> </a>
-		<a href="https://www.salesforce.com/trailblazer/sagarsahore" target="_blank" rel="noopener"><i class="fab fa-salesforce"></i></a>
-		<a href="https://x.com/sagar_sahore" target="_blank" rel="noopener"><i class="fab fa-x"></i></a>
-		<a href="https://www.linkedin.com/in/sagar-s-70b08b187/" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+		<a href="https://github.com/sagarsahore" target="_blank">🔗</a>
+		<a href="https://www.salesforce.com/trailblazer/sagarsahore" target="_blank" rel="noopener">☁</a>
+		<a href="https://x.com/sagar_sahore" target="_blank" rel="noopener">✕</a>
+		<a href="https://www.linkedin.com/in/sagar-s-70b08b187/" target="_blank" rel="noopener">💼</a>
 	  </div>
 	  
 	<!--Main-->
@@ -787,10 +798,18 @@
 									<!--Animated Block-->
 									<div class="vlt-animated-block animated" style="animation-delay:600ms; animation-duration:700ms;">
 										<div class="vlt-slide-photo">
-											<div class="vlt-slide-photo__inside"><img src="https://res.cloudinary.com/trailhead/image/upload/public-trailhead/assets/images/ranks/double-star-ranger.png" alt="Certifications Showcase"></div>
+											<div class="vlt-slide-photo__inside">
+												<div style="width: 200px; height: 200px; background: linear-gradient(135deg, #1976d2, #42a5f5); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; border-radius: 10px;">
+													🏆 Double Ranger
+												</div>
+											</div>
 											<div class="vlt-slide-photo__caption">* My Double Ranger Rank on Trailhead</div>
 											<div class="vlt-slide-photo__caption">  </div>
-											<div class="vlt-slide-photo__inside"><img src="https://www.salesforce.com/news/wp-content/uploads/sites/3/2023/03/Newsroom-Press-Release.png" alt="Certifications Showcase"></div>
+											<div class="vlt-slide-photo__inside">
+												<div style="width: 200px; height: 200px; background: linear-gradient(135deg, #00a1e0, #0070d2); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; border-radius: 10px;">
+													🤖 Einstein AI
+												</div>
+											</div>
 											<div class="vlt-slide-photo__caption">* Showcasing Eienstien AI from Salesforce.</div>
 											<div class="vlt-slide-photo__particle vlt-fade-in-left--small negative-z-index" style="right: -40px; top: -40px; width: 290px; transition-delay: 1.2s;"><img src="assets/img/root/plus-light-pattern.png" alt=""></div>
 										</div>
@@ -829,7 +848,11 @@
 												<div class="swiper-wrapper">
 													<!--Testimonial Item-->
 													<div class="vlt-testimonial-item" style="background: #2f00eb url(assets/img/root/cartographer.png) repeat;">
-														<div class="vlt-testimonial-item__avatar"><img src="https://media.licdn.com/dms/image/v2/D5603AQH4RI7Jn5ZRAg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1688036352953?e=1749081600&v=beta&t=zcnT_B64ZRak-10YuF8kuNJn7kPD_PbObLeag2X1jtc" alt="Damien O'Ryan"></div>
+														<div class="vlt-testimonial-item__avatar">
+															<div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+																👨‍💼
+															</div>
+														</div>
 														<div class="vlt-testimonial-item__content">
 															<p>I am thrilled to recommend Sagar who time and again has proven to be an invaluable team player and a very hard worker.
 
@@ -845,7 +868,11 @@
 													</div>
 													<!--Testimonial Item-->
 													<div class="vlt-testimonial-item" style="background: #2f00eb url(assets/img/root/cartographer.png) repeat;">
-														<div class="vlt-testimonial-item__avatar"><img src="https://media.licdn.com/dms/image/v2/D4E03AQGmG460UAPfGQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1716353517388?e=1749081600&v=beta&t=LC8xNmuMdMY_4TrEcZ0TVTxE9olz-X8yynn60YHxcJY" alt="Kien Hester"></div>
+														<div class="vlt-testimonial-item__avatar">
+															<div style="width: 80px; height: 80px; background: linear-gradient(135deg, #f093fb, #f5576c); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+																👩‍💼
+															</div>
+														</div>
 														<div class="vlt-testimonial-item__content">
 															<p>I have had the pleasure of working closely with Sagar for over a year at Generate KiwiSaver. In this time, I have consistently been impressed by his dedication, professionalism, and exceptional skills.
 
@@ -861,7 +888,11 @@
 													</div>
 													<!--Testimonial Item-->
 													<div class="vlt-testimonial-item" style="background: #2f00eb url(assets/img/root/cartographer.png) repeat;">
-														<div class="vlt-testimonial-item__avatar"><img src="https://media.licdn.com/dms/image/v2/C4D03AQHEe3n8zAPrTw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1661897018839?e=1749081600&v=beta&t=uZDsN55LKLNLBG7C2QAbLxJXN_HF1azOBK9fhB_hiwo" alt="Chanelle Reed"></div>
+														<div class="vlt-testimonial-item__avatar">
+															<div style="width: 80px; height: 80px; background: linear-gradient(135deg, #4facfe, #00f2fe); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+																👩‍💻
+															</div>
+														</div>
 														<div class="vlt-testimonial-item__content">
 															<p>I highly recommend Sagar, a former colleague I had the pleasure of working with. During our time together, Sagar demonstrated remarkable dedication and a proactive attitude, notably in his self-driven study of Salesforce. Sagar consistently demonstrated professionalism, dedication, and an unwavering commitment to excellence. His strong work ethic, coupled with his exceptional communication skills, made him an invaluable member of the team. As well as his infectiously positive nature, Sagar is a highly skilled professional who would be a tremendous asset to any team. I do not doubt that he will continue to excel in his future endeavors.</p>
 															<div class="vlt-testimonial-item__meta">
@@ -1051,36 +1082,63 @@
 	<script src="assets/vendors/gsap.min.js"></script>
 	<!--Deferred Non-Critical Scripts-->
 	<script>
-	// Optimized script loading with performance monitoring
+	// Optimized script loading with error handling and performance monitoring
 	function loadScript(src, async = true) {
-		const script = document.createElement('script');
-		script.src = src;
-		script.async = async;
-		document.head.appendChild(script);
+		try {
+			const script = document.createElement('script');
+			script.src = src;
+			script.async = async;
+			script.onerror = function() {
+				console.warn('Failed to load script:', src);
+			};
+			document.head.appendChild(script);
+		} catch (error) {
+			console.warn('Error loading script:', src, error);
+		}
 	}
+	
+	// Ensure page content is always visible
+	document.addEventListener('DOMContentLoaded', function() {
+		document.body.style.visibility = 'visible';
+		document.body.style.opacity = '1';
+	});
 	
 	// Load non-critical scripts after page load in correct order
 	window.addEventListener('load', function() {
-		// Load core scripts first, then dependent scripts
-		Promise.all([
-			new Promise(resolve => {
-				const script = document.createElement('script');
-				script.src = 'assets/scripts/vlt-plugins.min.js';
-				script.onload = resolve;
-				document.head.appendChild(script);
-			}),
-			new Promise(resolve => {
-				const script = document.createElement('script');
-				script.src = 'assets/scripts/vlt-helpers.js';
-				script.onload = resolve;
-				document.head.appendChild(script);
-			})
-		]).then(() => {
-			// Load dependent scripts after core scripts
-			loadScript('assets/scripts/performance.js');
-			loadScript('assets/scripts/vlt-controllers.min.js');
-			loadScript('assets/scripts/contact-form.js');
-		});
+		try {
+			// Load core scripts first, then dependent scripts
+			Promise.all([
+				new Promise(resolve => {
+					const script = document.createElement('script');
+					script.src = 'assets/scripts/vlt-plugins.min.js';
+					script.onload = resolve;
+					script.onerror = () => {
+						console.warn('Failed to load vlt-plugins.min.js');
+						resolve(); // Continue even if script fails
+					};
+					document.head.appendChild(script);
+				}),
+				new Promise(resolve => {
+					const script = document.createElement('script');
+					script.src = 'assets/scripts/vlt-helpers.js';
+					script.onload = resolve;
+					script.onerror = () => {
+						console.warn('Failed to load vlt-helpers.js');
+						resolve(); // Continue even if script fails
+					};
+					document.head.appendChild(script);
+				})
+			]).then(() => {
+				// Load dependent scripts after core scripts
+				loadScript('assets/scripts/performance.js');
+				loadScript('assets/scripts/vlt-controllers.min.js');
+				loadScript('assets/scripts/contact-form.js');
+			}).catch(error => {
+				console.warn('Error loading scripts:', error);
+			});
+		} catch (error) {
+			console.warn('Error in script loading:', error);
+		}
 	});
 	
 	// Performance optimization for scroll events
