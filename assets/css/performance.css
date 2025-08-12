@@ -1,0 +1,104 @@
+/* Performance Optimizations */
+
+/* Prefers-reduced-motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* GPU acceleration for animated elements */
+.vlt-particle,
+.vlt-animated-block,
+.vlt-slide-photo__particle {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* CSS containment for isolated components */
+.vlt-services {
+  contain: content;
+}
+
+.vlt-section {
+  contain: layout style;
+}
+
+/* Smooth scrolling with CSS */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scroll margin for anchor navigation */
+.vlt-section {
+  scroll-margin-top: 80px;
+}
+
+/* Optimize animations for 60fps */
+@keyframes fadeInOptimized {
+  from {
+    opacity: 0;
+    transform: translateY(20px) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+.vlt-animated-block.optimized {
+  animation: fadeInOptimized 0.6s ease forwards;
+}
+
+/* Prevent layout shift for images */
+img[loading="lazy"] {
+  content-visibility: auto;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+  }
+}
+
+/* Focus states optimization */
+a:focus,
+button:focus {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
+}
+
+/* Hover optimizations with will-change */
+.vlt-btn:hover,
+.vlt-link:hover {
+  will-change: transform;
+}
+
+.vlt-btn:not(:hover),
+.vlt-link:not(:hover) {
+  will-change: auto;
+}
+
+/* Optimize for mobile tap targets */
+.vlt-btn,
+.vlt-link,
+a {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Prevent content shift on focus */
+.vlt-btn:focus,
+.vlt-link:focus {
+  transform: none;
+}
