@@ -414,10 +414,12 @@
 .vlt-fade-in-left,
 .vlt-fade-in-left--small
 {
-    -webkit-transition: all 700ms 0s cubic-bezier(.46, .03, .52, .96);
-            transition: all 700ms 0s cubic-bezier(.46, .03, .52, .96);
+    -webkit-transition: opacity 280ms cubic-bezier(.46, .03, .52, .96), -webkit-transform 280ms cubic-bezier(.46, .03, .52, .96);
+            transition: opacity 280ms cubic-bezier(.46, .03, .52, .96), transform 280ms cubic-bezier(.46, .03, .52, .96);
+            transition: opacity 280ms cubic-bezier(.46, .03, .52, .96), transform 280ms cubic-bezier(.46, .03, .52, .96), -webkit-transform 280ms cubic-bezier(.46, .03, .52, .96);
     -webkit-transform: translate3d(-100%, 0, 0);
             transform: translate3d(-100%, 0, 0);
+    will-change: transform, opacity;
 
     opacity: 0;
 }
@@ -438,10 +440,12 @@
 .vlt-fade-in-right,
 .vlt-fade-in-right--small
 {
-    -webkit-transition: all 700ms 0s cubic-bezier(.46, .03, .52, .96);
-            transition: all 700ms 0s cubic-bezier(.46, .03, .52, .96);
+    -webkit-transition: opacity 280ms cubic-bezier(.46, .03, .52, .96), -webkit-transform 280ms cubic-bezier(.46, .03, .52, .96);
+            transition: opacity 280ms cubic-bezier(.46, .03, .52, .96), transform 280ms cubic-bezier(.46, .03, .52, .96);
+            transition: opacity 280ms cubic-bezier(.46, .03, .52, .96), transform 280ms cubic-bezier(.46, .03, .52, .96), -webkit-transform 280ms cubic-bezier(.46, .03, .52, .96);
     -webkit-transform: translate3d(100%, 0, 0);
             transform: translate3d(100%, 0, 0);
+    will-change: transform, opacity;
 
     opacity: 0;
 }
@@ -462,10 +466,12 @@
 .vlt-fade-in-top,
 .vlt-fade-in-top--small
 {
-    -webkit-transition: all 700ms 0s cubic-bezier(.46, .03, .52, .96);
-            transition: all 700ms 0s cubic-bezier(.46, .03, .52, .96);
+    -webkit-transition: opacity 280ms cubic-bezier(.46, .03, .52, .96), -webkit-transform 280ms cubic-bezier(.46, .03, .52, .96);
+            transition: opacity 280ms cubic-bezier(.46, .03, .52, .96), transform 280ms cubic-bezier(.46, .03, .52, .96);
+            transition: opacity 280ms cubic-bezier(.46, .03, .52, .96), transform 280ms cubic-bezier(.46, .03, .52, .96), -webkit-transform 280ms cubic-bezier(.46, .03, .52, .96);
     -webkit-transform: translate3d(0, -100%, 0);
             transform: translate3d(0, -100%, 0);
+    will-change: transform, opacity;
 
     opacity: 0;
 }
@@ -486,10 +492,12 @@
 .vlt-fade-in-bottom,
 .vlt-fade-in-bottom--small
 {
-    -webkit-transition: all 700ms 0s cubic-bezier(.46, .03, .52, .96);
-            transition: all 700ms 0s cubic-bezier(.46, .03, .52, .96);
+    -webkit-transition: opacity 280ms cubic-bezier(.46, .03, .52, .96), -webkit-transform 280ms cubic-bezier(.46, .03, .52, .96);
+            transition: opacity 280ms cubic-bezier(.46, .03, .52, .96), transform 280ms cubic-bezier(.46, .03, .52, .96);
+            transition: opacity 280ms cubic-bezier(.46, .03, .52, .96), transform 280ms cubic-bezier(.46, .03, .52, .96), -webkit-transform 280ms cubic-bezier(.46, .03, .52, .96);
     -webkit-transform: translate3d(0, 100%, 0);
             transform: translate3d(0, 100%, 0);
+    will-change: transform, opacity;
 
     opacity: 0;
 }
@@ -2105,15 +2113,21 @@ body .pp-scrollable
 /* 07. Widgets */
 /* WIDGET: ANIMATED BLOCK
 -------------------------------------------- */
+.vlt-animated-block {
+    will-change: transform, opacity;
+}
+
 .vlt-animated-block.animated
 {
     -webkit-animation-name: vlt_animation_block;
             animation-name: vlt_animation_block;
     -webkit-animation-timing-function: cubic-bezier(.46, .03, .52, .96);
             animation-timing-function: cubic-bezier(.46, .03, .52, .96);
-
+    -webkit-animation-duration: 320ms;
+            animation-duration: 320ms;
     -webkit-animation-fill-mode: both;
             animation-fill-mode: both;
+    will-change: transform, opacity;
 }
 
 /* WIDGET: AWARD ITEM

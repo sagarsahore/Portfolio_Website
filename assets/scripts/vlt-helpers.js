@@ -85,7 +85,7 @@ VLTJS.window.on('load resize scroll orientationchange', function() {
 	if (throttleArr.length) {
 		didScroll = true;
 	}
-});
+}, {passive: true});
 
 function hasScrolled() {
 
@@ -122,12 +122,21 @@ function hasScrolled() {
 	lastScrollTop = scrollTop;
 }
 
-setInterval(function() {
+function scheduleScrollCheck() {
 	if (didScroll) {
 		didScroll = false;
-		window.requestAnimationFrame(hasScrolled);
+		window.requestAnimationFrame(function() {
+			hasScrolled();
+			scheduleScrollCheck();
+		});
+	} else {
+		// Re-schedule check after 100ms when not scrolling
+		setTimeout(scheduleScrollCheck, 100);
 	}
-}, 250);
+}
+
+// Start the scroll check loop
+scheduleScrollCheck();
 
 VLTJS.throttleScroll = function(callback) {
 	if (typeof callback === 'function') {
