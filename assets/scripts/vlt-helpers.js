@@ -122,21 +122,12 @@ function hasScrolled() {
 	lastScrollTop = scrollTop;
 }
 
-function scheduleScrollCheck() {
+setInterval(function() {
 	if (didScroll) {
 		didScroll = false;
-		window.requestAnimationFrame(function() {
-			hasScrolled();
-			scheduleScrollCheck();
-		});
-	} else {
-		// Re-schedule check after 100ms when not scrolling
-		setTimeout(scheduleScrollCheck, 100);
+		window.requestAnimationFrame(hasScrolled);
 	}
-}
-
-// Start the scroll check loop
-scheduleScrollCheck();
+}, 250);
 
 VLTJS.throttleScroll = function(callback) {
 	if (typeof callback === 'function') {
