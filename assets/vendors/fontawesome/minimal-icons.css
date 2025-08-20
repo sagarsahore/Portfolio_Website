@@ -1,0 +1,34 @@
+/* Minimal FontAwesome replacement for better performance */
+/* Using Unicode symbols and CSS for essential social icons */
+
+.fab, .fas {
+  font-weight: 900;
+  font-family: "Font Awesome 6 Brands", "Font Awesome 6 Free", "Font Awesome 5 Brands", "Font Awesome 5 Free", sans-serif;
+}
+
+/* Fallback using Unicode symbols */
+.fa-github::before { content: "⚡"; }
+.fa-linkedin-in::before { content: "💼"; }
+.fa-salesforce::before { content: "☁"; }
+.fa-x::before { content: "✖"; }
+.fa-aws::before { content: "☁"; }
+.fa-brain::before { content: "🧠"; }
+.fa-cogs::before { content: "⚙"; }
+
+/* Better approach - use simple text/symbols */
+.social-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  border-radius: 3px;
+  margin: 0 5px;
+  text-decoration: none !important;
+  color: inherit;
+}
+
+.social-icon.github::before { content: "GH"; }
+.social-icon.linkedin::before { content: "IN"; }  
+.social-icon.salesforce::before { content: "SF"; }
+.social-icon.twitter::before { content: "X"; }

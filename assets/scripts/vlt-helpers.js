@@ -85,7 +85,7 @@ VLTJS.window.on('load resize scroll orientationchange', function() {
 	if (throttleArr.length) {
 		didScroll = true;
 	}
-});
+}, {passive: true});
 
 function hasScrolled() {
 
@@ -122,12 +122,23 @@ function hasScrolled() {
 	lastScrollTop = scrollTop;
 }
 
-setInterval(function() {
+// Optimized scroll throttling - more responsive than 250ms interval
+// Uses requestAnimationFrame for smooth performance when scrolling
+var scrollCheckActive = false;
+
+function checkScrollState() {
 	if (didScroll) {
 		didScroll = false;
-		window.requestAnimationFrame(hasScrolled);
+		scrollCheckActive = true;
+		window.requestAnimationFrame(function() {
+			hasScrolled();
+			scrollCheckActive = false;
+		});
 	}
-}, 250);
+}
+
+// Check for scroll more frequently for better responsiveness
+setInterval(checkScrollState, 16); // ~60fps for smooth animations
 
 VLTJS.throttleScroll = function(callback) {
 	if (typeof callback === 'function') {

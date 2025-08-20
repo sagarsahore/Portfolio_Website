@@ -69,7 +69,8 @@
 
 .vlt-fade-in-left {
 	transform: translate3d(-100%, 0, 0);
-	transition: all 700ms 0s $transition;
+	transition: opacity 280ms $transition, transform 280ms $transition;
+	will-change: transform, opacity;
 	opacity: 0;
 
 	&--small {
@@ -86,7 +87,8 @@
 
 .vlt-fade-in-right {
 	transform: translate3d(100%, 0, 0);
-	transition: all 700ms 0s $transition;
+	transition: opacity 280ms $transition, transform 280ms $transition;
+	will-change: transform, opacity;
 	opacity: 0;
 
 	&--small {
@@ -103,7 +105,8 @@
 
 .vlt-fade-in-top {
 	transform: translate3d(0, -100%, 0);
-	transition: all 700ms 0s $transition;
+	transition: opacity 280ms $transition, transform 280ms $transition;
+	will-change: transform, opacity;
 	opacity: 0;
 
 	&--small {
@@ -119,7 +122,8 @@
 
 .vlt-fade-in-bottom {
 	transform: translate3d(0, 100%, 0);
-	transition: all 700ms 0s $transition;
+	transition: opacity 280ms $transition, transform 280ms $transition;
+	will-change: transform, opacity;
 	opacity: 0;
 
 	&--small {

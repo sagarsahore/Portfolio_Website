@@ -2,10 +2,12 @@
 -------------------------------------------- */
 
 .vlt-animated-block {
+	will-change: transform, opacity;
 
 	&.animated {
 		animation-name: vlt_animation_block;
 		animation-timing-function: $transition;
+		animation-duration: 320ms; // Optimized for mobile
 		animation-fill-mode: both;
 	}
 

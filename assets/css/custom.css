@@ -87,3 +87,45 @@ html, body {
 		align-items: flex-start !important;
 	}
 }
+
+/* Reduced motion support for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    /* Maintain opacity changes but disable transforms */
+    .vlt-fade-in-left,
+    .vlt-fade-in-right,
+    .vlt-fade-in-top,
+    .vlt-fade-in-bottom,
+    .vlt-fade-in-left--small,
+    .vlt-fade-in-right--small,
+    .vlt-fade-in-top--small,
+    .vlt-fade-in-bottom--small {
+        transform: none !important;
+    }
+}
+
+/* Mobile-specific performance optimizations */
+@media (max-width: 768px) {
+    /* Shorter durations for better mobile performance */
+    .vlt-fade-in-left,
+    .vlt-fade-in-right,
+    .vlt-fade-in-top,
+    .vlt-fade-in-bottom,
+    .vlt-fade-in-left--small,
+    .vlt-fade-in-right--small,
+    .vlt-fade-in-top--small,
+    .vlt-fade-in-bottom--small {
+        transition-duration: 240ms !important;
+    }
+    
+    /* Optimize scroll performance */
+    html, body {
+        -webkit-overflow-scrolling: touch;
+    }
+}
