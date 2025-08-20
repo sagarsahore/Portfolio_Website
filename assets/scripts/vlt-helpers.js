@@ -85,7 +85,7 @@ VLTJS.window.on('load resize scroll orientationchange', function() {
 	if (throttleArr.length) {
 		didScroll = true;
 	}
-}, {passive: true});
+});
 
 function hasScrolled() {
 
