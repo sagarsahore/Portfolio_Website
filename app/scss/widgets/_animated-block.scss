@@ -7,6 +7,33 @@
 		animation-name: vlt_animation_block;
 		animation-timing-function: $transition;
 		animation-fill-mode: both;
+		@include mobile-optimized-animation;
+		@include respect-reduced-motion;
+	}
+	
+	// Mobile optimizations
+	.vlt-is-mobile & {
+		@include hardware-acceleration;
+		
+		&.animated {
+			animation-duration: 0.5s;
+		}
+	}
+	
+	// Low performance optimizations
+	.vlt-is-low-performance & {
+		&.animated {
+			animation: none;
+			transition: opacity 0.3s ease;
+			opacity: 1;
+		}
+	}
+	
+	// No animation fallback
+	&.vlt-no-animation {
+		animation: none !important;
+		opacity: 1 !important;
+		transform: none !important;
 	}
 
 }

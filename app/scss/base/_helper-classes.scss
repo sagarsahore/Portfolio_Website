@@ -71,6 +71,8 @@
 	transform: translate3d(-100%, 0, 0);
 	transition: all 700ms 0s $transition;
 	opacity: 0;
+	@include mobile-optimized-animation(all, 0.5s, $transition);
+	@include respect-reduced-motion;
 
 	&--small {
 		@extend .vlt-fade-in-left;
@@ -88,6 +90,8 @@
 	transform: translate3d(100%, 0, 0);
 	transition: all 700ms 0s $transition;
 	opacity: 0;
+	@include mobile-optimized-animation(all, 0.5s, $transition);
+	@include respect-reduced-motion;
 
 	&--small {
 		@extend .vlt-fade-in-right;
@@ -105,6 +109,8 @@
 	transform: translate3d(0, -100%, 0);
 	transition: all 700ms 0s $transition;
 	opacity: 0;
+	@include mobile-optimized-animation(all, 0.5s, $transition);
+	@include respect-reduced-motion;
 
 	&--small {
 		@extend .vlt-fade-in-top;
@@ -121,6 +127,8 @@
 	transform: translate3d(0, 100%, 0);
 	transition: all 700ms 0s $transition;
 	opacity: 0;
+	@include mobile-optimized-animation(all, 0.5s, $transition);
+	@include respect-reduced-motion;
 
 	&--small {
 		@extend .vlt-fade-in-bottom;
@@ -148,4 +156,83 @@
 	left: 50%;
 	transform: translate3d(-50%, -50%, 0);
 	z-index: 1;
+}
+
+/* Mobile Performance Utility Classes
+-------------------------------------------- */
+
+// No animation class for reduced motion
+.vlt-no-animation,
+.vlt-reduce-animations .vlt-animated-block,
+.vlt-reduce-animations .vlt-fade-in-left,
+.vlt-reduce-animations .vlt-fade-in-right,
+.vlt-reduce-animations .vlt-fade-in-top,
+.vlt-reduce-animations .vlt-fade-in-bottom {
+	animation: none !important;
+	transition: none !important;
+	transform: none !important;
+	opacity: 1 !important;
+}
+
+// Hardware acceleration for mobile
+.vlt-is-mobile .vlt-animated-block,
+.vlt-is-mobile .vlt-fade-in-left,
+.vlt-is-mobile .vlt-fade-in-right,
+.vlt-is-mobile .vlt-fade-in-top,
+.vlt-is-mobile .vlt-fade-in-bottom {
+	@include hardware-acceleration;
+}
+
+// Performance-based optimizations
+.vlt-performance-low {
+	.vlt-animated-block,
+	.vlt-fade-in-left,
+	.vlt-fade-in-right,
+	.vlt-fade-in-top,
+	.vlt-fade-in-bottom {
+		transition-duration: 0.2s !important;
+		animation-duration: 0.2s !important;
+	}
+}
+
+// Simplified animations for low performance
+.vlt-is-low-performance {
+	.vlt-animated-block {
+		animation: none !important;
+		transition: opacity 0.3s ease !important;
+	}
+	
+	.vlt-fade-in-left,
+	.vlt-fade-in-right,
+	.vlt-fade-in-top,
+	.vlt-fade-in-bottom {
+		transform: none !important;
+		transition: opacity 0.3s ease !important;
+	}
+}
+
+// Touch-specific optimizations
+.vlt-is-touch {
+	* {
+		-webkit-tap-highlight-color: transparent;
+		-webkit-touch-callout: none;
+	}
+}
+
+// Preloader optimizations
+.vlt-is-mobile .animsition-loading-2 {
+	.spinner {
+		transform: scale(0.8);
+	}
+}
+
+.vlt-reduce-animations .animsition-loading-2 {
+	.spinner {
+		animation: none;
+	}
+	
+	.double-bounce-one,
+	.double-bounce-two {
+		animation: none;
+	}
 }

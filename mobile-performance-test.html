@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Animation Performance Test</title>
+    <style>
+        /* Basic test styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        
+        .test-section {
+            margin: 50px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .test-element {
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            margin: 20px 0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .performance-info {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 1000;
+        }
+        
+        .performance-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .performance-good { background: #4CAF50; }
+        .performance-poor { background: #f44336; }
+        .performance-fair { background: #ff9800; }
+    </style>
+</head>
+<body>
+    <div class="performance-info" id="performanceInfo">
+        <div><span class="performance-indicator performance-good"></span>Mobile Detection: <span id="mobileStatus">Loading...</span></div>
+        <div><span class="performance-indicator performance-fair"></span>Performance Level: <span id="performanceLevel">Loading...</span></div>
+        <div><span class="performance-indicator performance-good"></span>Intersection Observer: <span id="ioStatus">Loading...</span></div>
+        <div><span class="performance-indicator performance-good"></span>Reduced Motion: <span id="motionStatus">Loading...</span></div>
+        <div><span class="performance-indicator performance-fair"></span>Frame Rate: <span id="frameRate">--</span> FPS</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Mobile Animation Performance Test</h2>
+        <p>This page tests the mobile animation performance improvements. Scroll down to see animations trigger with intersection observer.</p>
+        
+        <div class="test-element vlt-fade-in-left">
+            Fade In Left Animation
+        </div>
+        
+        <div class="test-element vlt-fade-in-right">
+            Fade In Right Animation
+        </div>
+        
+        <div class="test-element vlt-fade-in-top">
+            Fade In Top Animation
+        </div>
+        
+        <div class="test-element vlt-fade-in-bottom">
+            Fade In Bottom Animation
+        </div>
+        
+        <div class="test-element vlt-animated-block">
+            Animated Block
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>Performance Features Tested:</h3>
+        <ul>
+            <li>Enhanced mobile detection with performance hints</li>
+            <li>Hardware acceleration for mobile devices</li>
+            <li>Intersection Observer for lazy loading animations</li>
+            <li>Reduced motion preference support</li>
+            <li>Performance monitoring and frame rate tracking</li>
+            <li>Low-performance device optimizations</li>
+        </ul>
+    </div>
+
+    <!-- Include jQuery and the helper scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/assets/scripts/vlt-helpers.js"></script>
+    
+    <script>
+        // Simple test script to display performance information
+        function updatePerformanceInfo() {
+            if (typeof VLTJS !== 'undefined') {
+                // Mobile detection
+                document.getElementById('mobileStatus').textContent = 
+                    VLTJS.isMobile.any() ? 'Mobile Device' : 'Desktop';
+                
+                // Performance level
+                let perfLevel = 'Good';
+                if (VLTJS.isMobile.isLowPerformance && VLTJS.isMobile.isLowPerformance()) {
+                    perfLevel = 'Low Performance';
+                } else if (VLTJS.isMobile.shouldReduceAnimations && VLTJS.isMobile.shouldReduceAnimations()) {
+                    perfLevel = 'Reduced Motion';
+                }
+                document.getElementById('performanceLevel').textContent = perfLevel;
+                
+                // Intersection Observer
+                document.getElementById('ioStatus').textContent = 
+                    window.IntersectionObserver ? 'Supported' : 'Fallback';
+                
+                // Reduced Motion
+                document.getElementById('motionStatus').textContent = 
+                    window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'Enabled' : 'Disabled';
+            }
+        }
+        
+        // Simple FPS counter
+        let frameCount = 0;
+        let lastTime = performance.now();
+        
+        function updateFPS() {
+            frameCount++;
+            const currentTime = performance.now();
+            
+            if (currentTime - lastTime >= 1000) {
+                document.getElementById('frameRate').textContent = frameCount;
+                frameCount = 0;
+                lastTime = currentTime;
+            }
+            
+            requestAnimationFrame(updateFPS);
+        }
+        
+        // Initialize
+        setTimeout(updatePerformanceInfo, 100);
+        updateFPS();
+    </script>
+</body>
+</html>
