@@ -78,6 +78,15 @@
 	// Initialize when DOM is ready
 	$(document).ready(function() {
 		VLTJS.animatedBlock.init();
+		
+		// Add instant visual feedback for animations
+		$('.vlt-animated-block').each(function() {
+			var $this = $(this);
+			// Add a subtle pre-animation state to prevent blank content
+			if (!$this.hasClass('animated')) {
+				$this.addClass('vlt-pre-animated');
+			}
+		});
 	});
 
 })(jQuery);

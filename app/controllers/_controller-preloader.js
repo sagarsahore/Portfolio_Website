@@ -28,9 +28,33 @@
 	
 	el.animsition(preloaderSettings);
 	
+	el.on('animsition.inStart', function () {
+		// Initialize animations early during preloader
+		if (typeof VLTJS.intersectionObserver !== 'undefined') {
+			VLTJS.intersectionObserver.init();
+		}
+		if (typeof VLTJS.performance !== 'undefined') {
+			VLTJS.performance.init();
+		}
+	});
+
 	el.on('animsition.inEnd', function () {
 		VLTJS.window.trigger('vlt.preloader_done');
 		VLTJS.html.addClass('vlt-is-page-loaded');
+		
+		// Trigger immediate animation scan for instant responsiveness
+		setTimeout(function() {
+			// Force check for visible animated elements that should already be animating
+			$('.vlt-animated-block:not(.animated)').each(function() {
+				var $this = $(this);
+				var rect = this.getBoundingClientRect();
+				var isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+				
+				if (isVisible) {
+					$this.removeClass('vlt-pre-animated').addClass('animated');
+				}
+			});
+		}, 50); // Small delay to ensure DOM is fully settled
 		
 		// Clean up performance monitoring for preloader
 		if (VLTJS.performance && VLTJS.performance.enableHardwareAcceleration) {

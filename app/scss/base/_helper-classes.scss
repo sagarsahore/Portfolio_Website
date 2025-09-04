@@ -161,6 +161,19 @@
 /* Mobile Performance Utility Classes
 -------------------------------------------- */
 
+// Pre-animation state for instant visual feedback
+.vlt-pre-animated {
+	opacity: 0.1 !important;
+	transform: translate3d(0, 20px, 0) !important;
+	transition: all 0.3s ease !important;
+}
+
+// Ensure smooth transition from pre-animated to animated
+.vlt-animated-block.animated {
+	opacity: 1 !important;
+	transform: translate3d(0, 0, 0) !important;
+}
+
 // No animation class for reduced motion
 .vlt-no-animation,
 .vlt-reduce-animations .vlt-animated-block,
@@ -172,6 +185,13 @@
 	transition: none !important;
 	transform: none !important;
 	opacity: 1 !important;
+}
+
+// Disable pre-animation for reduced motion users
+.vlt-reduce-animations .vlt-pre-animated {
+	opacity: 1 !important;
+	transform: none !important;
+	transition: none !important;
 }
 
 // Hardware acceleration for mobile

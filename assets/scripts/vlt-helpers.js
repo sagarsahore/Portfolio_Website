@@ -335,16 +335,10 @@ if (typeof cssVars !== 'undefined') {
 }
 
 /**
- * Initialize mobile performance improvements
+ * Early initialization for instant animation setup
  */
-jQuery(document).ready(function($) {
-	// Initialize performance monitoring
-	VLTJS.performance.init();
-	
-	// Initialize intersection observer for lazy loading
-	VLTJS.intersectionObserver.init();
-	
-	// Add mobile-specific classes
+VLTJS.earlyInit = function() {
+	// Add mobile-specific classes immediately
 	if (typeof VLTJS !== 'undefined' && VLTJS.isMobile && VLTJS.isMobile.any && VLTJS.isMobile.any()) {
 		VLTJS.html.addClass('vlt-is-mobile');
 		
@@ -360,4 +354,40 @@ jQuery(document).ready(function($) {
 			VLTJS.html.addClass('vlt-reduce-animations');
 		}
 	}
+	
+	// Pre-apply hardware acceleration to avoid layout shifts
+	if (typeof document !== 'undefined') {
+		var style = document.createElement('style');
+		style.textContent = `
+			.vlt-animated-block,
+			.vlt-fade-in-left,
+			.vlt-fade-in-right,
+			.vlt-fade-in-top,
+			.vlt-fade-in-bottom {
+				transform: translateZ(0);
+				will-change: transform, opacity;
+				backface-visibility: hidden;
+			}
+		`;
+		document.head.appendChild(style);
+	}
+};
+
+// Initialize immediately, don't wait for DOM ready
+if (typeof window !== 'undefined') {
+	VLTJS.earlyInit();
+}
+
+/**
+ * Initialize mobile performance improvements
+ */
+jQuery(document).ready(function($) {
+	// Initialize performance monitoring
+	VLTJS.performance.init();
+	
+	// Initialize intersection observer for lazy loading
+	VLTJS.intersectionObserver.init();
+	
+	// Mark animations as ready to prevent delays
+	VLTJS.html.addClass('vlt-animations-ready');
 });
