@@ -68,78 +68,99 @@
 }
 
 .vlt-fade-in-left {
-	transform: translate3d(-100%, 0, 0);
-	transition: all 700ms 0s $transition;
+	transform: translate3d(-30px, 0, 0); // Reduced from -100% for mobile
+	transition: all 300ms 0s cubic-bezier(0.25, 0.46, 0.45, 0.94); // Mobile-optimized
 	opacity: 0;
-	@include mobile-optimized-animation(all, 0.5s, $transition);
-	@include respect-reduced-motion;
+	@include mobile-optimized-animation-v2(all, 0.3s);
+	@include hardware-acceleration-v2;
 
 	&--small {
 		@extend .vlt-fade-in-left;
-		transform: translate3d(-100px, 0, 0);
+		transform: translate3d(-20px, 0, 0); // Reduced for mobile
 	}
 
 	.active & {
 		transform: translate3d(0, 0, 0);
 		opacity: 1;
 	}
-
+	
+	// Mobile optimizations
+	@media (max-width: 767px) {
+		transition: all 250ms 0s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		transform: translate3d(-20px, 0, 0);
+	}
 }
 
 .vlt-fade-in-right {
-	transform: translate3d(100%, 0, 0);
-	transition: all 700ms 0s $transition;
+	transform: translate3d(30px, 0, 0); // Reduced from 100% for mobile
+	transition: all 300ms 0s cubic-bezier(0.25, 0.46, 0.45, 0.94); // Mobile-optimized
 	opacity: 0;
-	@include mobile-optimized-animation(all, 0.5s, $transition);
-	@include respect-reduced-motion;
+	@include mobile-optimized-animation-v2(all, 0.3s);
+	@include hardware-acceleration-v2;
 
 	&--small {
 		@extend .vlt-fade-in-right;
-		transform: translate3d(100px, 0, 0);
+		transform: translate3d(20px, 0, 0); // Reduced for mobile
 	}
 
 	.active & {
 		transform: translate3d(0, 0, 0);
 		opacity: 1;
 	}
-
+	
+	// Mobile optimizations
+	@media (max-width: 767px) {
+		transition: all 250ms 0s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		transform: translate3d(20px, 0, 0);
+	}
 }
 
 .vlt-fade-in-top {
-	transform: translate3d(0, -100%, 0);
-	transition: all 700ms 0s $transition;
+	transform: translate3d(0, -30px, 0); // Reduced from -100% for mobile
+	transition: all 300ms 0s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 	opacity: 0;
-	@include mobile-optimized-animation(all, 0.5s, $transition);
-	@include respect-reduced-motion;
+	@include mobile-optimized-animation-v2(all, 0.3s);
+	@include hardware-acceleration-v2;
 
 	&--small {
 		@extend .vlt-fade-in-top;
-		transform: translate3d(0, -100px, 0);
+		transform: translate3d(0, -20px, 0);
 	}
 
 	.active & {
 		transform: translate3d(0, 0, 0);
 		opacity: 1;
+	}
+	
+	// Mobile optimizations
+	@media (max-width: 767px) {
+		transition: all 250ms 0s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		transform: translate3d(0, -20px, 0);
 	}
 }
 
 .vlt-fade-in-bottom {
-	transform: translate3d(0, 100%, 0);
-	transition: all 700ms 0s $transition;
+	transform: translate3d(0, 30px, 0); // Reduced from 100% for mobile
+	transition: all 300ms 0s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 	opacity: 0;
-	@include mobile-optimized-animation(all, 0.5s, $transition);
-	@include respect-reduced-motion;
+	@include mobile-optimized-animation-v2(all, 0.3s);
+	@include hardware-acceleration-v2;
 
 	&--small {
 		@extend .vlt-fade-in-bottom;
-		transform: translate3d(0, 100px, 0);
+		transform: translate3d(0, 20px, 0);
 	}
 
 	.active & {
 		transform: translate3d(0, 0, 0);
 		opacity: 1;
 	}
-
+	
+	// Mobile optimizations
+	@media (max-width: 767px) {
+		transition: all 250ms 0s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		transform: translate3d(0, 20px, 0);
+	}
 }
 
 .message.success {
@@ -158,14 +179,25 @@
 	z-index: 1;
 }
 
-/* Mobile Performance Utility Classes
+/* Mobile Performance Utility Classes - Engine 2.0
 -------------------------------------------- */
 
-// Pre-animation state for instant visual feedback
+// Import animation engine 2.0 styles if not already imported
+@import '../abstracts/animation-engine-v2';
+
+// Enhanced pre-animation state for instant visual feedback
 .vlt-pre-animated {
 	opacity: 0.1 !important;
-	transform: translate3d(0, 20px, 0) !important;
-	transition: all 0.3s ease !important;
+	transform: translate3d(0, 10px, 0) !important; // Reduced for mobile
+	@include mobile-optimized-animation-v2(all, 0.3s) !important;
+	@include hardware-acceleration-v2;
+}
+
+// Instant show for critical above-fold content
+.vlt-instant-show {
+	opacity: 1 !important;
+	transform: translate3d(0, 0, 0) !important;
+	@include mobile-optimized-animation-v2(all, 0.2s) !important;
 }
 
 // Ensure smooth transition from pre-animated to animated
@@ -174,7 +206,7 @@
 	transform: translate3d(0, 0, 0) !important;
 }
 
-// No animation class for reduced motion
+// Enhanced no animation class for accessibility
 .vlt-no-animation,
 .vlt-reduce-animations .vlt-animated-block,
 .vlt-reduce-animations .vlt-fade-in-left,
@@ -183,15 +215,166 @@
 .vlt-reduce-animations .vlt-fade-in-bottom {
 	animation: none !important;
 	transition: none !important;
-	transform: none !important;
+	transform: translate3d(0, 0, 0) !important; // Keep minimal transform for layout
 	opacity: 1 !important;
 }
 
 // Disable pre-animation for reduced motion users
 .vlt-reduce-animations .vlt-pre-animated {
 	opacity: 1 !important;
-	transform: none !important;
+	transform: translate3d(0, 0, 0) !important;
 	transition: none !important;
+}
+
+// Mobile device optimizations
+.vlt-mobile-device {
+	.vlt-animated-block,
+	.vlt-fade-in-left,
+	.vlt-fade-in-right,
+	.vlt-fade-in-top,
+	.vlt-fade-in-bottom {
+		@include hardware-acceleration-v2;
+		
+		// Faster animations for mobile
+		animation-duration: $mobile-animation-duration !important;
+		transition-duration: $mobile-animation-duration !important;
+		animation-timing-function: $mobile-ease !important;
+		transition-timing-function: $mobile-ease !important;
+	}
+	
+	// Touch feedback
+	.vlt-touch-feedback:active {
+		transform: scale(0.98) translateZ(0) !important;
+		transition: transform 0.1s ease !important;
+	}
+	
+	// Optimized stagger delays
+	.vlt-animated-block {
+		@for $i from 1 through 10 {
+			&:nth-child(#{$i}) {
+				animation-delay: #{($i - 1) * $mobile-stagger-delay} !important;
+			}
+		}
+	}
+}
+
+// Low performance device optimizations
+.vlt-low-performance,
+.vlt-quality-low {
+	.vlt-animated-block,
+	.vlt-fade-in-left,
+	.vlt-fade-in-right,
+	.vlt-fade-in-top,
+	.vlt-fade-in-bottom {
+		// Simple fade only for low performance
+		animation: vlt_simple_fade 0.2s ease !important;
+		transition: opacity 0.2s ease !important;
+		
+		&.animated {
+			opacity: 1 !important;
+		}
+	}
+	
+	// Remove complex transforms
+	* {
+		transform: translateZ(0) !important; // Keep minimal for layout
+	}
+}
+
+// Performance quality indicators
+.vlt-quality-high {
+	.vlt-animated-block {
+		// Full animation complexity
+		&.animated {
+			@media (max-width: 767px) {
+				animation: vlt_mobile_fade_up 0.3s $mobile-ease;
+			}
+			@media (min-width: 768px) {
+				animation: vlt_desktop_slide_up 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+			}
+		}
+	}
+}
+
+.vlt-quality-medium {
+	.vlt-animated-block {
+		// Medium complexity animations
+		&.animated {
+			animation: vlt_mobile_fade_up 0.2s ease !important;
+		}
+	}
+}
+
+.vlt-quality-low {
+	.vlt-animated-block {
+		// Simple animations only
+		&.animated {
+			animation: vlt_simple_fade 0.15s ease !important;
+		}
+	}
+}
+
+// Network-aware optimizations
+.vlt-slow-network {
+	.vlt-animated-block {
+		// Minimal animations for slow connections
+		animation-duration: 0.2s !important;
+		transition-duration: 0.2s !important;
+	}
+}
+
+// Battery saving mode
+.vlt-low-power-mode {
+	.vlt-animated-block,
+	.vlt-fade-in-left,
+	.vlt-fade-in-right,
+	.vlt-fade-in-top,
+	.vlt-fade-in-bottom {
+		animation: none !important;
+		transition: none !important;
+		opacity: 1 !important;
+		transform: translate3d(0, 0, 0) !important;
+	}
+}
+
+// Enhanced reduced motion support
+@media (prefers-reduced-motion: reduce) {
+	.vlt-animated-block,
+	.vlt-fade-in-left,
+	.vlt-fade-in-right,
+	.vlt-fade-in-top,
+	.vlt-fade-in-bottom {
+		animation: vlt_simple_fade 0.2s ease !important;
+		transition: opacity 0.2s ease !important;
+		transform: translate3d(0, 0, 0) !important;
+		
+		&.vlt-pre-animated {
+			opacity: 0.3 !important;
+		}
+		
+		&.animated {
+			opacity: 1 !important;
+		}
+	}
+}
+
+// Section transition optimizations
+.vlt-section {
+	@include hardware-acceleration-v2;
+	
+	&.transitioning {
+		@include mobile-optimized-animation-v2(transform opacity, $mobile-animation-duration);
+		
+		// Mobile-specific section transitions
+		@media (max-width: 767px) {
+			transition: transform 0.3s $section-transition-ease, opacity 0.3s ease;
+		}
+	}
+	
+	&.active {
+		transform: translateY(0) translateZ(0);
+		opacity: 1;
+	}
 }
 
 // Hardware acceleration for mobile
