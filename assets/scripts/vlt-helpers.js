@@ -14,8 +14,8 @@ var VLTJS = {
 	body: jQuery('body'),
 	is_safari: /^((?!chrome|android).)*safari/i.test(navigator.userAgent),
 	is_firefox: navigator.userAgent.toLowerCase().indexOf('firefox') > -1,
-	is_chrome: /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor),
-	is_ie10: navigator.appVersion.indexOf('MSIE 10') !== -1,
+	is_chrome: /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor || ''),
+	is_ie10: (navigator.appVersion || '').indexOf('MSIE 10') !== -1,
 	transitionEnd: 'transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd',
 	animIteration: 'animationiteration webkitAnimationIteration oAnimationIteration MSAnimationIteration',
 	animationEnd: 'animationend webkitAnimationEnd'
@@ -73,7 +73,8 @@ VLTJS.performance = {
 	startTime: performance.now(),
 	
 	init: function () {
-		if (VLTJS.isMobile.any()) {
+		// Only monitor performance on mobile devices
+		if (typeof VLTJS !== 'undefined' && VLTJS.isMobile && VLTJS.isMobile.any && VLTJS.isMobile.any()) {
 			this.monitorPerformance();
 		}
 	},
@@ -97,10 +98,20 @@ VLTJS.performance = {
 			}
 			
 			lastTime = currentTime;
-			requestAnimationFrame(checkFrame);
+			
+			// Use requestAnimationFrame if available, fallback to setTimeout
+			if (typeof requestAnimationFrame !== 'undefined') {
+				requestAnimationFrame(checkFrame);
+			} else {
+				setTimeout(checkFrame, 16); // ~60fps fallback
+			}
 		}
 		
-		requestAnimationFrame(checkFrame);
+		if (typeof requestAnimationFrame !== 'undefined') {
+			requestAnimationFrame(checkFrame);
+		} else {
+			setTimeout(checkFrame, 16);
+		}
 	},
 	
 	enableHardwareAcceleration: function (element) {
@@ -196,7 +207,11 @@ function hasScrolled() {
 setInterval(function() {
 	if (didScroll) {
 		didScroll = false;
-		window.requestAnimationFrame(hasScrolled);
+		if (typeof requestAnimationFrame !== 'undefined') {
+			requestAnimationFrame(hasScrolled);
+		} else {
+			hasScrolled();
+		}
 	}
 }, 250);
 
@@ -214,23 +229,32 @@ VLTJS.intersectionObserver = {
 	animatedElements: [],
 	
 	init: function () {
-		if (!window.IntersectionObserver) {
+		if (typeof window !== 'undefined' && !window.IntersectionObserver) {
 			// Fallback for browsers without intersection observer support
 			this.fallbackToScroll();
 			return;
 		}
 		
+		if (typeof window === 'undefined') {
+			// Server-side or test environment, skip initialization
+			return;
+		}
+		
 		var options = {
 			root: null,
-			rootMargin: VLTJS.isMobile.any() ? '10px' : '50px', // Smaller margin for mobile
-			threshold: VLTJS.isMobile.any() ? 0.1 : 0.3 // Lower threshold for mobile
+			rootMargin: (typeof VLTJS !== 'undefined' && VLTJS.isMobile && VLTJS.isMobile.any && VLTJS.isMobile.any()) ? '10px' : '50px', // Smaller margin for mobile
+			threshold: (typeof VLTJS !== 'undefined' && VLTJS.isMobile && VLTJS.isMobile.any && VLTJS.isMobile.any()) ? 0.1 : 0.3 // Lower threshold for mobile
 		};
 		
-		this.observer = new IntersectionObserver(this.handleIntersection.bind(this), options);
+		this.observer = new window.IntersectionObserver(this.handleIntersection.bind(this), options);
 		this.observeElements();
 	},
 	
 	observeElements: function () {
+		if (typeof document === 'undefined') {
+			return;
+		}
+		
 		var elements = document.querySelectorAll('.vlt-animated-block, .vlt-fade-in-left, .vlt-fade-in-right, .vlt-fade-in-top, .vlt-fade-in-bottom');
 		
 		for (var i = 0; i < elements.length; i++) {
@@ -239,8 +263,8 @@ VLTJS.intersectionObserver = {
 			this.animatedElements.push(element);
 			
 			// Add hardware acceleration for mobile
-			if (VLTJS.isMobile.any()) {
-				VLTJS.performance.enableHardwareAcceleration($(element));
+			if (typeof VLTJS !== 'undefined' && VLTJS.isMobile && VLTJS.isMobile.any && VLTJS.isMobile.any()) {
+				VLTJS.performance.enableHardwareAcceleration(jQuery(element));
 			}
 		}
 	},
@@ -278,7 +302,7 @@ VLTJS.intersectionObserver = {
 				var $this = $(this);
 				var elementTop = $this.offset().top;
 				var elementHeight = $this.outerHeight();
-				var triggerPoint = VLTJS.isMobile.any() ? windowHeight * 0.9 : windowHeight * 0.7;
+				var triggerPoint = (typeof VLTJS !== 'undefined' && VLTJS.isMobile && VLTJS.isMobile.any && VLTJS.isMobile.any()) ? windowHeight * 0.9 : windowHeight * 0.7;
 				
 				if (elementTop < scrollTop + triggerPoint && elementTop + elementHeight > scrollTop) {
 					if (VLTJS.isMobile.shouldReduceAnimations()) {
@@ -292,7 +316,7 @@ VLTJS.intersectionObserver = {
 					}
 					
 					// Add hardware acceleration for mobile
-					if (VLTJS.isMobile.any()) {
+					if (typeof VLTJS !== 'undefined' && VLTJS.isMobile && VLTJS.isMobile.any && VLTJS.isMobile.any()) {
 						VLTJS.performance.enableHardwareAcceleration($this);
 					}
 				}
@@ -321,18 +345,18 @@ jQuery(document).ready(function($) {
 	VLTJS.intersectionObserver.init();
 	
 	// Add mobile-specific classes
-	if (VLTJS.isMobile.any()) {
+	if (typeof VLTJS !== 'undefined' && VLTJS.isMobile && VLTJS.isMobile.any && VLTJS.isMobile.any()) {
 		VLTJS.html.addClass('vlt-is-mobile');
 		
-		if (VLTJS.isMobile.isTouch()) {
+		if (VLTJS.isMobile.isTouch && VLTJS.isMobile.isTouch()) {
 			VLTJS.html.addClass('vlt-is-touch');
 		}
 		
-		if (VLTJS.isMobile.isLowPerformance()) {
+		if (VLTJS.isMobile.isLowPerformance && VLTJS.isMobile.isLowPerformance()) {
 			VLTJS.html.addClass('vlt-is-low-performance');
 		}
 		
-		if (VLTJS.isMobile.shouldReduceAnimations()) {
+		if (VLTJS.isMobile.shouldReduceAnimations && VLTJS.isMobile.shouldReduceAnimations()) {
 			VLTJS.html.addClass('vlt-reduce-animations');
 		}
 	}
