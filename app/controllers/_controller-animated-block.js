@@ -92,8 +92,10 @@
 		initIntersectionObserver: function (el) {
 			var options = {
 				root: null,
-				rootMargin: VLTJS.isMobile.any() ? '10px' : '50px',
-				threshold: VLTJS.isMobile.any() ? 0.1 : 0.3
+				// Increased margins for more stable content visibility
+				rootMargin: VLTJS.isMobile.any() ? '20px' : '80px',
+				// Increased thresholds for better content visibility before animation
+				threshold: VLTJS.isMobile.any() ? 0.4 : 0.5
 			};
 			
 			var observer = new IntersectionObserver(function (entries) {

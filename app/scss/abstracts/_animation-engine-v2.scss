@@ -151,6 +151,37 @@ $element-ease: cubic-bezier(0.4, 0, 0.2, 1); // Material design
     }
 }
 
+// Simple stable fade animations for content visibility
+@keyframes vlt_stable_fade_in {
+    from { 
+        opacity: 0; 
+    }
+    to { 
+        opacity: 1; 
+    }
+}
+
+@keyframes vlt_stable_fade_out {
+    from { 
+        opacity: 1; 
+    }
+    to { 
+        opacity: 0; 
+    }
+}
+
+// Subtle fade in with minimal movement for stability
+@keyframes vlt_subtle_fade_up {
+    from {
+        transform: translateY(10px) translateZ(0);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) translateZ(0);
+        opacity: 1;
+    }
+}
+
 // Simple animations for low performance
 @keyframes vlt_simple_fade {
     from { opacity: 0; }
@@ -194,16 +225,23 @@ $element-ease: cubic-bezier(0.4, 0, 0.2, 1); // Material design
     }
 }
 
-// Base animated block styles
+// Base animated block styles with stable fade focus
 .vlt-animated-block {
     @include hardware-acceleration-v2;
     opacity: 0;
-    transform: translateY(20px) translateZ(0);
+    transform: translateY(0) translateZ(0); // No initial transform for stability
     
-    // Pre-animated state for instant feedback
+    // Stable pre-animated state that maintains content readability
+    &.vlt-stable-pre-animated {
+        opacity: 0.3; // More visible than before for better content readability
+        transform: translateY(0) translateZ(0);
+        @include mobile-optimized-animation-v2(opacity, 0.3s);
+    }
+    
+    // Pre-animated state for instant feedback (legacy support)
     &.vlt-pre-animated {
-        opacity: 0.1;
-        transform: translateY(10px) translateZ(0);
+        opacity: 0.2;
+        transform: translateY(5px) translateZ(0); // Reduced movement
         @include mobile-optimized-animation-v2(all, 0.3s);
     }
     
@@ -213,21 +251,41 @@ $element-ease: cubic-bezier(0.4, 0, 0.2, 1); // Material design
         transform: translateY(0) translateZ(0);
     }
     
-    // Animated state
-    &.animated {
+    // Stable fade animation - primary animation method
+    &.vlt-stable-fade.animated {
+        opacity: 1;
+        transform: translateY(0) translateZ(0);
+        animation: vlt_stable_fade_in 0.4s ease-out;
+        
+        @media (max-width: 767px) {
+            animation: vlt_stable_fade_in 0.3s ease-out;
+        }
+    }
+    
+    // Subtle fade with minimal movement - alternative option
+    &.vlt-subtle-fade.animated {
+        opacity: 1;
+        transform: translateY(0) translateZ(0);
+        animation: vlt_subtle_fade_up 0.5s ease-out;
+        
+        @media (max-width: 767px) {
+            animation: vlt_subtle_fade_up 0.3s ease-out;
+        }
+    }
+    
+    // Legacy animated state (for backward compatibility)
+    &.animated:not(.vlt-stable-fade):not(.vlt-subtle-fade) {
         opacity: 1;
         transform: translateY(0) translateZ(0);
         
-        // Mobile animations
+        // Use simple fade on mobile for better performance
         @media (max-width: 767px) {
-            animation: vlt_mobile_fade_up $mobile-animation-duration $mobile-ease;
-            @include performance-animation(0.3s, 0.2s, 0.1s);
+            animation: vlt_stable_fade_in $mobile-animation-duration $mobile-ease;
         }
         
-        // Desktop animations
+        // Use subtle fade on desktop
         @media (min-width: 768px) {
-            animation: vlt_desktop_slide_up $desktop-animation-duration $element-ease;
-            @include performance-animation(0.5s, 0.3s, 0.2s);
+            animation: vlt_subtle_fade_up $desktop-animation-duration $element-ease;
         }
     }
     

@@ -459,8 +459,10 @@ window.VLTAnimationEngine = (function() {
     const AnimationController = {
         observerOptions: {
             root: null,
-            rootMargin: deviceCapabilities.isMobile ? '10px' : '50px',
-            threshold: deviceCapabilities.isMobile ? 0.1 : 0.3
+            // Increased rootMargin for more stable content visibility
+            rootMargin: deviceCapabilities.isMobile ? '20px' : '80px',
+            // Increased threshold to ensure more content is visible before animation triggers
+            threshold: deviceCapabilities.isMobile ? 0.4 : 0.5
         },
         
         init() {
@@ -496,20 +498,30 @@ window.VLTAnimationEngine = (function() {
                 return;
             }
             
-            // Enable hardware acceleration
+            // Enable hardware acceleration for stable performance
             HardwareAcceleration.enable(element);
             
-            // Add performance-appropriate animation class
-            element.classList.add(`vlt-${performanceMetrics.animationQuality}-animation`);
-            
-            // Trigger animation
-            element.classList.add('animated');
+            // Use stable fade animation for better content visibility
+            this.applyStableFadeAnimation(element);
             
             // Track active animation
             animationState.activeAnimations.add(element);
             
             // Clean up after animation
             this.cleanupAfterAnimation(element);
+        },
+        
+        applyStableFadeAnimation(element) {
+            // Remove any existing animation classes
+            element.classList.remove('vlt-pre-animated');
+            
+            // Add stable fade animation class
+            element.classList.add('vlt-stable-fade');
+            
+            // Trigger smooth fade-in animation
+            requestAnimationFrame(() => {
+                element.classList.add('animated');
+            });
         },
         
         cleanupAfterAnimation(element) {
@@ -534,12 +546,14 @@ window.VLTAnimationEngine = (function() {
         },
         
         initializeExistingElements() {
-            // Provide immediate visual feedback for elements above the fold
+            // Provide stable pre-animation state for better content visibility
             document.querySelectorAll('.vlt-animated-block').forEach(element => {
                 if (this.isAboveFold(element)) {
+                    // Show content immediately for above-fold elements
                     element.classList.add('vlt-instant-show');
                 } else {
-                    element.classList.add('vlt-pre-animated');
+                    // Use stable pre-animation state that maintains content readability
+                    element.classList.add('vlt-stable-pre-animated');
                 }
             });
         },

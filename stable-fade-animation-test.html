@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stable Fade Animation Test</title>
+    <style>
+        /* Hardware acceleration */
+        .hardware-acceleration {
+            transform: translateZ(0);
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+
+        /* Stable fade animations */
+        @keyframes vlt_stable_fade_in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes vlt_subtle_fade_up {
+            from {
+                transform: translateY(10px) translateZ(0);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) translateZ(0);
+                opacity: 1;
+            }
+        }
+
+        /* Base animated block styles */
+        .vlt-animated-block {
+            opacity: 0.3; /* More visible initial state for content readability */
+            transform: translateY(0) translateZ(0);
+            transition: all 0.3s ease-out;
+            padding: 20px;
+            margin: 20px 0;
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            min-height: 100px;
+        }
+
+        /* Stable fade animation */
+        .vlt-animated-block.vlt-stable-fade.animated {
+            opacity: 1;
+            animation: vlt_stable_fade_in 0.4s ease-out;
+        }
+
+        /* Subtle fade with minimal movement */
+        .vlt-animated-block.vlt-subtle-fade.animated {
+            opacity: 1;
+            animation: vlt_subtle_fade_up 0.5s ease-out;
+        }
+
+        /* Content styling */
+        .content {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .test-section {
+            margin: 50px 0;
+            padding: 20px;
+        }
+
+        .trigger-line {
+            height: 2px;
+            background: red;
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .trigger-line::after {
+            content: "Animation Trigger Line (40% threshold)";
+            position: absolute;
+            right: 0;
+            top: -20px;
+            color: red;
+            font-size: 12px;
+        }
+
+        /* Status indicators */
+        .status {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="status" id="status">
+        Scroll to test stable fade animations
+    </div>
+
+    <h1>Stable Fade Animation Test</h1>
+    <p>This page tests the new stable fade animation system with improved content visibility and higher thresholds.</p>
+
+    <div class="test-section">
+        <h2>Key Improvements</h2>
+        <ul>
+            <li><strong>Higher Threshold:</strong> Animations trigger when 40% of element is visible (vs 10% before)</li>
+            <li><strong>Better Content Visibility:</strong> Elements start at 30% opacity instead of 0%</li>
+            <li><strong>Stable Fade Focus:</strong> Simple fade animations instead of complex transforms</li>
+            <li><strong>Reduced Movement:</strong> Minimal transforms to maintain content stability</li>
+        </ul>
+    </div>
+
+    <div style="height: 300px; background: linear-gradient(to bottom, #e0e0e0, #f0f0f0); display: flex; align-items: center; justify-content: center;">
+        <p>Scroll down to see stable fade animations...</p>
+    </div>
+
+    <div class="trigger-line"></div>
+
+    <div class="vlt-animated-block vlt-stable-fade content">
+        <h3>Stable Fade Animation Block 1</h3>
+        <p>This block uses the new stable fade animation. Notice how:</p>
+        <ul>
+            <li>Content is partially visible (30% opacity) before animation</li>
+            <li>Animation only triggers when 40% of the block is visible</li>
+            <li>Uses simple fade-in animation for better stability</li>
+            <li>Content remains readable throughout the animation</li>
+        </ul>
+    </div>
+
+    <div class="vlt-animated-block vlt-subtle-fade content">
+        <h3>Subtle Fade with Minimal Movement</h3>
+        <p>This block uses subtle fade with very minimal upward movement (10px only):</p>
+        <ul>
+            <li>Starts with better content visibility</li>
+            <li>Only 10px vertical movement instead of 20-30px</li>
+            <li>Smooth, stable animation that doesn't disrupt reading</li>
+            <li>Perfect for content that users need to consume</li>
+        </ul>
+    </div>
+
+    <div class="vlt-animated-block vlt-stable-fade content">
+        <h3>Another Stable Fade Block</h3>
+        <p>This demonstrates consistent behavior across multiple elements:</p>
+        <ul>
+            <li>Same stable threshold for predictable behavior</li>
+            <li>Content always remains readable</li>
+            <li>No jarring movements or sudden appearances</li>
+            <li>User-friendly animation timing</li>
+        </ul>
+    </div>
+
+    <div style="height: 200px; background: #f5f5f5; display: flex; align-items: center; justify-content: center;">
+        <p>More content to demonstrate multiple animation triggers...</p>
+    </div>
+
+    <div class="vlt-animated-block vlt-subtle-fade content">
+        <h3>Final Test Block</h3>
+        <p>Last block to verify the animation system works consistently:</p>
+        <ul>
+            <li>Higher intersection threshold means more predictable triggers</li>
+            <li>Better content visibility ensures users can always see content</li>
+            <li>Stable animations that enhance rather than disrupt the experience</li>
+        </ul>
+    </div>
+
+    <script>
+        // Simulated VLT Animation Engine stable fade implementation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Enhanced intersection observer with stable thresholds
+            const observerOptions = {
+                root: null,
+                rootMargin: '20px', // Increased margin for stability
+                threshold: 0.4 // Higher threshold for better content visibility
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const statusEl = document.getElementById('status');
+                    
+                    if (entry.isIntersecting) {
+                        // Update status
+                        statusEl.textContent = `Animating: ${entry.target.querySelector('h3')?.textContent || 'Block'}`;
+                        
+                        // Apply stable fade animation
+                        entry.target.classList.add('animated');
+                        
+                        // Stop observing this element
+                        observer.unobserve(entry.target);
+                        
+                        // Clear status after animation
+                        setTimeout(() => {
+                            statusEl.textContent = 'Animation complete - content stable';
+                        }, 500);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all animated blocks
+            document.querySelectorAll('.vlt-animated-block').forEach(block => {
+                observer.observe(block);
+            });
+
+            // Show initial status
+            document.getElementById('status').textContent = 'Stable Animation System Ready - Threshold: 40%';
+        });
+    </script>
+</body>
+</html>
