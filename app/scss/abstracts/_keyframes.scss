@@ -28,19 +28,6 @@
 	}
 }
 
-// Mobile-optimized animation block
-@keyframes vlt_animation_block_mobile {
-	0% {
-		transform: translateY(20px) translateZ(0);
-		opacity: 0;
-	}
-
-	100% {
-		transform: translateY(0) translateZ(0);
-		opacity: 1;
-	}
-}
-
 @keyframes vlt_bounce {
 
 	0%,
@@ -50,35 +37,5 @@
 
 	50% {
 		transform: scale(1);
-	}
-}
-
-// Reduced motion alternatives
-@media (prefers-reduced-motion: reduce) {
-	@keyframes vlt_animation_block {
-		0% {
-			opacity: 0;
-		}
-		100% {
-			opacity: 1;
-		}
-	}
-	
-	@keyframes vlt_animate_icon_bottom {
-		0% {
-			opacity: 0;
-		}
-		100% {
-			opacity: 1;
-		}
-	}
-	
-	@keyframes vlt_bounce {
-		0% {
-			opacity: 0;
-		}
-		100% {
-			opacity: 1;
-		}
 	}
 }
