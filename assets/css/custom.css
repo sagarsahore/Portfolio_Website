@@ -9,6 +9,125 @@ html, body {
     overflow: hidden; /* Prevent unwanted scrolling */
 }
 
+/* Apple-style Segmented Filter Bar */
+.portfolio-filter-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+	width: 100%;
+}
+
+.portfolio-filter-bar {
+	display: inline-flex;
+	gap: 8px;
+	padding: 6px;
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	border-radius: 50px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	overflow-x: auto;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: none; /* Firefox */
+}
+
+.portfolio-filter-bar::-webkit-scrollbar {
+	display: none; /* Chrome, Safari, Edge */
+}
+
+.filter-pill {
+	padding: 10px 24px;
+	border: none;
+	border-radius: 50px;
+	background: transparent;
+	color: rgba(255, 255, 255, 0.7);
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	white-space: nowrap;
+	position: relative;
+	overflow: hidden;
+	font-family: inherit;
+	letter-spacing: 0.3px;
+}
+
+.filter-pill:hover {
+	color: rgba(255, 255, 255, 0.9);
+	background: rgba(255, 255, 255, 0.05);
+}
+
+.filter-pill.active {
+	background: rgba(255, 255, 255, 0.95);
+	color: #1a1a1a;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 
+	            0 1px 3px rgba(0, 0, 0, 0.1);
+	font-weight: 600;
+}
+
+.filter-pill:focus {
+	outline: none;
+}
+
+.filter-pill:active {
+	transform: scale(0.98);
+}
+
+/* Project card animation */
+.project-card {
+	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	opacity: 1;
+	transform: scale(1);
+}
+
+.project-card.hide {
+	opacity: 0;
+	transform: scale(0.9);
+	pointer-events: none;
+	position: absolute;
+	visibility: hidden;
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 991px) {
+	.portfolio-filter-bar {
+		gap: 6px;
+		padding: 5px;
+	}
+	
+	.filter-pill {
+		padding: 8px 18px;
+		font-size: 13px;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.portfolio-filter-container {
+		padding: 0 15px;
+	}
+	
+	.portfolio-filter-bar {
+		justify-content: flex-start;
+		gap: 6px;
+		padding: 4px;
+	}
+	
+	.filter-pill {
+		padding: 8px 16px;
+		font-size: 12px;
+	}
+}
+
+@media only screen and (max-width: 575px) {
+	.filter-pill {
+		padding: 7px 14px;
+		font-size: 11px;
+	}
+}
+
 .vlt-custom--8131 {
 	bottom: -250px;
 	left: -200px;
