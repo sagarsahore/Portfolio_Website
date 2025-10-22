@@ -44,24 +44,6 @@ html, body {
 }
 
 /* ============================================
-   NAVIGATION ENHANCEMENTS
-   ============================================ */
-
-/* Glass navigation bar */
-.vlt-navbar {
-    background: rgba(255, 255, 255, 0.8) !important;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-}
-
-.vlt-navbar.scrolled {
-    background: rgba(255, 255, 255, 0.95) !important;
-    padding: 12px 0;
-}
-
-/* ============================================
    SERVICE CARDS ENHANCEMENT
    ============================================ */
 
@@ -210,6 +192,7 @@ html, body {
 	align-items: center;
 	margin: 0 auto;
 	width: 100%;
+	padding: 0 20px; /* Add padding for mobile */
 }
 
 .portfolio-filter-bar {
@@ -226,6 +209,7 @@ html, body {
 	overflow-y: hidden;
 	-webkit-overflow-scrolling: touch;
 	scrollbar-width: none; /* Firefox */
+	max-width: 100%; /* Ensure it doesn't overflow container */
 }
 
 .portfolio-filter-bar::-webkit-scrollbar {
@@ -247,6 +231,8 @@ html, body {
 	overflow: hidden;
 	font-family: inherit;
 	letter-spacing: 0.3px;
+	flex-shrink: 0; /* Prevent pills from shrinking on mobile */
+	-webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
 }
 
 .filter-pill:hover {
@@ -293,32 +279,78 @@ html, body {
 	}
 	
 	.filter-pill {
-		padding: 8px 18px;
+		padding: 9px 20px;
 		font-size: 13px;
 	}
 }
 
-@media only screen and (max-width: 767px) {
+/* iPad and smaller tablets */
+@media only screen and (max-width: 768px) {
 	.portfolio-filter-container {
-		padding: 0 15px;
+		padding: 0 20px;
 	}
 	
 	.portfolio-filter-bar {
 		justify-content: flex-start;
 		gap: 6px;
+		padding: 5px;
+		width: 100%; /* Full width on tablets */
+	}
+	
+	.filter-pill {
+		padding: 10px 20px;
+		font-size: 13px;
+		min-width: auto; /* Allow flexible sizing */
+	}
+}
+
+/* iPhone and mobile devices */
+@media only screen and (max-width: 576px) {
+	.portfolio-filter-container {
+		padding: 0 15px;
+		margin-bottom: 10px;
+	}
+	
+	.portfolio-filter-bar {
+		gap: 6px;
+		padding: 5px;
+		width: 100%;
+		justify-content: flex-start;
+	}
+	
+	.filter-pill {
+		padding: 10px 18px;
+		font-size: 12px;
+		min-height: 44px; /* iOS recommended touch target */
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
+
+/* iPhone SE and smaller (320px-375px) */
+@media only screen and (max-width: 390px) {
+	.portfolio-filter-container {
+		padding: 0 12px;
+	}
+	
+	.portfolio-filter-bar {
+		gap: 5px;
 		padding: 4px;
 	}
 	
 	.filter-pill {
-		padding: 8px 16px;
-		font-size: 12px;
+		padding: 8px 14px;
+		font-size: 11px;
+		min-height: 40px;
 	}
 }
 
-@media only screen and (max-width: 575px) {
+/* iPhone 12/13/14 Pro Max and larger */
+@media only screen and (min-width: 428px) and (max-width: 576px) {
 	.filter-pill {
-		padding: 7px 14px;
-		font-size: 11px;
+		padding: 10px 20px;
+		font-size: 13px;
 	}
 }
 
