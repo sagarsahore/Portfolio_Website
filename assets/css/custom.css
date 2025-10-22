@@ -3,6 +3,22 @@ html, body {
     scroll-behavior: smooth;
 }
 
+/* Apple-inspired purple gradient background for entire site */
+body {
+    background: linear-gradient(135deg, #6C5CE7 0%, #4C63D2 100%);
+    background-attachment: fixed; /* Keep gradient fixed during scroll */
+}
+
+/* Hide theme toggle button */
+.theme-toggle,
+.sun-moon-toggle,
+button[aria-label*="theme"],
+button[aria-label*="sun"],
+button[aria-label*="moon"],
+#theme-toggle {
+    display: none !important;
+}
+
 .vlt-section {
     height: 100vh; /* Full viewport height */
     overflow: hidden; /* Prevent unwanted scrolling */
@@ -12,9 +28,9 @@ html, body {
    HERO SECTION ENHANCEMENTS
    ============================================ */
 
-/* Soft gradient background for hero */
+/* Hero section now uses site-wide gradient from body */
 .vlt-section[data-anchor="Home"] {
-    background: linear-gradient(135deg, #6C5CE7 0%, #4C63D2 100%) !important;
+    background: transparent !important;
 }
 
 /* Glass cards for stats */
