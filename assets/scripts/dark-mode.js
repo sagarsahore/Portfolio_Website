@@ -48,25 +48,11 @@
 
   /**
    * Create and inject theme toggle if it doesn't exist
+   * DISABLED: Theme toggle is hidden for consistent visual experience
    */
   function createThemeToggle() {
-    // Check if toggle already exists
-    if (document.querySelector('.theme-toggle')) return;
-
-    const toggleHTML = `
-      <div class="theme-toggle" style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
-        <input type="checkbox" id="theme-switch" class="theme-switch" style="display: none;">
-        <label for="theme-switch" class="theme-label" style="cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.2);">
-          <span class="sun-icon" style="font-size: 18px;">☀️</span>
-          <div class="toggle-slider" style="width: 40px; height: 20px; background: rgba(255, 255, 255, 0.3); border-radius: 10px; position: relative; transition: all 0.3s;">
-            <div style="width: 16px; height: 16px; background: white; border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: all 0.3s;"></div>
-          </div>
-          <span class="moon-icon" style="font-size: 18px;">🌙</span>
-        </label>
-      </div>
-    `;
-
-    document.body.insertAdjacentHTML('beforeend', toggleHTML);
+    // Theme toggle creation disabled - keeping light theme only
+    return;
     
     // Update slider position based on theme
     const updateSlider = () => {
@@ -82,17 +68,19 @@
   }
 
   // Initialize theme immediately to prevent flash
-  const savedTheme = localStorage.getItem('theme') || 'light';
-  document.documentElement.setAttribute('data-theme', savedTheme);
+  // Force light theme only - dark mode toggle disabled
+  document.documentElement.setAttribute('data-theme', 'light');
+  localStorage.setItem('theme', 'light');
 
   // Initialize when DOM is ready
+  // Theme toggle creation disabled for consistent visual experience
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-      createThemeToggle();
-      initTheme();
+      // createThemeToggle(); // Disabled
+      // initTheme(); // Disabled
     });
   } else {
-    createThemeToggle();
-    initTheme();
+    // createThemeToggle(); // Disabled
+    // initTheme(); // Disabled
   }
 })();
