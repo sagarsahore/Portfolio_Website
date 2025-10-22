@@ -206,3 +206,25 @@ html, body {
 		align-items: flex-start !important;
 	}
 }
+
+/* Certifications Grid Layout */
+.certifications-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 30px;
+	width: 100%;
+}
+
+@media only screen and (max-width: 991px) {
+	.certifications-grid {
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 25px;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.certifications-grid {
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+}
