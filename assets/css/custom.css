@@ -4,22 +4,24 @@ html, body {
 }
 
 /* Apple-inspired purple gradient background for entire site */
-body {
-    background: linear-gradient(135deg, #351C75 0%, #5B21B6 100%);
-    background-attachment: fixed; /* Keep gradient fixed during scroll */
-}
-
-/* Fix for mobile devices where background-attachment: fixed doesn't work well */
 html {
-    background: linear-gradient(135deg, #351C75 0%, #5B21B6 100%);
-    background-attachment: scroll; /* Use scroll on html for mobile compatibility */
+    background: linear-gradient(135deg, #351C75 0%, #5B21B6 100%) no-repeat;
+    background-size: cover;
+    background-attachment: scroll;
     min-height: 100%;
 }
 
-/* Ensure body is transparent on mobile so html background shows through */
+body {
+    background: linear-gradient(135deg, #351C75 0%, #5B21B6 100%) no-repeat;
+    background-size: cover;
+    background-attachment: fixed; /* Keep gradient fixed during scroll on desktop */
+    min-height: 100vh;
+}
+
+/* Fix for mobile devices where background-attachment: fixed doesn't work well */
 @media only screen and (max-width: 768px) {
     body {
-        background-attachment: scroll; /* Override fixed on mobile */
+        background: transparent; /* Remove body gradient on mobile, use html gradient instead */
     }
 }
 
