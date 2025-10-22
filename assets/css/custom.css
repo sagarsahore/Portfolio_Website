@@ -5,7 +5,7 @@ html, body {
 
 /* Apple-inspired purple gradient background for entire site */
 body {
-    background: linear-gradient(135deg, #6C5CE7 0%, #4C63D2 100%);
+    background: linear-gradient(135deg, #351C75 0%, #5B21B6 100%);
     background-attachment: fixed; /* Keep gradient fixed during scroll */
 }
 
