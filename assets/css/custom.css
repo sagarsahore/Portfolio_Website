@@ -9,6 +9,20 @@ body {
     background-attachment: fixed; /* Keep gradient fixed during scroll */
 }
 
+/* Fix for mobile devices where background-attachment: fixed doesn't work well */
+html {
+    background: linear-gradient(135deg, #351C75 0%, #5B21B6 100%);
+    background-attachment: scroll; /* Use scroll on html for mobile compatibility */
+    min-height: 100%;
+}
+
+/* Ensure body is transparent on mobile so html background shows through */
+@media only screen and (max-width: 768px) {
+    body {
+        background-attachment: scroll; /* Override fixed on mobile */
+    }
+}
+
 /* Hide theme toggle button */
 .theme-toggle,
 .sun-moon-toggle,
