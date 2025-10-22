@@ -1,12 +1,216 @@
-
 /* Smooth scrolling for mobile devices */
 html, body {
     scroll-behavior: smooth;
 }
 
+/* Apple-inspired purple gradient background for entire site */
+html {
+
+    background-size: cover;
+    background-attachment: scroll;
+    min-height: 100%;
+}
+
+body {
+
+    min-height: 100vh;
+}
+
+
+/* Hide theme toggle button */
+.theme-toggle,
+.sun-moon-toggle,
+button[aria-label*="theme"],
+button[aria-label*="sun"],
+button[aria-label*="moon"],
+#theme-toggle {
+    display: none !important;
+}
+
 .vlt-section {
     height: 100vh; /* Full viewport height */
     overflow: hidden; /* Prevent unwanted scrolling */
+}
+
+/* ============================================
+   HERO SECTION ENHANCEMENTS
+   ============================================ */
+
+/* Hero section now uses site-wide gradient from body */
+.vlt-section[data-anchor="Home"] {
+    background: transparent !important;
+}
+
+/* Glass cards for stats */
+.vlt-counter-up-small {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.vlt-counter-up-small:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Greeting text styling */
+.greeting {
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 12px;
+}
+.greetingh1 {
+    font-size: 16.5px;
+    font-weight: 500;
+    font-style: bold;
+}
+/* ============================================
+   SERVICE CARDS ENHANCEMENT
+   ============================================ */
+
+.vlt-services {
+    transition: all 0.3s ease;
+    padding: 32px;
+    border-radius: 16px;
+    background: transparent;
+}
+
+.vlt-services:hover {
+    background: rgba(108, 92, 231, 0.05);
+    transform: translateY(-4px);
+}
+
+/* Service tags */
+.service-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 8px;
+    margin-top: 8px;
+}
+
+.service-tag.popular {
+    background: rgba(0, 122, 255, 0.1);
+    color: #007AFF;
+}
+
+.service-tag.ai-enhanced {
+    background: rgba(108, 92, 231, 0.1);
+    color: #6C5CE7;
+}
+
+.service-tag.high-impact {
+    background: rgba(48, 209, 88, 0.1);
+    color: #30D158;
+}
+
+.service-tag.trending {
+    background: rgba(255, 149, 0, 0.1);
+    color: #FF9500;
+}
+
+/* ============================================
+   TIMELINE VISUALIZATION
+   ============================================ */
+
+.timeline {
+    position: relative;
+    padding-left: 32px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #6C5CE7, transparent);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 48px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -33px;
+    top: 8px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #6C5CE7;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+}
+
+/* ============================================
+   ENHANCED BUTTONS
+   ============================================ */
+
+.vlt-btn {
+    border-radius: 50px !important;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.vlt-btn:hover {
+    transform: translateY(-1px);
+}
+
+.vlt-btn--primary:hover {
+    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+}
+
+.vlt-btn--secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Download button animation */
+.download-btn .vlt-btn__icon {
+    transition: transform 0.3s ease;
+}
+
+.download-btn:hover .vlt-btn__icon {
+    animation: downloadBounce 0.6s ease-in-out;
+}
+
+@keyframes downloadBounce {
+    0%, 20%, 60%, 100% { 
+        transform: translateY(0); 
+    }
+    40% { 
+        transform: translateY(-3px); 
+    }
+    80% { 
+        transform: translateY(-1px); 
+    }
 }
 
 /* Apple-style Segmented Filter Bar */
@@ -16,6 +220,7 @@ html, body {
 	align-items: center;
 	margin: 0 auto;
 	width: 100%;
+	padding: 0 20px; /* Add padding for mobile */
 }
 
 .portfolio-filter-bar {
@@ -32,6 +237,7 @@ html, body {
 	overflow-y: hidden;
 	-webkit-overflow-scrolling: touch;
 	scrollbar-width: none; /* Firefox */
+	max-width: 100%; /* Ensure it doesn't overflow container */
 }
 
 .portfolio-filter-bar::-webkit-scrollbar {
@@ -53,6 +259,8 @@ html, body {
 	overflow: hidden;
 	font-family: inherit;
 	letter-spacing: 0.3px;
+	flex-shrink: 0; /* Prevent pills from shrinking on mobile */
+	-webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
 }
 
 .filter-pill:hover {
@@ -99,32 +307,78 @@ html, body {
 	}
 	
 	.filter-pill {
-		padding: 8px 18px;
+		padding: 9px 20px;
 		font-size: 13px;
 	}
 }
 
-@media only screen and (max-width: 767px) {
+/* iPad and smaller tablets */
+@media only screen and (max-width: 768px) {
 	.portfolio-filter-container {
-		padding: 0 15px;
+		padding: 0 20px;
 	}
 	
 	.portfolio-filter-bar {
 		justify-content: flex-start;
 		gap: 6px;
+		padding: 5px;
+		width: 100%; /* Full width on tablets */
+	}
+	
+	.filter-pill {
+		padding: 10px 20px;
+		font-size: 13px;
+		min-width: auto; /* Allow flexible sizing */
+	}
+}
+
+/* iPhone and mobile devices */
+@media only screen and (max-width: 576px) {
+	.portfolio-filter-container {
+		padding: 0 15px;
+		margin-bottom: 10px;
+	}
+	
+	.portfolio-filter-bar {
+		gap: 6px;
+		padding: 5px;
+		width: 100%;
+		justify-content: flex-start;
+	}
+	
+	.filter-pill {
+		padding: 10px 18px;
+		font-size: 12px;
+		min-height: 44px; /* iOS recommended touch target */
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
+
+/* iPhone SE and smaller (320px-375px) */
+@media only screen and (max-width: 390px) {
+	.portfolio-filter-container {
+		padding: 0 12px;
+	}
+	
+	.portfolio-filter-bar {
+		gap: 5px;
 		padding: 4px;
 	}
 	
 	.filter-pill {
-		padding: 8px 16px;
-		font-size: 12px;
+		padding: 8px 14px;
+		font-size: 11px;
+		min-height: 40px;
 	}
 }
 
-@media only screen and (max-width: 575px) {
+/* iPhone 12/13/14 Pro Max and larger */
+@media only screen and (min-width: 428px) and (max-width: 576px) {
 	.filter-pill {
-		padding: 7px 14px;
-		font-size: 11px;
+		padding: 10px 20px;
+		font-size: 13px;
 	}
 }
 

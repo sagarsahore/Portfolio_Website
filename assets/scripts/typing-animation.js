@@ -6,8 +6,8 @@ window.onload = () => {
         console.warn("Typing element with id 'typing' not found");
         return;
     }
-    
-    const roles = ["Salesforce Consultant", "AI Enthusiast", "Cloud Consultant"];
+
+    const roles = ["a Salesforce Consultant", "an AI/ML Researcher", "a Technology Consultant"];
     let roleIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
