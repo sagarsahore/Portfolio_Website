@@ -7,15 +7,7 @@ window.onload = () => {
         return;
     }
     
-    // Get the greeting based on time of day
-    const getGreeting = () => {
-        const hour = new Date().getHours();
-        if (hour < 12) return "Good morning! I'm";
-        if (hour < 17) return "Good afternoon! I'm";
-        return "Good evening! I'm";
-    };
-    
-    const roles = [getGreeting(), "Sagar Sahore", "I am an AI Researcher"];
+    const roles = ["Salesforce Consultant", "AI Enthusiast", "Cloud Consultant"];
     let roleIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
