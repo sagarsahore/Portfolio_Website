@@ -213,35 +213,38 @@ button[aria-label*="moon"],
     }
 }
 
-/* Apple-style Segmented Filter Bar */
+/* Apple-style Segmented Filter Bar - Purple Theme */
 .portfolio-filter-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 0 auto;
+	margin: 0 auto 40px auto;
 	width: 100%;
-	padding: 0 20px; /* Add padding for mobile */
+	padding: 0 20px;
 }
 
 .portfolio-filter-bar {
 	display: inline-flex;
 	gap: 8px;
 	padding: 6px;
-	background: rgba(255, 255, 255, 0.1);
+	
+	/* Dark glass morphism with purple accent */
+	background: rgba(20, 20, 30, 0.5);
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(10px);
 	border-radius: 50px;
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-	border: 1px solid rgba(255, 255, 255, 0.15);
+	box-shadow: 0 4px 20px rgba(168, 85, 247, 0.15);
+	border: 1px solid rgba(168, 85, 247, 0.2);
+	
 	overflow-x: auto;
 	overflow-y: hidden;
 	-webkit-overflow-scrolling: touch;
-	scrollbar-width: none; /* Firefox */
-	max-width: 100%; /* Ensure it doesn't overflow container */
+	scrollbar-width: none;
+	max-width: 100%;
 }
 
 .portfolio-filter-bar::-webkit-scrollbar {
-	display: none; /* Chrome, Safari, Edge */
+	display: none;
 }
 
 .filter-pill {
@@ -249,7 +252,7 @@ button[aria-label*="moon"],
 	border: none;
 	border-radius: 50px;
 	background: transparent;
-	color: rgba(255, 255, 255, 0.7);
+	color: #d1d5db;
 	font-size: 14px;
 	font-weight: 500;
 	cursor: pointer;
@@ -259,20 +262,21 @@ button[aria-label*="moon"],
 	overflow: hidden;
 	font-family: inherit;
 	letter-spacing: 0.3px;
-	flex-shrink: 0; /* Prevent pills from shrinking on mobile */
-	-webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
+	flex-shrink: 0;
+	-webkit-tap-highlight-color: transparent;
 }
 
 .filter-pill:hover {
-	color: rgba(255, 255, 255, 0.9);
-	background: rgba(255, 255, 255, 0.05);
+	color: #ffffff;
+	background: rgba(168, 85, 247, 0.1);
 }
 
 .filter-pill.active {
-	background: rgba(255, 255, 255, 0.95);
-	color: #1a1a1a;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 
-	            0 1px 3px rgba(0, 0, 0, 0.1);
+	/* Active state with purple accent */
+	background: rgba(168, 85, 247, 0.2);
+	color: #a855f7;
+	border: 1px solid rgba(168, 85, 247, 0.4);
+	box-shadow: 0 2px 8px rgba(168, 85, 247, 0.2);
 	font-weight: 600;
 }
 
@@ -780,6 +784,11 @@ button[aria-label*="moon"],
    APPLE-INSPIRED PORTFOLIO SECTION
    ============================================ */
 
+/* ============================================
+   iOS 26 LIQUID GLASS PORTFOLIO SECTION
+   Black Background + Purple Accent Theme
+   ============================================ */
+
 /* Portfolio Section Container */
 .vlt-section[data-anchor="Portfolio"] .vlt-section__content {
 	padding-top: 100px;
@@ -789,16 +798,17 @@ button[aria-label*="moon"],
 .vlt-section[data-anchor="Portfolio"] .container {
 	max-width: 1280px;
 	margin: 0 auto;
+	padding: 0 40px;
 }
 
 /* Portfolio Section Header */
 .portfolio-section-header {
 	text-align: center;
-	margin-bottom: 0;
+	margin-bottom: 60px;
 }
 
 .portfolio-heading {
-	font-size: 52px;
+	font-size: 48px;
 	font-weight: 600;
 	color: #ffffff;
 	margin-bottom: 16px;
@@ -809,15 +819,15 @@ button[aria-label*="moon"],
 .portfolio-subheading {
 	font-size: 20px;
 	font-weight: 400;
-	color: rgba(255, 255, 255, 0.6);
+	color: #d1d5db;
 	margin: 0;
 	letter-spacing: 0.01em;
 }
 
 /* Portfolio Grid Layout */
 .vlt-section[data-anchor="Portfolio"] .row {
-	row-gap: 34px;
-	column-gap: 34px;
+	row-gap: 32px;
+	column-gap: 32px;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 }
@@ -828,37 +838,50 @@ button[aria-label*="moon"],
 	flex: none;
 }
 
-/* Portfolio Project Card */
+/* Portfolio Project Card - Dark Glass Morphism */
 .portfolio-project-card {
-	background: #ffffff;
-	border-radius: 18px;
+	/* Dark glass morphism effect */
+	background: rgba(20, 20, 30, 0.6);
+	backdrop-filter: blur(20px) saturate(180%);
+	-webkit-backdrop-filter: blur(20px) saturate(180%);
+	
+	/* Purple-tinted border & shadow */
+	border: 1px solid rgba(168, 85, 247, 0.2);
+	box-shadow: 0 8px 32px rgba(168, 85, 247, 0.15);
+	border-radius: 20px;
+	
+	/* Layout */
 	overflow: hidden;
-	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	height: 100%;
 	display: flex;
 	flex-direction: column;
 }
 
 .portfolio-project-card:hover {
-	transform: translateY(-4px);
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+	transform: translateY(-6px) scale(1.02);
+	border-color: rgba(168, 85, 247, 0.4);
+	
+	/* Purple glow on hover */
+	box-shadow: 
+		0 16px 48px rgba(168, 85, 247, 0.3),
+		0 0 60px rgba(168, 85, 247, 0.2);
 }
 
 /* Project Image */
 .portfolio-project-image {
 	position: relative;
 	width: 100%;
-	height: 230px;
+	height: 240px;
 	overflow: hidden;
-	border-radius: 18px 18px 0 0;
+	background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 }
 
 .portfolio-project-image img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .portfolio-project-card:hover .portfolio-project-image img {
@@ -884,25 +907,25 @@ button[aria-label*="moon"],
 
 /* Project Title */
 .portfolio-project-title {
-	font-size: 24px;
+	font-size: 22px;
 	font-weight: 600;
-	color: #1d1d1f;
+	color: #ffffff;
 	margin: 0 0 12px 0;
 	letter-spacing: -0.01em;
-	line-height: 1.2;
+	line-height: 1.3;
 }
 
 .portfolio-project-title a {
-	color: #1d1d1f;
+	color: #ffffff;
 	text-decoration: none;
 	transition: color 0.2s ease;
 }
 
 .portfolio-project-title a:hover {
-	color: #21808d;
+	color: #c084fc;
 }
 
-/* Role Tags */
+/* Role Tags - Purple Glass Pills */
 .portfolio-role-tags {
 	display: flex;
 	flex-wrap: wrap;
@@ -911,17 +934,25 @@ button[aria-label*="moon"],
 }
 
 .role-tag {
-	display: inline-block;
-	background: rgba(33, 128, 141, 0.12);
-	color: #21808d;
+	display: inline-flex;
+	align-items: center;
+	
+	/* Purple glass pill */
+	background: rgba(168, 85, 247, 0.15);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	
+	/* Styling */
+	color: #a855f7;
+	padding: 6px 14px;
+	border-radius: 14px;
 	font-size: 13px;
 	font-weight: 500;
-	padding: 4px 12px;
-	border-radius: 12px;
+	border: 1px solid rgba(168, 85, 247, 0.3);
 	letter-spacing: 0.01em;
 }
 
-/* Tech Stack Tags */
+/* Tech Stack Tags - Subtle Dark Glass */
 .portfolio-tech-tags {
 	display: flex;
 	flex-wrap: wrap;
@@ -931,21 +962,34 @@ button[aria-label*="moon"],
 
 .tech-tag {
 	display: inline-block;
-	background: rgba(0, 0, 0, 0.04);
-	color: #6e6e73;
+	
+	/* Subtle dark glass */
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	
+	/* Styling */
+	color: #9ca3af;
+	padding: 5px 10px;
+	border-radius: 8px;
 	font-size: 12px;
 	font-weight: 400;
-	padding: 4px 10px;
-	border-radius: 8px;
-	border: 1px solid rgba(0, 0, 0, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.1);
 	letter-spacing: 0.01em;
+	transition: all 0.2s ease;
+}
+
+.tech-tag:hover {
+	background: rgba(255, 255, 255, 0.1);
+	border-color: rgba(168, 85, 247, 0.3);
+	color: #d1d5db;
 }
 
 /* Project Description */
 .portfolio-project-description {
-	font-size: 16px;
+	font-size: 15px;
 	line-height: 1.6;
-	color: #6e6e73;
+	color: #9ca3af;
 	margin: 0 0 20px 0;
 	flex-grow: 1;
 }
@@ -963,28 +1007,39 @@ button[aria-label*="moon"],
 	align-items: center;
 	justify-content: center;
 	padding: 10px 20px;
-	font-size: 16px;
+	font-size: 15px;
 	font-weight: 500;
-	color: #21808d;
-	background: transparent;
-	border: 1.5px solid #21808d;
-	border-radius: 10px;
+	
+	/* Purple glass button */
+	color: #a855f7;
+	background: rgba(168, 85, 247, 0.1);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	border: 1.5px solid rgba(168, 85, 247, 0.3);
+	border-radius: 12px;
 	text-decoration: none;
-	transition: all 0.2s ease;
+	transition: all 0.3s ease;
 	cursor: pointer;
 }
 
 .portfolio-action-btn:hover {
-	background: #21808d;
-	color: #ffffff;
-	transform: translateY(-1px);
+	background: rgba(168, 85, 247, 0.2);
+	border-color: rgba(168, 85, 247, 0.5);
+	color: #c084fc;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 16px rgba(168, 85, 247, 0.2);
 }
 
-/* Responsive Design */
-@media only screen and (max-width: 991px) {
+
+/* Responsive Design - Tablet */
+@media only screen and (max-width: 1199px) {
 	.vlt-section[data-anchor="Portfolio"] .vlt-section__content {
 		padding-top: 80px;
 		padding-bottom: 80px;
+	}
+	
+	.vlt-section[data-anchor="Portfolio"] .container {
+		padding: 0 32px;
 	}
 	
 	.portfolio-heading {
@@ -1002,18 +1057,23 @@ button[aria-label*="moon"],
 	}
 	
 	.portfolio-project-content {
-		padding: 26px;
+		padding: 28px;
 	}
 	
 	.portfolio-project-image {
-		height: 200px;
+		height: 220px;
 	}
 }
 
+/* Responsive Design - Mobile */
 @media only screen and (max-width: 767px) {
 	.vlt-section[data-anchor="Portfolio"] .vlt-section__content {
 		padding-top: 60px;
 		padding-bottom: 60px;
+	}
+	
+	.vlt-section[data-anchor="Portfolio"] .container {
+		padding: 0 20px;
 	}
 	
 	.portfolio-heading {
@@ -1030,12 +1090,11 @@ button[aria-label*="moon"],
 	}
 	
 	.portfolio-project-card {
-		border-radius: 14px;
+		border-radius: 16px;
 	}
 	
 	.portfolio-project-image {
-		height: 180px;
-		border-radius: 14px 14px 0 0;
+		height: 200px;
 	}
 	
 	.portfolio-project-content {
@@ -1047,7 +1106,14 @@ button[aria-label*="moon"],
 	}
 	
 	.portfolio-project-description {
-		font-size: 15px;
+		font-size: 14px;
+	}
+	
+	.portfolio-action-btn {
+		font-size: 14px;
+		padding: 8px 16px;
+	}
+}
 	}
 }
 
