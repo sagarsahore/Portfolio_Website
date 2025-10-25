@@ -668,7 +668,7 @@ button[aria-label*="moon"],
 	color: rgba(255, 255, 255, 0.8);
 	line-height: 1.7;
 	letter-spacing: 0.01em;
-	text-align: justify;
+	text-align: left;
 }
 
 /* CTA Button Area */
@@ -739,7 +739,6 @@ button[aria-label*="moon"],
 	
 	.apple-card-narrative {
 		font-size: 15px;
-		text-align: left;
 	}
 	
 	.apple-timeline {

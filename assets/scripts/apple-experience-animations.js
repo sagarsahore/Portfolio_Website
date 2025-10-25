@@ -22,7 +22,7 @@
 		};
 
 		const observer = new IntersectionObserver((entries) => {
-			entries.forEach((entry, index) => {
+			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
 					// Add delay based on the data-index attribute for sequential animation
 					const dataIndex = entry.target.getAttribute('data-index');
