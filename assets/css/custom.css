@@ -771,3 +771,92 @@ button[aria-label*="moon"],
 .vlt-gap-80 {
 	height: 80px;
 }
+
+.vlt-gap-65 {
+	height: 65px;
+}
+
+/* ============================================
+   APPLE-INSPIRED ABOUT SECTION POLISH
+   ============================================ */
+
+/* About section vertical spacing */
+.vlt-section[data-anchor="about"] .vlt-section__content {
+	padding-top: 100px;
+	padding-bottom: 100px;
+}
+
+/* About section heading spacing */
+.vlt-section[data-anchor="about"] h4 {
+	font-size: 48px;
+	font-weight: 600;
+	line-height: 1.1;
+	margin-bottom: 20px;
+	letter-spacing: -0.02em;
+}
+
+/* About section paragraph text improvements */
+.vlt-section[data-anchor="about"] p {
+	font-size: 17px;
+	line-height: 1.65;
+	color: rgba(29, 29, 31, 0.85);
+}
+
+/* Card-like spacing between text blocks */
+.vlt-section[data-anchor="about"] .vlt-animated-block {
+	padding: 36px 40px;
+	border-radius: 14px;
+	border: 1px solid rgba(0, 0, 0, 0.06);
+	background: rgba(255, 255, 255, 0.6);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	transition: all 0.3s ease;
+}
+
+/* Hover effect for cards */
+.vlt-section[data-anchor="about"] .vlt-animated-block:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+	border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Gap between cards - override existing gaps */
+.vlt-section[data-anchor="about"] .vlt-gap-50 {
+	height: 38px;
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 991px) {
+	.vlt-section[data-anchor="about"] .vlt-section__content {
+		padding-top: 80px;
+		padding-bottom: 80px;
+	}
+	
+	.vlt-section[data-anchor="about"] h4 {
+		font-size: 40px;
+	}
+	
+	.vlt-section[data-anchor="about"] .vlt-animated-block {
+		padding: 32px 36px;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.vlt-section[data-anchor="about"] .vlt-section__content {
+		padding-top: 60px;
+		padding-bottom: 60px;
+	}
+	
+	.vlt-section[data-anchor="about"] h4 {
+		font-size: 32px;
+	}
+	
+	.vlt-section[data-anchor="about"] p {
+		font-size: 16px;
+	}
+	
+	.vlt-section[data-anchor="about"] .vlt-animated-block {
+		padding: 28px 32px;
+		border-radius: 12px;
+	}
+}
