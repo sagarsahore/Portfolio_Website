@@ -824,26 +824,28 @@ button[aria-label*="moon"],
 	letter-spacing: 0.01em;
 }
 
-/* Portfolio Grid Layout */
+/* Portfolio Grid Layout - Responsive CSS Grid */
 .vlt-section[data-anchor="Portfolio"] .row {
-	row-gap: 32px;
-	column-gap: 32px;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
+	gap: 32px;
+	width: 100%;
 }
 
 .vlt-section[data-anchor="Portfolio"] .project-card {
 	padding: 0;
 	max-width: none;
 	flex: none;
+	width: 100%;
+	min-width: 0; /* Prevent grid blowout */
 }
 
 /* Portfolio Project Card - Dark Glass Morphism */
 .portfolio-project-card {
 	/* Dark glass morphism effect */
-	background: rgba(20, 20, 30, 0.6);
-	backdrop-filter: blur(20px) saturate(180%);
-	-webkit-backdrop-filter: blur(20px) saturate(180%);
+	background: rgba(20, 20, 30, 0.7);
+	backdrop-filter: blur(15px) saturate(180%);
+	-webkit-backdrop-filter: blur(15px) saturate(180%);
 	
 	/* Purple-tinted border & shadow */
 	border: 1px solid rgba(168, 85, 247, 0.2);
@@ -856,6 +858,8 @@ button[aria-label*="moon"],
 	height: 100%;
 	display: flex;
 	flex-direction: column;
+	width: 100%;
+	min-width: 0; /* Prevent overflow */
 }
 
 .portfolio-project-card:hover {
@@ -937,19 +941,20 @@ button[aria-label*="moon"],
 	display: inline-flex;
 	align-items: center;
 	
-	/* Purple glass pill */
-	background: rgba(168, 85, 247, 0.15);
+	/* Purple glass pill - more prominent */
+	background: rgba(168, 85, 247, 0.18);
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(10px);
 	
 	/* Styling */
-	color: #a855f7;
+	color: #c084fc;
 	padding: 6px 14px;
 	border-radius: 14px;
 	font-size: 13px;
 	font-weight: 500;
-	border: 1px solid rgba(168, 85, 247, 0.3);
+	border: 1px solid rgba(168, 85, 247, 0.33);
 	letter-spacing: 0.01em;
+	white-space: nowrap;
 }
 
 /* Tech Stack Tags - Subtle Dark Glass */
@@ -964,19 +969,20 @@ button[aria-label*="moon"],
 	display: inline-block;
 	
 	/* Subtle dark glass */
-	background: rgba(255, 255, 255, 0.05);
+	background: rgba(30, 30, 40, 0.4);
 	backdrop-filter: blur(8px);
 	-webkit-backdrop-filter: blur(8px);
 	
 	/* Styling */
-	color: #9ca3af;
+	color: #d1d5db;
 	padding: 5px 10px;
 	border-radius: 8px;
 	font-size: 12px;
 	font-weight: 400;
-	border: 1px solid rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.08);
 	letter-spacing: 0.01em;
 	transition: all 0.2s ease;
+	white-space: nowrap;
 }
 
 .tech-tag:hover {
@@ -1031,8 +1037,8 @@ button[aria-label*="moon"],
 }
 
 
-/* Responsive Design - Tablet */
-@media only screen and (max-width: 1199px) {
+/* Responsive Design - Tablet (700px - 1100px) */
+@media only screen and (max-width: 1100px) and (min-width: 701px) {
 	.vlt-section[data-anchor="Portfolio"] .vlt-section__content {
 		padding-top: 80px;
 		padding-bottom: 80px;
@@ -1052,8 +1058,7 @@ button[aria-label*="moon"],
 	
 	.vlt-section[data-anchor="Portfolio"] .row {
 		grid-template-columns: repeat(2, 1fr);
-		row-gap: 28px;
-		column-gap: 28px;
+		gap: 28px;
 	}
 	
 	.portfolio-project-content {
@@ -1063,10 +1068,18 @@ button[aria-label*="moon"],
 	.portfolio-project-image {
 		height: 220px;
 	}
+	
+	.portfolio-project-title {
+		font-size: 20px;
+	}
+	
+	.portfolio-project-description {
+		font-size: 14px;
+	}
 }
 
-/* Responsive Design - Mobile */
-@media only screen and (max-width: 767px) {
+/* Responsive Design - Mobile (<700px) */
+@media only screen and (max-width: 700px) {
 	.vlt-section[data-anchor="Portfolio"] .vlt-section__content {
 		padding-top: 60px;
 		padding-bottom: 60px;
@@ -1084,9 +1097,13 @@ button[aria-label*="moon"],
 		font-size: 16px;
 	}
 	
+	.portfolio-section-header {
+		margin-bottom: 40px;
+	}
+	
 	.vlt-section[data-anchor="Portfolio"] .row {
 		grid-template-columns: 1fr;
-		row-gap: 24px;
+		gap: 24px;
 	}
 	
 	.portfolio-project-card {
@@ -1094,26 +1111,37 @@ button[aria-label*="moon"],
 	}
 	
 	.portfolio-project-image {
-		height: 200px;
+		height: 180px;
 	}
 	
 	.portfolio-project-content {
-		padding: 24px;
+		padding: 20px;
 	}
 	
 	.portfolio-project-title {
-		font-size: 20px;
+		font-size: 19px;
+		margin-bottom: 10px;
 	}
 	
 	.portfolio-project-description {
 		font-size: 14px;
+		line-height: 1.5;
+		margin-bottom: 16px;
+	}
+	
+	.role-tag {
+		font-size: 12px;
+		padding: 5px 12px;
+	}
+	
+	.tech-tag {
+		font-size: 11px;
+		padding: 4px 9px;
 	}
 	
 	.portfolio-action-btn {
+		padding: 9px 16px;
 		font-size: 14px;
-		padding: 8px 16px;
-	}
-}
 	}
 }
 
