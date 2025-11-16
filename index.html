@@ -20,6 +20,7 @@
 	<!--Custom-->
 	<link rel="stylesheet" href="assets/css/design-system.css">
 	<link rel="stylesheet" href="assets/css/custom.css">
+	<link rel="stylesheet" href="assets/css/liquid-glass-transition.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
@@ -1211,6 +1212,28 @@
 	<script src="assets/scripts/counter-animation.js"></script>
 	<script src="assets/scripts/scroll-animations.js"></script>
 	<script src="assets/scripts/dark-mode.js"></script>
+	<!--Liquid Glass Transition-->
+	<script src="assets/scripts/liquid-glass-transition.js"></script>
+	<script>
+		// Initialize Liquid Glass Transition
+		document.addEventListener('DOMContentLoaded', function() {
+			// Initialize with configuration
+			const glassTransition = initLiquidGlassTransition({
+				duration: 500,
+				debug: false,
+				autoIntercept: true,
+				onStart: function() {
+					// Optional: Add any custom logic before transition starts
+				},
+				onComplete: function() {
+					// Optional: Add any custom logic after transition completes
+				}
+			});
+			
+			// Make it globally accessible for custom usage
+			window.glassTransition = glassTransition;
+		});
+	</script>
 </body>
 
 </html>
