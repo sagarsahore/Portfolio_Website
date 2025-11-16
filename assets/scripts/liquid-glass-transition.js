@@ -231,9 +231,20 @@ class LiquidGlassTransition {
         if (typeof target === 'string') {
             // Navigate to section with anchor
             return this.transition(() => {
-                // Integration with fullpage.js
-                if (typeof $.fn.fullpage !== 'undefined' && typeof $.fn.fullpage.moveTo === 'function') {
-                    $.fn.fullpage.moveTo(target);
+                // Integration with fullpage.js - check multiple ways it might be accessible
+                if (typeof $.fn.fullpage !== 'undefined') {
+                    // Try standard fullpage.js API
+                    if ($.fn.fullpage.moveTo) {
+                        $.fn.fullpage.moveTo(target);
+                    } else if (typeof fullpage_api !== 'undefined' && fullpage_api.moveTo) {
+                        fullpage_api.moveTo(target);
+                    } else {
+                        // Fallback to silentMoveTo if available
+                        const fpInstance = $('.vlt-fullpage-slider');
+                        if (fpInstance.length && fpInstance.fullpage) {
+                            fpInstance.fullpage('moveTo', target);
+                        }
+                    }
                 } else {
                     // Fallback: scroll to section
                     const section = document.querySelector(`[data-anchor="${target}"]`);
@@ -280,8 +291,27 @@ if (typeof window !== 'undefined') {
 function initLiquidGlassTransition(options = {}) {
     const transition = new LiquidGlassTransition(options);
     
-    // Auto-intercept internal navigation links
-    if (options.autoIntercept !== false) {
+    // Integration with fullpage.js if available
+    if (typeof $.fn.fullpage !== 'undefined') {
+        // Hook into fullpage.js navigation events
+        $(document).on('click', 'a[href^="#"]', function(e) {
+            const href = $(this).attr('href');
+            if (href && href.length > 1) {
+                const anchor = href.substring(1);
+                const targetSection = $(`[data-anchor="${anchor}"]`);
+                
+                if (targetSection.length > 0) {
+                    e.preventDefault();
+                    transition.navigateTo(anchor);
+                }
+            }
+        });
+        
+        if (options.debug) {
+            console.log('[LiquidGlassTransition] Integrated with fullpage.js');
+        }
+    } else if (options.autoIntercept !== false) {
+        // Fallback: Auto-intercept internal navigation links
         document.addEventListener('click', function(e) {
             // Find closest anchor tag
             const link = e.target.closest('a');
